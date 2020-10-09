@@ -48,6 +48,8 @@ export class DealerOrderPage{
         this.user_data = this.dbService.userStorageData;
         this.user_id = this.dbService.userStorageData.id;
         console.log(this.user_data);
+        console.log(this.user_data.type);
+        
 
         this.get_orders();
 
@@ -122,6 +124,20 @@ export class DealerOrderPage{
         },err=>
         {
         })
+    }
+
+
+    get_orders1(){
+
+        
+        this.start = this.order_list.length;
+        this.filter.type = this.order_type;
+
+        this.dbService.onPostRequestDataFromApi({"search":this.filter,"user_id":this.user_id,"start":this.start,"limit":this.limit,'status':this.filter.order_status},"dealerData/get_orders", this.dbService.rootUrlSfa)
+        .subscribe((r) =>{
+            console.log(r);
+            this.order_list=this.order_list.concat(r['order_list']);
+        });
     }
 
     loadData(infiniteScroll)
