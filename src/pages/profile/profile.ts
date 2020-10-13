@@ -121,7 +121,7 @@ export class ProfilePage {
         this.loading.dismiss();
         this.karigar_detail=r['karigar'];
         console.log(this.karigar_detail.profile);
-        this.karigar_detail.profile =  this.sanitizer.bypassSecurityTrustResourceUrl( this.dbService.upload_url+'app/uploads/'+this.karigar_detail.profile  );
+        // this.karigar_detail.profile =  this.sanitizer.bypassSecurityTrustResourceUrl( this.dbService.upload_url+'app/uploads/'+this.karigar_detail.profile  );
         this.karigar_detail.document_image =  this.sanitizer.bypassSecurityTrustResourceUrl( this.dbService.upload_url+'app/uploads/'+this.karigar_detail.document_image  );
         console.log( this.karigar_detail.document_image);
 

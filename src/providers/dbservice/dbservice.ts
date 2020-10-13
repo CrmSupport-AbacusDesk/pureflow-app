@@ -15,7 +15,7 @@ export class DbserviceProvider {
 
   public server_url: string = this.rootUrl + 'index.php/app/';
 
-  public upload_url: string = this.rootUrl + 'uploads/';
+  public upload_url: string = this.rootUrl;
   public upload_url1: string = 'http://app.gravitybath.com/crm/api/uploads/';
   public upload_url2: string = 'http://app.gravitybath.com/uploads/order-invoice/';
   public upload_url3: string = 'http://app.gravitybath.com/dd_api/app/uploads/';

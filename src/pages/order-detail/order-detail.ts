@@ -43,6 +43,7 @@ export class OrderDetailPage {
     upload_url:any='';
     userType:any='';
     pdfUrl:any;
+    loginId:any;
 
     constructor(public navCtrl: NavController,
                 public modalCtrl: ModalController,
@@ -62,6 +63,7 @@ export class OrderDetailPage {
 
     ionViewWillEnter()
     {
+        this.loginId = this.dbService.userStorageData.id;
         if(this.navParams.get('login'))
         {
             this.login = this.navParams.get('login');
@@ -71,6 +73,8 @@ export class OrderDetailPage {
             this.login = 'DrLogin'
         }
         console.log(this.login);
+
+        
 
         this.collObject.index=true
         this.upload_url = this.dbService.upload_url2;
@@ -611,7 +615,7 @@ export class OrderDetailPage {
                 cssClass: 'close-action-sheet',
                 handler:()=>
                 {
-                    this.dbService.onPostRequestDataFromApi({id:this.userDetail.order_id},'dealerData/changeStatusToDispatch', this.dbService.rootUrlSfa)
+                    this.dbService.onPostRequestDataFromApi({'loginId':this.loginId,id:this.userDetail.order_id},'dealerData/changeStatusToDispatch', this.dbService.rootUrlSfa)
                     .subscribe((result)=>{
                         this.dbService.presentToast('Order Dispatched Successfully');
                         this.userDetail.order_status='Dispatch'
@@ -645,7 +649,7 @@ export class OrderDetailPage {
     {
         console.log(this.orderDetail);
 
-        this.dbService.onPostRequestDataFromApi({"item":this.orderDetail},"dealerData/dispatch_order", this.dbService.rootUrlSfa)
+        this.dbService.onPostRequestDataFromApi({'loginId':this.loginId,"item":this.orderDetail},"dealerData/dispatch_order", this.dbService.rootUrlSfa)
         .subscribe(resp=>{
             console.log(resp);
             if(resp['msg'] == "success")
