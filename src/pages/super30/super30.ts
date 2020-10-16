@@ -20,6 +20,7 @@ export class Super30Page {
   loading:Loading;
   filter:any={}
   SelfData:any={}
+ test:any=[];
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -31,6 +32,8 @@ export class Super30Page {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Super30Page');
+    this.getList();
+
   }
 
   presentLoading()
@@ -48,7 +51,7 @@ export class Super30Page {
     this.getList();
     refresher.complete();
   }
-
+ 
   getList()
   {
     this.filter.limit = 0;
@@ -59,7 +62,7 @@ export class Super30Page {
         console.log(response);
         this.loading.dismiss();
         this.plumber_list = response['karigars'];
-
+        
         var index = response['karigarData'].findIndex(row=>row.id==this.dbService.userStorageData.id);
         console.log(index);
         if(index!=-1)

@@ -304,7 +304,7 @@
         </div>
 
         <div class="pd-left-right16">
-            <button class="cs-button border-btn mt16" *ngIf="userDetail.delivery_from!=dbService.userStorageData.id && (userDetail.order_status == 'Draft' || userDetail.order_status == 'Pending')" (click)="more_item(order_id)">ADD MORE ITEM</button>
+            <button class="cs-button border-btn mt16" *ngIf="userDetail.delivery_from!=dbService.userStorageData.id && (userDetail.order_status == 'Draft' || userDetail.order_status == 'Pending')" (click)="more_item(order_id)">ADD MORE ITEM / Edit Transport Detail</button>
         </div>
 
         <!-- <button *ngIf="userDetail.order_status=='Pending' && userDetail.changeStatus!=true && userDetail.delivery_from==dbService.userStorageData.id" (click)="userDetail.changeStatus=true">Change Status</button> -->
@@ -573,5 +573,5 @@
         </button>
     </div> -->
     <ion-footer class="af-none" padding>
-        <button ion-button full round class="pdf-btn" (click)="goToDownload(userDetail.order_id)"><i class="material-icons"> picture_as_pdf</i> Genrate PDF</button>
+        <button ion-button full round class="pdf-btn" (click)="goToDownload(userDetail.order_id)"><i class="material-icons"> picture_as_pdf</i> Generate PDF</button>
     </ion-footer>

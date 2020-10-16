@@ -57,7 +57,7 @@ export class TransactionPage {
         {
           this.loading.dismiss();
           this.transaction_detail=r['transaction']
-          this.balance_point=r['karigar'].balance_point;
+          this.balance_point=parseInt(r['karigar'].balance_point) + parseInt(r['karigar'].reg_points);
         }
       });
     }

@@ -37,27 +37,29 @@ export class AddLeadsPage {
   get_states()
   {
     this.dbService.onPostRequestDataFromApi({},"dealerData/getStates", this.dbService.rootUrlSfa)
-    .then(resp=>{
+    .subscribe(resp=>{
       console.log(resp);
       this.state_list = resp['state_list'];
     },
     err=>{
       this.dbService.errToasr()
-    })
+    });
   }
 
 
   district_list:any=[];
   get_district()
   {
+    console.log(this.form);
+    
     this.dbService.onPostRequestDataFromApi({"state_name":this.form.state},"dealerData/getDistrict", this.dbService.rootUrlSfa)
-    .then(resp=>{
+    .subscribe(resp=>{
       console.log(resp);
       this.district_list = resp['district_list'];
     },
     err=>{
       this.dbService.errToasr()
-    })
+    });
   }
 
   submit()
@@ -72,9 +74,9 @@ export class AddLeadsPage {
     {
       return
     }
-    this.dbService.onShowLoadingHandler()
+    this.dbService.onShowLoadingHandler();
     this.dbService.onPostRequestDataFromApi({"data":this.form,"loginData":this.user_data},"Distributor/save_lead", this.dbService.rootUrlSfa)
-    .then(resp=>{
+    .subscribe(resp=>{
       console.log(resp);
       this.dbService.onDismissLoadingHandler()
 
@@ -176,7 +178,7 @@ export class AddLeadsPage {
       {
         loading.dismiss()
 
-      })
+      });
 
 
 
@@ -196,18 +198,20 @@ export class AddLeadsPage {
           loading.dismiss()
 
           console.log(result);
-          this.form.state = result['state_name']
-          this.get_district()
-          this.form.district = result['district_name']
-          this.form.city = result['city']
-          this.form.area = result['area']
+          this.form.state = result.state_name;
+          // this.get_district();
+          this.form.district = result.district_name;
+          this.form.city = result.city;
+          this.form.area = result.area;
+          console.log(this.form);
+          
 
         },err=>
         {
           loading.dismiss()
 
           // this.db.presentToast('Failed To Get ')
-        })
+        });
       }
     }
     dealer_details:any = [];

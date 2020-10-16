@@ -117,6 +117,8 @@ export class DealerAddorderPage {
             if(resp['special_discount'] &&  resp['special_discount']['type'])
             this.type = resp['special_discount']['type'];
             console.log(this.type);
+            console.log(this.user_data);
+            
 
             if(this.user_data.type == '1' )
             {
