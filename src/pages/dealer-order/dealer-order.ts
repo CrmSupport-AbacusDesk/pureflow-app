@@ -129,11 +129,13 @@ export class DealerOrderPage{
 
     get_orders1(){
 
+        console.log(this.order_type);
+        console.log(this.filter);
         
         this.start = this.order_list.length;
         this.filter.type = this.order_type;
 
-        this.dbService.onPostRequestDataFromApi({"search":this.filter,"user_id":this.user_id,"start":this.start,"limit":this.limit,'status':this.filter.order_status},"dealerData/get_orders", this.dbService.rootUrlSfa)
+        this.dbService.onPostRequestDataFromApi({"search":this.filter,"user_id":this.user_id,"start":this.start,"limit":this.limit,'status':this.filter.order_status,type:this.user_data.type},"dealerData/get_orders", this.dbService.rootUrlSfa)
         .subscribe((r) =>{
             console.log(r);
             this.order_list=this.order_list.concat(r['order_list']);

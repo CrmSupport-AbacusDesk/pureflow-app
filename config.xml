@@ -174,5 +174,5 @@
     <plugin name="polarcape-cordova-plugin-document-handler" spec="^1.1.1" />
     <plugin name="com.outsystems.mobile.stetho" spec="~0.0.1" />
     <engine name="android" spec="6.4.0" />
-    <engine name="ios" spec="~4.5.5" />
+    <engine name="ios" spec="^4.5.5" />
 </widget>
