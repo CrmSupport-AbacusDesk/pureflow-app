@@ -58,7 +58,8 @@ export class GiftDetailPage {
 				console.log(this.gift_detail);
 				this.offer_balance= parseInt(r['gift'].offer_balance );
 				this.balance_point= parseInt(r['karigar'].balance_point ) + parseInt(r['karigar'].reg_points);
-				console.log(this.balance_point);
+				console.log(this.balance_point
+					);
 				
 				this.gift_detail.coupon_points = parseInt( this.gift_detail.coupon_points );
 				if(r['gift_star'])

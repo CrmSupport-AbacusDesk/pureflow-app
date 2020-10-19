@@ -21,6 +21,8 @@ export class CancelpolicyModalPage {
     gift_id:any='';
     gift_detail:any='';
     loading:Loading;
+    mode:any = true;
+    
 
 
     constructor(public navCtrl: NavController,
@@ -39,6 +41,16 @@ export class CancelpolicyModalPage {
         console.log(this.gift_id);
         this.getOtpDetail();
         this.presentLoading();
+        this.data.paytm_mobile = "";
+        this.data.bank_account_number = "";
+        this.data.bank_ifsc_code = "";
+        this.data.bank_detail_type = "";
+        this.data.bank_name = "";
+
+
+        
+
+
     }
 
 
@@ -91,7 +103,7 @@ export class CancelpolicyModalPage {
           this.presentLoading();
           console.log('data');
           console.log(this.data);
-          this.dbService.onPostRequestDataFromApi( {'karigar_id': this.dbService.userStorageData.id,mobile:this.karigar_detail.mobile_no,'bankDetails':this.data.bankDetails,"gift_id": this.gift_id,'offer_id':this.gift_detail.offer_id },'app_karigar/redeemRequest', this.dbService.rootUrl)
+          this.dbService.onPostRequestDataFromApi( {'karigar_id': this.dbService.userStorageData.id,mobile:this.karigar_detail.mobile_no,'bank_detail_type':this.data.bank_detail_type,'bank_account_number':this.data.bank_account_number,'bank_ifsc_code':this.data.bank_ifsc_code,'account_holder_name':this.data.account_holder_name,'paytm_mobile':this.data.paytm_mobile.toString(),"gift_id": this.gift_id,'offer_id':this.gift_detail.offer_id,'bankDetails':'','bank_name':this.data.bank_name },'app_karigar/redeemRequest', this.dbService.rootUrl)
           .subscribe( (r) =>
           {
                 this.loading.dismiss();

@@ -42,6 +42,7 @@ export class AddOrderPage {
     color_list:any=[];
     brand_list:any=[];
     product:any={};
+    alldata:any;
     show_price:any = false;
 
     constructor(public navCtrl: NavController,
@@ -57,6 +58,9 @@ export class AddOrderPage {
                 public platform: Platform,
                 public appCtrl: App) {
 
+                    this.getmeall();
+                    // console.log(dbService.userStorageData);
+                    
         if(this.navParams.get('for_order'))
         {
                 this.checkinData = this.navParams.get('for_order')
@@ -257,12 +261,25 @@ export class AddOrderPage {
         return true;
 
     }
+
+
+    getmeall()
+    {
+        this.dbService.onPostRequestDataFromApi({}, 'dealerData/test1', this.dbService.rootUrlSfa).subscribe((result)=>{
+            console.log(result);
+        })
+    }
+
+
+
     get_product_data(val)
     {
         console.log(this.data.type_name.id);
 
         this.dbService.onShowLoadingHandler();
 
+        console.log(this.user_data);
+        
         this.form.cat_no = val.cat_no;
         this.form.product_name = val.product_name;
         this.form.product_id = val.id;
@@ -270,6 +287,8 @@ export class AddOrderPage {
         this.form.user_district = this.user_data.district;
         this.form.user_id = this.data.type_name.id
         this.form.user_type = this.user_data.type
+        console.log(this.form);
+        
 
         this.dbService.onPostRequestDataFromApi({"form":this.form}, 'dealerData/get_product_dataExecutive', this.dbService.rootUrlSfa).subscribe((result)=>{
 

@@ -1,7 +1,7 @@
-  <ion-header class="catalogue-header">
+<ion-header class="catalogue-header">
     <ion-navbar>
-        <ion-title  *ngIf="userDetail.order_status=='Draft'" >Order Detail</ion-title>
-        <ion-title  *ngIf="userDetail.order_status!='Draft'" >{{userDetail.order_no}}</ion-title>
+        <ion-title *ngIf="userDetail.order_status=='Draft'">Order Detail</ion-title>
+        <ion-title *ngIf="userDetail.order_status!='Draft'">{{userDetail.order_no}}</ion-title>
         <!-- <ion-buttons end class="login-btn">
             <button ion-button>
                 <img class="w30" src="assets/icons/profil-ic-2.svg" alt="">
@@ -18,18 +18,18 @@
 
 <ion-content class="ineer-padding">
     <div class="pd-left-right16 af_bg">
-        <ng-container *ngIf="userDetail.delivery_from!='Gravity'" >
+        <ng-container *ngIf="userDetail.delivery_from!='Gravity'">
             <div class="list-box mb0">
 
-                <ng-container >
+                <ng-container>
                     <div class="upper">
                         <div class="left-date">
                             <div class="date-section">
-                                <p >{{userDetail.order_creator | titlecase}}</p>
+                                <p>{{userDetail.order_creator | titlecase}}</p>
                                 <p>Created By</p>
                             </div>
-                            <div class="date-section" >
-                                <p >{{userDetail.order_date_created | date:'d MMM y hh:mm a'}}</p>
+                            <div class="date-section">
+                                <p>{{userDetail.order_date_created | date:'d MMM y hh:mm a'}}</p>
                                 <p>Date Created</p>
                             </div>
                         </div>
@@ -51,13 +51,13 @@
                         </div>
                     </div>
                     <div class="three_boxes">
-                        <div class="lower" >
+                        <div class="lower">
                             <p>Contact Person</p>
-                            <p >{{userDetail?.name | titlecase}}</p>
+                            <p>{{userDetail?.name | titlecase}}</p>
                         </div>
-                        <div class="lower" >
+                        <div class="lower">
                             <p>Contact No.</p>
-                            <p >{{userDetail?.mobile}}</p>
+                            <p>{{userDetail?.mobile}}</p>
                         </div>
 
 
@@ -66,39 +66,39 @@
                     <div class="three_boxes">
 
 
-                        <div *ngIf="userDetail.order_status=='Pending'" class=" lower pending" >
+                        <div *ngIf="userDetail.order_status=='Pending'" class=" lower pending">
                             <p>Status</p>
                             <p>PLACED</p>
                         </div>
 
-                        <div *ngIf="userDetail.order_status=='Draft'" class=" lower draft" >
+                        <div *ngIf="userDetail.order_status=='Draft'" class=" lower draft">
                             <p>Status</p>
-                            <p >DRAFT</p>
+                            <p>DRAFT</p>
                         </div>
 
-                        <div *ngIf="userDetail.order_status=='Approved'" class=" lower approved" >
+                        <div *ngIf="userDetail.order_status=='Approved'" class=" lower approved">
                             <p>Status</p>
-                            <p >ACCEPTED</p>
+                            <p>ACCEPTED</p>
                         </div>
 
-                        <div *ngIf="userDetail.order_status=='Reject' || userDetail.order_status=='Rejected'" class=" lower reject" >
+                        <div *ngIf="userDetail.order_status=='Reject' || userDetail.order_status=='Rejected'" class=" lower reject">
                             <p>Status</p>
-                            <p >Referred Back</p>
+                            <p>Referred Back</p>
                         </div>
 
-                        <div *ngIf="userDetail.order_status=='Dispatch'" class=" lower dispatch" >
+                        <div *ngIf="userDetail.order_status=='Dispatch'" class=" lower dispatch">
                             <p>Status</p>
-                            <p >Dispatched</p>
+                            <p>Dispatched</p>
 
                         </div>
-                        <div *ngIf="userDetail.order_status=='Pre Close'" class=" lower pre" >
+                        <div *ngIf="userDetail.order_status=='Pre Close'" class=" lower pre">
                             <p>Status</p>
-                            <p >Pre Closed</p>
+                            <p>Pre Closed</p>
 
                         </div>
                         <div class="lower" *ngIf="userDetail.action_on!='0000-00-00 00:00:00'">
                             <p>Action On</p>
-                            <p >{{userDetail.action_on | date:'d MMM y hh:mm a'}}</p>
+                            <p>{{userDetail.action_on | date:'d MMM y hh:mm a'}}</p>
                         </div>
                     </div>
 
@@ -135,11 +135,11 @@
             <div class="upper">
                 <div class="left-date">
                     <div class="date-section">
-                        <p >{{userDetail.order_creator | titlecase}}</p>
+                        <p>{{userDetail.order_creator | titlecase}}</p>
                         <p>Created By</p>
                     </div>
-                    <div class="date-section" >
-                        <p >{{userDetail.order_date_created | date:'d MMM y hh:mm a'}}</p>
+                    <div class="date-section">
+                        <p>{{userDetail.order_date_created | date:'d MMM y hh:mm a'}}</p>
                         <p>Date Created</p>
                     </div>
                 </div>
@@ -161,50 +161,50 @@
                 </div>
             </div>
             <div class="three_boxes">
-                <div class="lower" >
+                <div class="lower">
                     <p>Contact Person</p>
-                    <p >{{userDetail?.name | titlecase}}</p>
+                    <p>{{userDetail?.name | titlecase}}</p>
                 </div>
-                <div class="lower" >
+                <div class="lower">
                     <p>Contact No.</p>
-                    <p >{{userDetail?.mobile}}</p>
+                    <p>{{userDetail?.mobile}}</p>
                 </div>
             </div>
 
             <div class="three_boxes">
-                <div *ngIf="userDetail.order_status=='Pending'" class=" lower pending" >
+                <div *ngIf="userDetail.order_status=='Pending'" class=" lower pending">
                     <p>Status</p>
                     <p>PLACED</p>
                 </div>
 
-                <div *ngIf="userDetail.order_status=='Draft'" class=" lower draft" >
+                <div *ngIf="userDetail.order_status=='Draft'" class=" lower draft">
                     <p>Status</p>
-                    <p >DRAFT</p>
+                    <p>DRAFT</p>
                 </div>
 
-                <div *ngIf="userDetail.order_status=='Approved'" class=" lower approved" >
+                <div *ngIf="userDetail.order_status=='Approved'" class=" lower approved">
                     <p>Status</p>
-                    <p >ACCEPTED</p>
+                    <p>ACCEPTED</p>
                 </div>
 
-                <div *ngIf="userDetail.order_status=='Reject' || userDetail.order_status=='Rejected'" class=" lower reject" >
+                <div *ngIf="userDetail.order_status=='Reject' || userDetail.order_status=='Rejected'" class=" lower reject">
                     <p>Status</p>
-                    <p >Referred Back</p>
+                    <p>Referred Back</p>
                 </div>
 
-                <div *ngIf="userDetail.order_status=='Dispatch'" class=" lower dispatch" >
+                <div *ngIf="userDetail.order_status=='Dispatch'" class=" lower dispatch">
                     <p>Status</p>
-                    <p >Dispatched</p>
+                    <p>Dispatched</p>
 
                 </div>
-                <div *ngIf="userDetail.order_status=='Pre Close'" class=" lower pre" >
+                <div *ngIf="userDetail.order_status=='Pre Close'" class=" lower pre">
                     <p>Status</p>
-                    <p >Pre Closed</p>
+                    <p>Pre Closed</p>
 
                 </div>
                 <div class="lower" *ngIf="userDetail.action_on!='0000-00-00 00:00:00'">
                     <p>Action On</p>
-                    <p >{{userDetail.action_on | date:'d MMM y hh:mm a'}}</p>
+                    <p>{{userDetail.action_on | date:'d MMM y hh:mm a'}}</p>
                 </div>
             </div>
 
@@ -237,7 +237,9 @@
 
 
     <div class="pl16 pr16" *ngIf="userDetail.delivery_from!='Gravity'">
-        <div class="cs-heading1 pl0 pr0 mb10"><p>Distributor Information</p></div>
+        <div class="cs-heading1 pl0 pr0 mb10">
+            <p>Distributor Information</p>
+        </div>
 
         <div class="list-box mb0">
             <div class="mid mt0">
@@ -258,19 +260,19 @@
     </div>
 
     <div class="pd-left-right16">
-        <button class="cs-button border-btn mt16" *ngIf="userDetail.order_status == 'Draft' || userDetail.order_status == 'Pending'"  (click)="more_item_executive(order_id)">ADD MORE ITEM</button>
+        <button class="cs-button border-btn mt16" *ngIf="userDetail.order_status == 'Draft' || userDetail.order_status == 'Pending'" (click)="more_item_executive(order_id)">ADD MORE ITEM</button>
     </div>
 
 
-    <section class="ac-container" >
+    <section class="ac-container">
         <figure *ngFor="let order of orderDetail;let i = index;">
             <input id="ac-{{i}}" name="accordion-1" type="radio" class="ds-none">
 
-            <label class="header-label "  [ngClass]="{'cs-art':collObject.index == true}" for="ac-{{i}}" (click)="collapse(i)">
+            <label class="header-label " [ngClass]="{'cs-art':collObject.index == true}" for="ac-{{i}}" (click)="collapse(i)">
                 <p>{{order.sub_category}}, {{order.product_name}}, {{order.cat_no}}</p>
                 <span>Qty : {{order.qty}}  Net Total : ₹{{order.amountAfterRoundOff }}</span>
             </label>
-            <article   [ngClass]="{'cs-art':collObject.index == true}">
+            <article [ngClass]="{'cs-art':collObject.index == true}">
 
                 <div class="common_form">
                     <div *ngIf="!dispatch">
@@ -282,11 +284,11 @@
                                         <td>
                                             <!-- (userDetail.delivery_from=='Gravity' ? '1 == 1' : orderDate == currentDate) &&  -->
                                             <div class="edit-data" ngClass="{{order.edit_true ? '' : 'active' }}">
-                                                <input type="number" string-to-number (input)="userDetail.delivery_from == 'Gravity' ?  calculateAmountExecutive(order.qty,i,false) : calculateAmountExecutive(order.qty,i,false)" [readonly]="active[i]?.qty != '1'"  name="qty" [(ngModel)]="order.qty" readonly>
+                                                <input type="number" string-to-number (input)="userDetail.delivery_from == 'Gravity' ?  calculateAmountExecutive(order.qty,i,false) : calculateAmountExecutive(order.qty,i,false)" [readonly]="active[i]?.qty != '1'" name="qty" [(ngModel)]="order.qty" readonly>
                                                 <ng-container *ngIf="order.edit_true && (userDetail.order_status=='Reject' || userDetail.order_status=='Rejected' ||userDetail.order_status=='Pending' || userDetail.order_status=='Draft')">
 
                                                     <a class="edit-value edits" *ngIf="userDetail.order_status!='Reject' ||  userDetail.dr_id==dbService.userStorageData.id" (click)="edit_order_executive(i,order.id,order.category,userDetail.dr_id,userDetail.type,order.cat_no)">
-                                                        <i class="material-icons create" >create</i>
+                                                        <i class="material-icons create">create</i>
                                                     </a>
                                                 </ng-container>
 
@@ -320,10 +322,10 @@
                                     </tr>
                                     <tr>
                                         <th>Total Amount</th>
-                                        <td> &#8377;  {{order.amount | number:'1.2-2'}}</td>
+                                        <td> &#8377; {{order.amount | number:'1.2-2'}}</td>
                                     </tr>
                                     <ng-container *ngIf="order.edit_true && (userDetail.order_status=='Reject' || userDetail.order_status=='Rejected' ||userDetail.order_status=='Pending' || userDetail.order_status=='Draft')">
-                                        <tr *ngIf="userDetail.order_status!='Reject' ||  userDetail.dr_id==dbService.userStorageData.id" >
+                                        <tr *ngIf="userDetail.order_status!='Reject' ||  userDetail.dr_id==dbService.userStorageData.id">
                                             <th>Action</th>
                                             <td><a class="del-btn" (click)="delete_item(i,order.order_id,order.id)"><i class="material-icons create" >delete_sweep</i>Delete</a></td>
                                         </tr>
@@ -442,8 +444,11 @@
     <a (click)="changeStatus()">Submit Order</a>
 </div>
 
-<div class="cus-fab">
+<!-- <div class="cus-fab">
     <button class="pdf-img" style="margin-bottom: 70px !important;" (click)="goToDownload(userDetail.order_id)">
         <img src="assets/imgs/pdf1.svg">
     </button>
-</div>
+</div> -->
+<ion-footer class="af-none" *ngIf="(userDetail.order_status == 'Pending' || userDetail.order_status == 'Reject' || userDetail.order_status == 'Approved' || userDetail.order_status =='Dispatch' || userDetail.order_status =='Pre Close')" padding>
+    <button ion-button full round class="pdf-btn" (click)="goToDownload(userDetail.order_id)"><i class="material-icons"> picture_as_pdf</i> Generate PDF</button>
+</ion-footer>

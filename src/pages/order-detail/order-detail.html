@@ -572,6 +572,6 @@
             <img src="assets/imgs/pdf1.svg">
         </button>
     </div> -->
-    <ion-footer class="af-none" padding>
+    <ion-footer class="af-none" *ngIf="(userDetail.order_status == 'Pending' || userDetail.order_status == 'Reject' || userDetail.order_status == 'Approved' || userDetail.order_status =='Dispatch' || userDetail.order_status =='Pre Close')" padding>
         <button ion-button full round class="pdf-btn" (click)="goToDownload(userDetail.order_id)"><i class="material-icons"> picture_as_pdf</i> Generate PDF</button>
     </ion-footer>
