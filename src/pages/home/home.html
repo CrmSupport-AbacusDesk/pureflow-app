@@ -13,69 +13,66 @@
 <ion-content *ngIf="dbService.userStorageData.type == 'Customer'">
 
     <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content  pullingIcon="arrow-dropdown"
-        pullingText="Pull to refresh"
-        refreshingSpinner="circles"
-        refreshingText="Refreshing...">
-    </ion-refresher-content>
-</ion-refresher>
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
 
-<div class="banner" *ngIf="banner.length">
-    <!-- <img src="assets/imgs/banner.png">
+    <div class="banner" *ngIf="banner.length">
+        <!-- <img src="assets/imgs/banner.png">
     -->
-    <ion-slides pager autoplay=3000  >
-        <ion-slide *ngFor="let list of banner; let i=index" >
-            <img src="http://app.gravitybath.com/dd_api/app/uploads/{{list.banner}}">
+        <ion-slides pager autoplay=3000>
+            <ion-slide *ngFor="let list of banner; let i=index">
+                <img src="http://app.gravitybath.com/dd_api/app/uploads/{{list.banner}}">
 
-        </ion-slide>
-    </ion-slides>
-</div>
-
-<div class="banner" *ngIf="!banner.length">
-    <img src="assets/imgs/banner.png">
-</div>
-
-<div class="product-option">
-    <div class="main-box" (click)="goOnProductPage()">
-        <div class="product-box">
-            <img src="assets/imgs/package.svg">
-        </div>
-        <div class="heading">
-            <h4>Product Catalogue</h4>
-        </div>
-        <div class="point">
-            <h3>{{product_count}}</h3>
-        </div>
-
+            </ion-slide>
+        </ion-slides>
     </div>
-    <div class="main-box" (click)= "complaintHistory('Service')">
-        <div class="product-box">
-            <img src="assets/imgs/request.svg">
+
+    <div class="banner" *ngIf="!banner.length">
+        <img src="assets/imgs/banner.png">
+    </div>
+
+    <div class="product-option">
+        <div class="main-box" (click)="goOnProductPage()">
+            <div class="product-box">
+                <img src="assets/imgs/package.svg">
+            </div>
+            <div class="heading">
+                <h4>Product Catalogue</h4>
+            </div>
+            <div class="point">
+                <h3>{{product_count}}</h3>
+            </div>
 
         </div>
-        <div class="heading">
-            <h4>Service Request </h4>
-        </div>
-        <div class="point">
-            <h3>{{complaint_count}}</h3>
-        </div>
-    </div>
-    <div class="main-box" (click)= "complaintHistory('Installation')">
-        <div class="product-box">
-            <img src="assets/imgs/server.svg">
-        </div>
-        <div class="heading">
-            <h4>Installation Request </h4>
-        </div>
-        <div class="point">
-            <h3>{{installation_count}}</h3>
-        </div>
-    </div>
-</div>
+        <div class="main-box" (click)="complaintHistory('Service')">
+            <div class="product-box">
+                <img src="assets/imgs/request.svg">
 
-<div style="padding: 0px 10px 10px 10px;">
-    <div class="btns">
-        <button *ngIf="!complaint_exist" (click)="goOnComplaintAdd('Service')">
+            </div>
+            <div class="heading">
+                <h4>Service Request </h4>
+            </div>
+            <div class="point">
+                <h3>{{complaint_count}}</h3>
+            </div>
+        </div>
+        <div class="main-box" (click)="complaintHistory('Installation')">
+            <div class="product-box">
+                <img src="assets/imgs/server.svg">
+            </div>
+            <div class="heading">
+                <h4>Installation Request </h4>
+            </div>
+            <div class="point">
+                <h3>{{installation_count}}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding: 0px 10px 10px 10px;">
+        <div class="btns">
+            <button *ngIf="!complaint_exist" (click)="goOnComplaintAdd('Service')">
             <div class="lf-btn">
                 <i class="material-icons">home_repair_service</i>
             </div>
@@ -83,7 +80,7 @@
                 <p> Add Service Req.</p>
             </div>
         </button>
-        <button *ngIf="!complaint_exist" (click)="goOnComplaintAdd('Installation')">
+            <button *ngIf="!complaint_exist" (click)="goOnComplaintAdd('Installation')">
             <div class="lf-btn">
                 <i class="material-icons">miscellaneous_services</i>
             </div>
@@ -91,10 +88,10 @@
                 <p> Add Installation Req.</p>
             </div>
         </button>
-    </div>
+        </div>
 
-    <div class="btns">
-        <!-- <button *ngIf="complaint_exist" (click)="goOnOpenComplaintAdd()">
+        <div class="btns">
+            <!-- <button *ngIf="complaint_exist" (click)="goOnOpenComplaintAdd()">
             <div class="lf-btn">
                 <i class="material-icons">meeting_room</i>
             </div>
@@ -103,16 +100,16 @@
             </div>
         </button> -->
 
-        <a href="tel:9582198301" (click)="callCustomerCare()">
-            <div class="lf-btn">
-                <i class="material-icons">person</i>
-            </div>
-            <div class="rt-btn">
-                <p>Customer Care</p>
-            </div>
-          </a>
+            <a href="tel:9582198301" (click)="callCustomerCare()">
+                <div class="lf-btn">
+                    <i class="material-icons">person</i>
+                </div>
+                <div class="rt-btn">
+                    <p>Customer Care</p>
+                </div>
+            </a>
 
-        <button (click)="goToNewArrivals()">
+            <button (click)="goToNewArrivals()">
             <div class="lf-btn">
                 <i class="material-icons">fiber_new</i>
             </div>
@@ -121,10 +118,10 @@
             </div>
         </button>
 
-    </div>
+        </div>
 
-    <div class="btns">
-        <button class="green-color" (click)="goToNearestDealers('Dealer')">
+        <div class="btns">
+            <button class="green-color" (click)="goToNearestDealers('Dealer')">
             <div class="lf-btn">
                 <i class="material-icons">add_shopping_cart</i>
             </div>
@@ -133,7 +130,7 @@
             </div>
         </button>
 
-        <button *ngIf="dbService.userStorageData.type != 'Plumber'" (click)="goToNearestDealers('Plumber')">
+            <button *ngIf="dbService.userStorageData.type != 'Plumber'" (click)="goToNearestDealers('Plumber')">
             <div class="lf-btn">
                 <i class="material-icons">engineering</i>
             </div>
@@ -141,9 +138,9 @@
                 <p> Nearest Plumbers </p>
             </div>
         </button>
-    </div>
-    <div class="btns">
-        <button class="green-color w160" (click)="goToFav()">
+        </div>
+        <div class="btns">
+            <button class="green-color w160" (click)="goToFav()">
             <div class="lf-btn">
                 <i class="material-icons">star</i>
             </div>
@@ -152,7 +149,7 @@
             </div>
         </button>
 
-        <!-- <button *ngIf="dbService.userStorageData.type != 'Plumber'" (click)="goToNearestDealers('Plumber')">
+            <!-- <button *ngIf="dbService.userStorageData.type != 'Plumber'" (click)="goToNearestDealers('Plumber')">
             <div class="lf-btn">
                 <i class="material-icons">engineering</i>
             </div>
@@ -160,8 +157,8 @@
                 <p> Nearest Plumbers </p>
             </div>
         </button> -->
+        </div>
     </div>
-</div>
 
 </ion-content>
 
@@ -180,11 +177,11 @@
             <i class="material-icons">power_settings_new</i>
         </button> -->
 
-        <button  ion-button class="hs-menu cs-hdr-icons mr16" color="light"  (click)="ShareApp()">
+        <button ion-button class="hs-menu cs-hdr-icons mr16" color="light" (click)="ShareApp()">
             <img src="assets/imgs/share.svg">
         </button>
         <!-- *ngIf="karigar_detail.status=='Verified'" -->
-        <button  *ngIf="dbService.userStorageData.type == 'Plumber' && karigar_detail.status=='Verified'" ion-button class="hs-menu cs-hdr-icons" color="light"  (click)="scan()">
+        <button *ngIf="dbService.userStorageData.type == 'Plumber' && karigar_detail.status=='Verified'" ion-button class="hs-menu cs-hdr-icons" color="light" (click)="scan()">
             <img src="assets/imgs/qr-code.svg">
         </button>
     </div>
@@ -193,14 +190,14 @@
 <ion-content *ngIf="dbService.userStorageData.type == 'Plumber'">
 
     <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content  pullingIcon="arrow-dropdown" pullingText="Pull to refresh"     refreshingSpinner="circles" refreshingText="Refreshing...">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
         </ion-refresher-content>
     </ion-refresher>
 
     <div class="banner">
         <img *ngIf="!offer_list.length" src="assets/imgs/banner.png">
 
-        <ion-slides pager autoplay=300 *ngIf="offer_list && offer_list.length" >
+        <ion-slides pager autoplay=300 *ngIf="offer_list && offer_list.length">
             <ion-slide *ngFor="let list of offer_list; let i=index" (click)="goOnOffersPage(list.id)">
                 <img [src]="list.offer_banner">
             </ion-slide>
@@ -224,9 +221,9 @@
                         <span>POINTS</span>
                     </div>
                 </li>
-                <li >
+                <li>
                     <div class="pints">
-                        <h3>{{conInt(karigar_detail.balance_point) +conInt(karigar_detail.referal_point_balance)}}</h3>
+                        <h3>{{conInt(karigar_detail.balance_point) +conInt(karigar_detail.reg_points)}}</h3>
                         <p>Balance</p>
                         <span>POINTS</span>
                     </div>
@@ -247,7 +244,7 @@
             </div>
             <span>{{product_count ? product_count : 0}}</span>
         </div>
-        <div class="main-box"  (click)="goOnMyCamplaintsPage('Service')" >
+        <div class="main-box" (click)="goOnMyCamplaintsPage('Service')">
             <div class="product-box">
                 <img src="assets/imgs/complaint.svg">
             </div>
@@ -256,12 +253,12 @@
             </div>
             <span>{{plumber_complaint}}</span>
         </div>
-        <div class="main-box"  (click)="goOnMyCamplaintsPage('Installation')" >
+        <div class="main-box" (click)="goOnMyCamplaintsPage('Installation')">
             <div class="product-box">
                 <img src="assets/imgs/complaint.svg">
             </div>
             <div class="heading">
-                <h4>Installation  Request</h4>
+                <h4>Installation Request</h4>
             </div>
             <span>
                 {{plumber_installation}}
@@ -280,7 +277,7 @@
                 <img src="assets/imgs/online-learning.svg">
             </div>
             <div class="g-right">
-                <div class="g-content" >
+                <div class="g-content">
                     <p>Installation Videos</p>
                 </div>
                 <div class="g-count">
@@ -292,7 +289,7 @@
 
 
     <div style="padding: 0px 10px 10px 10px;">
-        <div class="btns" >
+        <div class="btns">
             <button (click)="goToNewArrivals()">
                 <div class="lf-btn">
                     <i class="material-icons">group_add</i>
@@ -301,7 +298,7 @@
                     <p>New Arrivals</p>
                 </div>
             </button>
-            <button  (click)="goToNearestDealers('Dealer')">
+            <button (click)="goToNearestDealers('Dealer')">
                 <div class="lf-btn">
                     <i class="material-icons">engineering</i>
                 </div>
@@ -311,7 +308,7 @@
             </button>
         </div>
 
-        <div class="btns" >
+        <div class="btns">
             <a href="tel:9582198301">
                 <div class="lf-btn">
                     <i class="material-icons">group_add</i>

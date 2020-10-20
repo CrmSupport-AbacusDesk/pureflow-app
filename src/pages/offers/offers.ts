@@ -69,7 +69,7 @@ export class OffersPage {
       this.offer_detail=r['offer'];
       this.offer_balance=parseInt(r['gift'][0].offer_balance);
       this.gift_list=r['gift'];
-      this.balance_point=parseInt(r['karigar'].balance_point);
+      this.balance_point=parseInt(r['karigar'].balance_point + parseInt(r['karigar'].reg_points));
       // for gift active class
       for (let i = 0; i < this.gift_list.length; i++)
       {

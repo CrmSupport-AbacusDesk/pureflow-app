@@ -117,8 +117,10 @@ export class DealerAddorderPage {
             if(resp['special_discount'] &&  resp['special_discount']['type'])
             this.type = resp['special_discount']['type'];
             console.log(this.type);
+            console.log(this.user_data);
+            
 
-            if(this.user_data.type == '1')
+            if(this.user_data.type == '1' )
             {
                 if(resp['special_discount'] &&  resp['special_discount']['distributor_discount'])
                 this.special_discount = resp['special_discount']['distributor_discount'];
@@ -128,6 +130,12 @@ export class DealerAddorderPage {
             {
                 if(resp['special_discount'] &&  resp['special_discount']['dealer_discount'])
                 this.special_discount = resp['special_discount']['dealer_discount'];
+            }
+
+            if(this.user_data.type == '7')
+            {
+                if(resp['special_discount'] &&  resp['special_discount']['distributor_discount'])
+                this.special_discount = resp['special_discount']['distributor_discount'];
             }
 
             if(resp['special_discount'] &&  resp['special_discount']['lable'])
@@ -338,7 +346,7 @@ export class DealerAddorderPage {
         console.log(this.product);
         if(this.cart_array.length == 0)
         {
-            this.cart_array.push(this.product);
+            this.cart_array.push(JSON.parse(JSON.stringify(this.product)));
         }
         else
         {
@@ -361,7 +369,7 @@ export class DealerAddorderPage {
 
             if(flag)
             {
-                this.cart_array.push(this.product);
+                this.cart_array.push(JSON.parse(JSON.stringify(this.product)));
             }
         }
         this.data.cat_no = {};
@@ -614,6 +622,7 @@ export class DealerAddorderPage {
     }
     deleteItemFromCartAlertMessage(index)
     {
+        
         let alert=this.alertCtrl.create({
             title:'Are You Sure?',
             subTitle: 'You want to remove this item ??',
@@ -639,14 +648,32 @@ export class DealerAddorderPage {
     }
     deleteItemFromCart(index)
     {
-        this.sub_total = parseFloat(this.sub_total) -  parseFloat(this.cart_array[index].subTotal) ;
 
-        this.dis_amt = parseFloat(this.dis_amt) -  parseFloat(this.cart_array[index].subtotal_discount) ;
+        this.cart_array.splice(index,1);
+        this.dis_amt=0;
+        this.sub_total=0;
+        this.net_total=0;
+        this.spcl_dis_amt=0;
+        this.grand_total=0;
+        for (let index = 0; index < this.cart_array.length; index++) {
 
-        this.net_total = parseFloat(this.net_total) -  parseFloat(this.cart_array[index].subtotal_discounted) ;
+            this.dis_amt += parseFloat(this.cart_array[index].subtotal_discount);
+            this.sub_total += parseFloat(this.cart_array[index].subTotal);   
+            this.net_total += parseFloat(this.cart_array[index].subtotal_discounted);   
+
+        }
+
+    
+        // this.sub_total = parseFloat(this.sub_total) -  parseFloat(this.cart_array[index].subTotal) ;
+
+        // this.dis_amt = parseFloat(this.dis_amt) -  parseFloat(this.cart_array[index].subtotal_discount) ;
+
+        // this.net_total = parseFloat(this.net_total) -  parseFloat(this.cart_array[index].subtotal_discounted) ;
 
         this.spcl_dis_amt = (this.net_total * this.special_discount)/100;
 
+        console.log(this.dis_amt);
+        
         if(this.type=='Discount')
         {
             this.grand_total = Math.round(this.net_total - this.spcl_dis_amt);
@@ -655,7 +682,9 @@ export class DealerAddorderPage {
             this.grand_total = Math.round(this.net_total + this.spcl_dis_amt);
         }
 
-        this.cart_array.splice(index,1);
+        console.log(this.grand_total);
+        
+
 
         this.dbService.presentToast('Item removed !!')
     }

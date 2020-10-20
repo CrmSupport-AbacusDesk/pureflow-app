@@ -1,9 +1,8 @@
-
-<ng-container >
+<ng-container>
     <ion-header class="catalogue-header">
         <ion-navbar>
-            <ion-title  *ngIf="userDetail.order_status=='Draft'" >Order Detail</ion-title>
-            <ion-title  *ngIf="userDetail.order_status!='Draft'" >{{userDetail.order_no}}</ion-title>
+            <ion-title *ngIf="userDetail.order_status=='Draft'">Order Detail</ion-title>
+            <ion-title *ngIf="userDetail.order_status!='Draft'">{{userDetail.order_no}}</ion-title>
             <ion-buttons end class="login-btn">
                 <button ion-button>
                     <img class="w30" src="assets/icons/profil-ic-2.svg" alt="">
@@ -17,11 +16,11 @@
         </ion-navbar>
     </ion-header>
 
-    <ion-content >
+    <ion-content>
         <div class="pd-left-right16 af_bg">
-            <div class="list-box mb0" *ngIf="userDetail.delivery_from==dbService.userStorageData.id && dbService.userStorageData.type==1" >
+            <div class="list-box mb0" *ngIf="userDetail.delivery_from==dbService.userStorageData.id && dbService.userStorageData.type==1">
 
-                <ng-container >
+                <ng-container>
                     <div class="upper">
                         <div class="left-date">
                             <div class="date-section">
@@ -29,8 +28,8 @@
                                 <p *ngIf=" userDetail.dr_creater">{{userDetail.dr_creater | titlecase}}</p>
                                 <p>Created By</p>
                             </div>
-                            <div class="date-section" >
-                                <p >{{userDetail.order_date_created | date:'d MMM y hh:mm a'}}</p>
+                            <div class="date-section">
+                                <p>{{userDetail.order_date_created | date:'d MMM y hh:mm a'}}</p>
                                 <p>Date Created</p>
                             </div>
                         </div>
@@ -54,12 +53,12 @@
                         </div>
                     </div>
                     <div class="three_boxes">
-                        <div class="lower" >
-                            <p >{{userDetail.name | titlecase}}</p>
+                        <div class="lower">
+                            <p>{{userDetail.name | titlecase}}</p>
                             <p>Contact Person</p>
                         </div>
-                        <div class="lower" >
-                            <p >{{userDetail.mobile}}</p>
+                        <div class="lower">
+                            <p>{{userDetail.mobile}}</p>
                             <p>Contact No.</p>
                         </div>
 
@@ -68,39 +67,39 @@
                     <div class="three_boxes">
 
 
-                        <div *ngIf="userDetail.order_status=='Pending'" class=" lower pending" >
+                        <div *ngIf="userDetail.order_status=='Pending'" class=" lower pending">
                             <p>Status</p>
                             <p>PLACED</p>
                         </div>
 
-                        <div *ngIf="userDetail.order_status=='Draft'" class=" lower draft" >
+                        <div *ngIf="userDetail.order_status=='Draft'" class=" lower draft">
                             <p>Status</p>
-                            <p >DRAFT</p>
+                            <p>DRAFT</p>
                         </div>
 
-                        <div *ngIf="userDetail.order_status=='Approved'" class=" lower approved" >
+                        <div *ngIf="userDetail.order_status=='Approved'" class=" lower approved">
                             <p>Status</p>
-                            <p >ACCEPTED</p>
+                            <p>ACCEPTED</p>
                         </div>
 
-                        <div *ngIf="userDetail.order_status=='Reject' || userDetail.order_status=='Rejected'" class=" lower reject" >
+                        <div *ngIf="userDetail.order_status=='Reject' || userDetail.order_status=='Rejected'" class=" lower reject">
                             <p>Status</p>
-                            <p >Referred Back</p>
+                            <p>Referred Back</p>
                         </div>
 
-                        <div *ngIf="userDetail.order_status=='Dispatch'" class=" lower dispatch" >
+                        <div *ngIf="userDetail.order_status=='Dispatch'" class=" lower dispatch">
                             <p>Status</p>
-                            <p >Dispatched</p>
+                            <p>Dispatched</p>
 
                         </div>
-                        <div *ngIf="userDetail.order_status=='Pre Close'" class=" lower pre" >
+                        <div *ngIf="userDetail.order_status=='Pre Close'" class=" lower pre">
                             <p>Status</p>
-                            <p >Pre Closed</p>
+                            <p>Pre Closed</p>
 
                         </div>
                         <div class="lower" *ngIf="userDetail.action_on!='0000-00-00 00:00:00'">
                             <p>Action On</p>
-                            <p >{{userDetail.action_on | date:'d MMM y hh:mm a'}}</p>
+                            <p>{{userDetail.action_on | date:'d MMM y hh:mm a'}}</p>
                         </div>
                     </div>
 
@@ -131,7 +130,7 @@
 
             </div>
 
-            <div class="list-box mb0"  *ngIf="userDetail.dr_id==dbService.userStorageData.id && dbService.userStorageData.type==3 && userDetail.delivery_from" >
+            <div class="list-box mb0" *ngIf="userDetail.dr_id==dbService.userStorageData.id && dbService.userStorageData.type==3 && userDetail.delivery_from">
 
                 <ng-container>
                     <div class="upper">
@@ -140,8 +139,8 @@
                                 <p>{{userDetail.deliveryFromData.company_name.toUpperCase()}}</p>
                                 <p>Distributor Name </p>
                             </div>
-                            <div class="date-section" >
-                                <p >{{userDetail.deliveryFromData.name | titlecase}}</p>
+                            <div class="date-section">
+                                <p>{{userDetail.deliveryFromData.name | titlecase}}</p>
                                 <p>Contact Person</p>
                             </div>
                         </div>
@@ -159,39 +158,39 @@
                 <div class="three_boxes">
 
 
-                    <div *ngIf="userDetail.order_status=='Pending'" class=" lower pending" >
+                    <div *ngIf="userDetail.order_status=='Pending'" class=" lower pending">
                         <p>Status</p>
                         <p>PLACED</p>
                     </div>
 
-                    <div *ngIf="userDetail.order_status=='Draft'" class=" lower draft" >
+                    <div *ngIf="userDetail.order_status=='Draft'" class=" lower draft">
                         <p>Status</p>
-                        <p >DRAFT</p>
+                        <p>DRAFT</p>
                     </div>
 
-                    <div *ngIf="userDetail.order_status=='Approved'" class=" lower approved" >
+                    <div *ngIf="userDetail.order_status=='Approved'" class=" lower approved">
                         <p>Status</p>
-                        <p >ACCEPTED</p>
+                        <p>ACCEPTED</p>
                     </div>
 
-                    <div *ngIf="userDetail.order_status=='Reject' || userDetail.order_status=='Rejected'" class=" lower reject" >
+                    <div *ngIf="userDetail.order_status=='Reject' || userDetail.order_status=='Rejected'" class=" lower reject">
                         <p>Status</p>
-                        <p >Referred Back</p>
+                        <p>Referred Back</p>
                     </div>
 
-                    <div *ngIf="userDetail.order_status=='Dispatch'" class=" lower dispatch" >
+                    <div *ngIf="userDetail.order_status=='Dispatch'" class=" lower dispatch">
                         <p>Status</p>
-                        <p >Dispatched</p>
+                        <p>Dispatched</p>
 
                     </div>
-                    <div *ngIf="userDetail.order_status=='Pre Close'" class=" lower pre" >
+                    <div *ngIf="userDetail.order_status=='Pre Close'" class=" lower pre">
                         <p>Status</p>
-                        <p >Pre Closed</p>
+                        <p>Pre Closed</p>
 
                     </div>
-                    <div class="lower"  *ngIf="userDetail.action_on!='0000-00-00 00:00:00'">
+                    <div class="lower" *ngIf="userDetail.action_on!='0000-00-00 00:00:00'">
                         <p>Action On</p>
-                        <p >{{userDetail.action_on | date:'d MMM y hh:mm a'}}</p>
+                        <p>{{userDetail.action_on | date:'d MMM y hh:mm a'}}</p>
                     </div>
                 </div>
                 <div class="lower" *ngIf="userDetail.reason_reject && userDetail.reason_reject != ''">
@@ -212,7 +211,7 @@
                 </div>
             </div>
 
-            <div class="list-box mb0 "  *ngIf="userDetail.dr_id==dbService.userStorageData.id && dbService.userStorageData.type==1" >
+            <div class="list-box mb0 " *ngIf="userDetail.dr_id==dbService.userStorageData.id && dbService.userStorageData.type==1">
 
 
                 <div class="mid mt0">
@@ -230,15 +229,15 @@
 
                 </div>
                 <div class="three_boxes">
-                    <div class="lower" >
+                    <div class="lower">
                         <p>Date Created</p>
-                        <p >{{userDetail.order_date_created | date:'d MMM y'}}</p>
+                        <p>{{userDetail.order_date_created | date:'d MMM y'}}</p>
                     </div>
 
 
-                    <div class=" lower " >
+                    <div class=" lower ">
                         <p>Time</p>
-                        <p >{{userDetail.order_date_created | date:'hh:mm a'}}</p>
+                        <p>{{userDetail.order_date_created | date:'hh:mm a'}}</p>
 
                     </div>
 
@@ -247,40 +246,40 @@
                 <div class="three_boxes">
 
 
-                    <div *ngIf="userDetail.order_status=='Pending'" class=" lower pending" >
+                    <div *ngIf="userDetail.order_status=='Pending'" class=" lower pending">
                         <p>Status</p>
                         <p>PLACED</p>
                     </div>
 
-                    <div *ngIf="userDetail.order_status=='Draft'" class=" lower draft" >
+                    <div *ngIf="userDetail.order_status=='Draft'" class=" lower draft">
                         <p>Status</p>
-                        <p >DRAFT</p>
+                        <p>DRAFT</p>
                     </div>
 
-                    <div *ngIf="userDetail.order_status=='Approved'" class=" lower approved" >
+                    <div *ngIf="userDetail.order_status=='Approved'" class=" lower approved">
                         <p>Status</p>
-                        <p >ACCEPTED</p>
+                        <p>ACCEPTED</p>
                     </div>
 
-                    <div *ngIf="userDetail.order_status=='Reject' || userDetail.order_status=='Rejected'" class=" lower reject" >
+                    <div *ngIf="userDetail.order_status=='Reject' || userDetail.order_status=='Rejected'" class=" lower reject">
                         <p>Status</p>
-                        <p >Referred Back</p>
+                        <p>Referred Back</p>
                     </div>
 
-                    <div *ngIf="userDetail.order_status=='Dispatch'" class=" lower dispatch" >
+                    <div *ngIf="userDetail.order_status=='Dispatch'" class=" lower dispatch">
                         <p>Status</p>
-                        <p >Dispatched</p>
+                        <p>Dispatched</p>
 
                     </div>
-                    <div *ngIf="userDetail.order_status=='Pre Close'" class=" lower pre" >
+                    <div *ngIf="userDetail.order_status=='Pre Close'" class=" lower pre">
                         <p>Status</p>
-                        <p >{{userDetail.order_status}}</p>
+                        <p>{{userDetail.order_status}}</p>
 
                     </div>
 
                     <div class="lower" *ngIf="userDetail.action_on!='0000-00-00 00:00:00'">
                         <p>Action On</p>
-                        <p >{{userDetail.action_on | date:'d MMM y hh:mm a'}}</p>
+                        <p>{{userDetail.action_on | date:'d MMM y hh:mm a'}}</p>
                     </div>
                 </div>
                 <div class="lower" *ngIf="userDetail.reason_reject && userDetail.reason_reject != ''">
@@ -305,7 +304,7 @@
         </div>
 
         <div class="pd-left-right16">
-            <button class="cs-button border-btn mt16" *ngIf="userDetail.delivery_from!=dbService.userStorageData.id && (userDetail.order_status == 'Draft' || userDetail.order_status == 'Pending')"  (click)="more_item(order_id)">ADD MORE ITEM</button>
+            <button class="cs-button border-btn mt16" *ngIf="userDetail.delivery_from!=dbService.userStorageData.id && (userDetail.order_status == 'Draft' || userDetail.order_status == 'Pending')" (click)="more_item(order_id)">ADD MORE ITEM / Edit Transport Detail</button>
         </div>
 
         <!-- <button *ngIf="userDetail.order_status=='Pending' && userDetail.changeStatus!=true && userDetail.delivery_from==dbService.userStorageData.id" (click)="userDetail.changeStatus=true">Change Status</button> -->
@@ -314,7 +313,7 @@
                 <ion-list>
                     <ion-item class="cs-normal-select mt16">
                         <ion-label><span>Status <strong>*</strong></span></ion-label>
-                        <ion-select placeholder="Select Status"  name="status"  [(ngModel)]="userDetail.status">
+                        <ion-select placeholder="Select Status" name="status" [(ngModel)]="userDetail.status">
                             <ion-option *ngIf="userDetail.order_status=='Pending'" value="Approved">Accept Order</ion-option>
                             <ion-option *ngIf="userDetail.order_status=='Pending'" value="Reject">Refer Back Order</ion-option>
                             <ion-option value="Pre Close">Pre Close</ion-option>
@@ -340,11 +339,11 @@
             <figure *ngFor="let order of orderDetail;let i = index;">
                 <input id="ac-{{i}}" name="accordion-1" type="radio" class="ds-none">
 
-                <label class="header-label "  [ngClass]="{'cs-art':collObject.index == true}" for="ac-{{i}}" (click)="collapse(i)">
+                <label class="header-label " [ngClass]="{'cs-art':collObject.index == true}" for="ac-{{i}}" (click)="collapse(i)">
                     <p>{{order.sub_category}}, {{order.product_name}}, {{order.cat_no}}</p>
                     <span>Qty : {{order.qty}}  Net Total : ₹{{order.amountAfterRoundOff }}</span>
                 </label>
-                <article   [ngClass]="{'cs-art':collObject.index == true}">
+                <article [ngClass]="{'cs-art':collObject.index == true}">
 
                     <div class="common_form">
                         <div *ngIf="!dispatch">
@@ -356,11 +355,11 @@
                                             <td>
                                                 <!-- (userDetail.delivery_from=='Gravity' ? '1 == 1' : orderDate == currentDate) &&  -->
                                                 <div class="edit-data" ngClass="{{order.edit_true ? '' : 'active' }}">
-                                                    <input type="number" string-to-number (input)="userDetail.delivery_from == 'Gravity' ?  calculateAmount(order.qty,i,false) : calculateAmount(order.qty,i,false)" [readonly]="active[i]?.qty != '1'"  name="qty" [(ngModel)]="order.qty" readonly>
+                                                    <input type="number" string-to-number (input)="userDetail.delivery_from == 'Gravity' ?  calculateAmount(order.qty,i,false) : calculateAmount(order.qty,i,false)" [readonly]="active[i]?.qty != '1'" name="qty" [(ngModel)]="order.qty" readonly>
                                                     <ng-container *ngIf="order.edit_true && (userDetail.order_status=='Reject' || userDetail.order_status=='Rejected' ||userDetail.order_status=='Pending' || userDetail.order_status=='Draft')">
 
                                                         <a class="edit-value edits" *ngIf="userDetail.order_status!='Reject' ||  userDetail.dr_id==dbService.userStorageData.id" (click)="edit_order(i,order.id,order.category,userDetail.dr_id,userDetail.type,order.cat_no)">
-                                                            <i class="material-icons create" >create</i>
+                                                            <i class="material-icons create">create</i>
                                                         </a>
                                                     </ng-container>
 
@@ -394,10 +393,10 @@
                                         </tr>
                                         <tr>
                                             <th>Total Amount</th>
-                                            <td> &#8377;  {{order.amount | number:'1.2-2'}}</td>
+                                            <td> &#8377; {{order.amount | number:'1.2-2'}}</td>
                                         </tr>
                                         <ng-container *ngIf="order.edit_true && (userDetail.order_status=='Reject' || userDetail.order_status=='Rejected' ||userDetail.order_status=='Pending' || userDetail.order_status=='Draft')">
-                                            <tr *ngIf="userDetail.order_status!='Reject' ||  userDetail.dr_id==dbService.userStorageData.id" >
+                                            <tr *ngIf="userDetail.order_status!='Reject' ||  userDetail.dr_id==dbService.userStorageData.id">
                                                 <th>Action</th>
                                                 <td><a class="del-btn" (click)="delete_item(i,order.order_id,order.id)"><i class="material-icons create" >delete_sweep</i>Delete</a></td>
                                             </tr>
@@ -405,7 +404,7 @@
                                     </table>
                                 </div>
 
-                                <div class="oneinfo pt0 pr0 pl0 pb0"  style="display: none;">
+                                <div class="oneinfo pt0 pr0 pl0 pb0" style="display: none;">
                                     <div class="figure" *ngIf="userDetail.delivery_from == 'Gravity'">
                                         <p>GST</p>
                                         <p>&#8377; {{order.gst_amount | number:'1.2-2'}}</p>
@@ -452,7 +451,7 @@
                             <th>Dispatch Qty</th>
                             <td>
                                 <div class="edit-data" ngClass="{{order.edit_true ? '' : 'active' }}">
-                                    <input placeholder="Enter Qty" type="number" string-to-number  name="disp_qty" [(ngModel)]="order.disp_qty" (keyup)="check_num(idx)">
+                                    <input placeholder="Enter Qty" type="number" string-to-number name="disp_qty" [(ngModel)]="order.disp_qty" (keyup)="check_num(idx)">
                                 </div>
                             </td>
                         </tr>
@@ -517,7 +516,7 @@
             </ul>
         </div>
 
-        <div class="upload-plus-icon ch-change" >
+        <div class="upload-plus-icon ch-change">
             <h1 class="img-heading" *ngIf="show_image && image.length">Dispatch Document</h1>
             <ul>
                 <li *ngIf="dispatch">
@@ -543,12 +542,12 @@
 
             <ng-container *ngIf="  userDetail.changeStatus!=true && userDetail.delivery_from==dbService.userStorageData.id && userDetail.order_status == 'Approved'">
                 <div class="align-btn">
-                    <button class="cs-button border" (click)="!dispatch ? dispatch = true : dispatch_item()" >
+                    <button class="cs-button border" (click)="!dispatch ? dispatch = true : dispatch_item()">
                         <i class="material-icons">local_shipping</i>
 
                         {{!dispatch ? 'Dispatch Item' : 'Save'}}
                     </button>
-                    <button class="cs-button w200" (click)="forceDispatch()">Dispatch Order</button>
+                    <button class="cs-button w200" (click)="forceDispatch()">Complete Dispatch</button>
                 </div>
 
             </ng-container>
@@ -557,10 +556,10 @@
 
     </ion-content>
 
-    <div class="endcheck"*ngIf=" userDetail.changeStatus!=true && userDetail.delivery_from==dbService.userStorageData.id">
+    <div class="endcheck" *ngIf=" userDetail.changeStatus!=true && userDetail.delivery_from==dbService.userStorageData.id">
         <a (click)="userDetail.changeStatus=true">Change Status</a>
     </div>
-    <div class="endcheck"*ngIf=" userDetail.changeStatus==true && userDetail.delivery_from==dbService.userStorageData.id">
+    <div class="endcheck" *ngIf=" userDetail.changeStatus==true && userDetail.delivery_from==dbService.userStorageData.id">
         <a (click)="updateStatus(userDetail.status,userDetail.reason_reject1,userDetail.remark1,userDetail.pre_close_remark1);">Update Status</a>
     </div>
 
@@ -568,9 +567,11 @@
         <a (click)="changeStatus()">Submit Order</a>
     </div>
 
-    <div class="cus-fab">
-        <button  class="pdf-img" style="margin-bottom: 70px !important;" (click)="goToDownload(userDetail.order_id)">
+    <!-- <div class="cus-fab">
+        <button class="pdf-img" style="margin-bottom: 70px !important;" (click)="goToDownload(userDetail.order_id)">
             <img src="assets/imgs/pdf1.svg">
         </button>
-    </div>
-
+    </div> -->
+    <ion-footer class="af-none" *ngIf="(userDetail.order_status == 'Pending' || userDetail.order_status == 'Reject' || userDetail.order_status == 'Approved' || userDetail.order_status =='Dispatch' || userDetail.order_status =='Pre Close')" padding>
+        <button ion-button full round class="pdf-btn" (click)="goToDownload(userDetail.order_id)"><i class="material-icons"> picture_as_pdf</i> Generate PDF</button>
+    </ion-footer>

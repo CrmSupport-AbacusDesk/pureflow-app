@@ -64,7 +64,7 @@ export class DistributorListPage {
 
       this.dbService.onShowLoadingHandler();
       this.dbService.onPostRequestDataFromApi({user_data:this.user_data,"start":this.start,"limit":this.limit,"search":this.filter,type:type,'userId':this.userId},"dealerData/get_assign_lead", this.dbService.rootUrlSfa)
-      .then(resp=>{
+      .subscribe(resp=>{
           console.log(resp);
           this.dbService.onDismissLoadingHandler()
           this.dr_list = resp['dr_list'];
