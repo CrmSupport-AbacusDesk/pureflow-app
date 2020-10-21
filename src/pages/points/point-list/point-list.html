@@ -206,7 +206,9 @@
 
 <ion-footer class="csm-footer-tabs">
     <div class="ftabs">
-        <button ion-item [ngClass]="{'active': filter.active_tab == 'points'}" (click)="change_tab('points')"><p>Points History</p></button>
-        <button ion-item [ngClass]="{'active': filter.active_tab == 'redeem'}" (click)="change_tab('redeem')"><p>Redeem History</p></button>
+        <button ion-item class="ml0" [ngClass]="{'active': filter.active_tab == 'points'}" (click)="change_tab('points')"><p>Points History</p></button>
+        <button ion-item class="ml0" [ngClass]="{'active': filter.active_tab == 'redeem'}" (click)="change_tab('redeem')"><p>Redeem History</p></button>
+        <button ion-item class="ml0" [ngClass]="{'active': filter.active_tab == 'offer_list'}" (click)="change_tab('offer_list')"><p>Redeem Request</p></button>
+
     </div>
 </ion-footer>
