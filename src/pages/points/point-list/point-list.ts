@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams ,Loading, LoadingController, App} from 'ionic-angular';
 import { PointDetailPage } from '../point-detail/point-detail';
+import { OffersPage } from '../../offers/offers';
 import { DbserviceProvider } from '../../../providers/dbservice/dbservice';
 import { HomePage } from '../../home/home';
 import { TabsPage } from '../../tabs/tabs';
@@ -167,6 +168,13 @@ export class PointListPage {
         if(this.filter.active_tab == "redeem")
         {
             this.getTransactionDetail();
+        }
+
+        if(this.filter.active_tab == "offer_list")
+        {
+            // this.getTransactionDetail();
+             this.navCtrl.push(OffersPage,{'id':'3'});
+
         }
     }
 
