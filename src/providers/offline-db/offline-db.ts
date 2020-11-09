@@ -46,7 +46,7 @@ export class OfflineDbProvider {
 
       private _DB 	: SQLiteObject;
 
-      private _SQL_URI : string = encodeURI('http://app.gravitybath.com/crm/api/app/Cron/onGetUpdatedProductDataForOfflineInstallation');
+      private _SQL_URI : string = encodeURI(this.dbService.rootUrlSfa + 'Cron/onGetUpdatedProductDataForOfflineInstallation');
 
       public dataImported : boolean 	= false;
 
@@ -536,34 +536,37 @@ export class OfflineDbProvider {
             public onDownloadImageFileForLocalDBHandler(type, imageName,lastUpdatedTime,db) {
 
                   let imageSourceDirectory, downloadDestinationDirectory = '';
-                  if(type == 'mainCategoryImage') {
+                  // if(type == 'mainCategoryImage') {
 
-                        imageSourceDirectory = 'app/Http/Controllers/Admin/Master/appOfflineUploads/mainCategoryImage/';
+                  //       imageSourceDirectory = 'app/Http/Controllers/Admin/Master/appOfflineUploads/mainCategoryImage/';
 
-                        downloadDestinationDirectory = 'download/mainCategoryImage/';
+                  //       downloadDestinationDirectory = 'download/mainCategoryImage/';
 
-                  } else if(type == 'categoryImage') {
+                  // } else if(type == 'categoryImage') {
 
-                        imageSourceDirectory = 'app/Http/Controllers/Admin/Master/appOfflineUploads/categoryImage/';
+                  //       imageSourceDirectory = 'app/Http/Controllers/Admin/Master/appOfflineUploads/categoryImage/';
 
-                        downloadDestinationDirectory = 'download/categoryImage/';
+                  //       downloadDestinationDirectory = 'download/categoryImage/';
 
-                  } else if(type == 'productImage') {
+                  // } else if(type == 'productImage') {
 
-                        imageSourceDirectory = 'app/Http/Controllers/Admin/Master/appOfflineUploads/productImage/';
+                  //       imageSourceDirectory = 'app/Http/Controllers/Admin/Master/appOfflineUploads/productImage/';
 
-                        downloadDestinationDirectory = 'download/productImage/';
-                  }
+                  //       downloadDestinationDirectory = 'download/productImage/';
+                  // }
 
-                  downloadDestinationDirectory = 'download/productImage/';
+
 
                   const fileTransfer: FileTransferObject = this.fileTransfer.create();
-
                   console.log(this.file.dataDirectory);
 
-                  var url = this.dbService.rootUrl + imageSourceDirectory + imageName;
+                  downloadDestinationDirectory = 'imageCatalogue/';
 
-                  fileTransfer.download(url, this.file.dataDirectory + downloadDestinationDirectory + imageName).then((entry) => {
+                  const sourceURL = this.dbService.rootUrl + 'app/Http/Controllers/Admin/Master/appOfflineUploads/' + downloadDestinationDirectory + imageName;
+
+                  const downloadURL = this.file.dataDirectory + downloadDestinationDirectory + imageName;
+
+                  fileTransfer.download(sourceURL, downloadURL).then((entry) => {
 
                         console.log('download complete: ' + entry.toURL());
 
