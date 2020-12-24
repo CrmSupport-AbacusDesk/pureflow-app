@@ -60,7 +60,7 @@ export class AddOrderPage {
 
                     this.getmeall();
                     // console.log(dbService.userStorageData);
-                    
+
         if(this.navParams.get('for_order'))
         {
                 this.checkinData = this.navParams.get('for_order')
@@ -279,7 +279,7 @@ export class AddOrderPage {
         this.dbService.onShowLoadingHandler();
 
         console.log(this.user_data);
-        
+
         this.form.cat_no = val.cat_no;
         this.form.product_name = val.product_name;
         this.form.product_id = val.id;
@@ -288,7 +288,7 @@ export class AddOrderPage {
         this.form.user_id = this.data.type_name.id
         this.form.user_type = this.user_data.type
         console.log(this.form);
-        
+
 
         this.dbService.onPostRequestDataFromApi({"form":this.form}, 'dealerData/get_product_dataExecutive', this.dbService.rootUrlSfa).subscribe((result)=>{
 
@@ -691,6 +691,7 @@ save_order(type)
             toast.present();
             return;
         }
+
         this.user_data.distributor_id = this.data.distributor_id.dr_id
     }
 

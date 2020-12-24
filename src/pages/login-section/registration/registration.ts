@@ -129,6 +129,7 @@ export class RegistrationPage {
                     if(r['status'] == 'NOT FOUND'){
 
                       return;
+
                     } else if(r['status'] == 'ACCOUNT SUSPENDED'){
 
                       this.showAlert("Your account has been suspended");
@@ -137,16 +138,23 @@ export class RegistrationPage {
                     }
                     else if(r['status'] == 'SUCCESS')
                     {
-                      r['loginType'] = 'CMS';
-                      this.storage.set('userStorageData',r);
-                      this.navCtrl.push(TabsPage);
+                        r['loginType'] = 'CMS';
+                        r['user']['token'] = r['token'];
+                        r['user']['loginType'] = r['loginType'];
+                        this.storage.set('userStorageData',r['user']);
 
-                      if( r['user'].status !='Verified')
-                      {
-                            let contactModal = this.modalCtrl.create(AboutusModalPage);
-                            contactModal.present();
-                            return;
-                      }
+                        this.dbService.userStorageData = [];
+                        this.dbService.userStorageData = r['user'];
+
+                        console.log(this.dbService.userStorageData);
+                        this.navCtrl.push(TabsPage);
+
+                        if( r['user'].status !='Verified')
+                        {
+                              let contactModal = this.modalCtrl.create(AboutusModalPage);
+                              contactModal.present();
+                              return;
+                        }
                     }
 
                   });
