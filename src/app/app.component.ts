@@ -248,9 +248,7 @@ export class MyApp {
 
                       } else  if( karigarData.status != 'Verified') {
 
-                            let contactModal = this.modalCtrl.create(AboutusModalPage);
-                            contactModal.present();
-                            return;
+                            this.rootPage = TabsPage;
                       }
 
                 } else {

@@ -262,7 +262,7 @@ export class ProductSubdetailPage {
                     var data = {"id":userId,userType:this.userType}
                     this.dbService.onShowLoadingHandler();
                     this.dbService.onPostRequestDataFromApi({"user_data":data,"product":prod},"dealerData/add_favorite", this.dbService.rootUrlSfa)
-                    .then(resp=>{
+                    .subscribe(resp=>{
                         console.log(resp);
                         this.dbService.onDismissLoadingHandler();
                         this.dbService.presentToast('Product Added to Favourites')
@@ -324,7 +324,7 @@ export class ProductSubdetailPage {
                     var data = {"id":userId,userType:this.userType}
                     this.dbService.onShowLoadingHandler();
                     this.dbService.onPostRequestDataFromApi({"user_data":data,"product":prod},"dealerData/remove_from_fav", this.dbService.rootUrlSfa)
-                    .then(resp=>{
+                    .subscribe(resp=>{
                         console.log(resp);
                         this.dbService.onDismissLoadingHandler();
                         this.dbService.presentToast('Product Removed From Favourites')
@@ -389,7 +389,7 @@ export class ProductSubdetailPage {
                     // this.dbService.userStorageData.id
                     setTimeout(() => {
                         this.dbService.onPostRequestDataFromApi({"product_id":this.navParams.get('id'),"userId":userId,userType:this.userType},"dealerData/checkForExistInFavourite", this.dbService.rootUrlSfa)
-                        .then(resp=>{
+                        .subscribe(resp=>{
                             console.log(resp);
                             if(resp!=0)
                             {

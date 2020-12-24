@@ -49,6 +49,11 @@ export class TabsPage {
     //   // this.index=1
     // }
 
+      this.storage.get('userStorageData').then((userStorageData) => {
+         console.log(userStorageData);
+
+     });
+
       const val = this.dbService.userStorageData.token;
       console.log(val);
       if(val == '' || val == null || val == undefined)
@@ -60,12 +65,11 @@ export class TabsPage {
 
         if(this.index=='5')
         {
-          console.log('index 5');
+            console.log('index 5');
 
-        this.navCtrl.setRoot(ProfilePage);
-        // this.rootPage = ProfilePage;
-        return;
-
+            this.navCtrl.setRoot(ProfilePage);
+            // this.rootPage = ProfilePage;
+            return;
         }
         // this.navCtrl.setRoot(HomePage);
 
