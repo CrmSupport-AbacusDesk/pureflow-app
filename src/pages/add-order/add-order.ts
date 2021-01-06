@@ -44,6 +44,8 @@ export class AddOrderPage {
     product:any={};
     alldata:any;
     show_price:any = false;
+    totalQty:any=0;
+
 
     constructor(public navCtrl: NavController,
                 public events:Events,
@@ -418,7 +420,7 @@ export class AddOrderPage {
         this.selectComponent.open();
     }
 
-    addToCart()
+    addToCart(qty)
     {
         console.log(this.product);
         if(this.cart_array.length == 0)
@@ -454,6 +456,9 @@ export class AddOrderPage {
         console.log(this.cart_array);
 
         this.cal_grand_total();
+        this.totalQty=parseInt(this.totalQty)+parseInt(qty);
+        console.log(this.totalQty);
+
     }
 
     grand_amt:any={};
@@ -488,7 +493,7 @@ export class AddOrderPage {
         console.log(this.grand_total);
         console.log(this.net_total - this.spcl_dis_amt);
     }
-    deleteItemFromCartAlertMessage(index)
+    deleteItemFromCartAlertMessage(index,delQty)
     {
         let alert=this.alertCtrl.create({
             title:'Are You Sure?',
@@ -506,7 +511,7 @@ export class AddOrderPage {
                 text:'Confirm',
                 cssClass: 'close-action-sheet',
                 handler:()=>
-                {
+                { this.totalQty=this.totalQty-delQty;
                     this.deleteItemFromCart(index)
                 }
             }]

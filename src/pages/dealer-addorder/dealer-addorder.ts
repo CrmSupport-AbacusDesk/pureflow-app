@@ -32,6 +32,7 @@ export class DealerAddorderPage {
     order_data:any={};
     special_discount:any=0;
     type:any='';
+    totalQty:any=0;
 
     order_item:any=[];
     constructor(public navCtrl: NavController,
@@ -300,6 +301,9 @@ export class DealerAddorderPage {
             }
             console.log(this.product)
         })
+
+       
+        
     }
 
     calculate_amt()
@@ -341,9 +345,11 @@ export class DealerAddorderPage {
     }
 
     cart_array:any=[]
-    addToCart()
+    addToCart(qty)
     {
         console.log(this.product);
+        console.log(qty);
+
         if(this.cart_array.length == 0)
         {
             this.cart_array.push(JSON.parse(JSON.stringify(this.product)));
@@ -377,6 +383,11 @@ export class DealerAddorderPage {
         console.log(this.cart_array);
 
         this.cal_grand_total();
+
+        this.totalQty=parseInt(this.totalQty)+parseInt(qty);
+        console.log(this.totalQty);
+        
+
     }
 
     grand_amt:any={};
@@ -620,7 +631,7 @@ export class DealerAddorderPage {
         });
         alert.present();
     }
-    deleteItemFromCartAlertMessage(index)
+    deleteItemFromCartAlertMessage(index,delQty)
     {
         
         let alert=this.alertCtrl.create({
@@ -639,7 +650,9 @@ export class DealerAddorderPage {
                 text:'Confirm',
                 cssClass: 'close-action-sheet',
                 handler:()=>
-                {
+                {console.warn(delQty);
+                    this.totalQty=this.totalQty-delQty;
+                    console.log(this.totalQty);
                     this.deleteItemFromCart(index)
                 }
             }]

@@ -2,6 +2,7 @@
     <ion-navbar>
         <ion-title>
             <h1 *ngIf="order_type == 'Primary' && dbService.userStorageData.type==1"> Order To Gravity</h1>
+            <h1 *ngIf="order_type == 'Primary' && dbService.userStorageData.type==7"> Order To Gravity</h1>
             <h1 *ngIf="order_type == 'Primary' && dbService.userStorageData.type==3"> Order To Distributor</h1>
             <h1 *ngIf="order_type == 'Secondary' && dbService.userStorageData.type==1"> Order From Dealer</h1>
         </ion-title>
@@ -102,8 +103,11 @@
             <li [ngClass]="{'active' : filter.order_status=='Approved'}" (click)="filter.date='';filter.master='';start=0;filter.order_status='Approved';order_list = [];get_orders1()">
                 <p>Accepted<span>{{count.approved}}</span></p>
             </li>
+            <li [ngClass]="{'active' : filter.order_status=='PDispatch'}" (click)="filter.date='';filter.master='';start=0;filter.order_status='PDispatch';order_list = [];get_orders1()">
+                <p>Partially Dispatched<span>--PDC--</span></p>
+            </li>
             <li [ngClass]="{'active' : filter.order_status=='Dispatch'}" (click)="filter.date='';filter.master='';start=0;filter.order_status='Dispatch';order_list = [];get_orders1()">
-                <p>Dispatched<span>{{count.dispatch}}</span></p>
+                <p>Completely Dispatched<span>--CDC--</span></p>
             </li>
             <!-- <li *ngIf="dbService.userStorageData.type==3" [ngClass]="{'active' : filter.order_status=='Dispatch'}" (click)="filter.date='';filter.master='';start=0;filter.order_status='Dispatch';constant.tabSelectedOrder='Dispatch';get_orders1()">
                     <p>Recieved<span>{{count.dispatch}}</span></p>
