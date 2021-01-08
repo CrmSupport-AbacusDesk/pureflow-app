@@ -1018,7 +1018,7 @@ export class OrderDetailPage {
                       console.log('Invalid link');
                   }
                 },
-                url, 'Order', 'application/pdf');
+                url, 'PDF', 'application/pdf');
 
                 // fileTransfer.download(url, this.file.externalRootDirectory + '/Download/' + pdfName).then((entry) => {
                 //     console.log('download complete: ' + entry.toURL());

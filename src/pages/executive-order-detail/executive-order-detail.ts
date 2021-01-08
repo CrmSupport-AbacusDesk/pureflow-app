@@ -1011,7 +1011,7 @@ export class ExecutiveOrderDetailPage {
                         console.log('Invalid link');
                     }
                 },
-                url, 'Orderrrr', 'application/pdf');
+                url, 'PDF', 'application/pdf');
 
                 // fileTransfer.download(url, this.file.externalRootDirectory + '/Download/' + pdfName).then((entry) => {
                 //     console.log('download complete: ' + entry.toURL());
