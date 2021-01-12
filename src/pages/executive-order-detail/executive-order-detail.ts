@@ -152,7 +152,7 @@ export class ExecutiveOrderDetailPage {
             this.userDetail=result['data'];
             // this.userDetail.order_total = Math.round(parseFloat(this.userDetail.order_total))
             this.userDetail.order_grand_totalAfterRoundOff = Math.round(parseFloat(this.userDetail.order_grand_total))
-            this.userDetail.netBreakup = (parseFloat(this.userDetail.order_grand_total)/1.18)
+            this.userDetail.netBreakup = (parseFloat(this.userDetail.order_grand_total)*1.18)
             this.userDetail.gstBreakup = parseFloat(this.userDetail.order_grand_total)-parseFloat(this.userDetail.netBreakup)
             this.userDetail.disc_percentage = Math.round((parseFloat(this.userDetail.order_discount)*100)/parseFloat(this.userDetail.sub_total));
             console.log(this.userDetail);
@@ -1011,7 +1011,7 @@ export class ExecutiveOrderDetailPage {
                         console.log('Invalid link');
                     }
                 },
-                url, 'Order', 'application/pdf');
+                url, 'PDF', 'application/pdf');
 
                 // fileTransfer.download(url, this.file.externalRootDirectory + '/Download/' + pdfName).then((entry) => {
                 //     console.log('download complete: ' + entry.toURL());

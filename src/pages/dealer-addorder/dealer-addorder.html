@@ -113,7 +113,7 @@
     </div>
 
     <div class="pd-left-right16">
-        <button *ngIf="show_price && product.qty > 0 " class="cs-button border-btn mt20" (click)="addToCart()">ADD TO LIST</button>
+        <button *ngIf="show_price && product.qty > 0 " class="cs-button border-btn mt20" (click)="addToCart(product.qty)">ADD TO LIST</button>
     </div>
 
     <div class="pd-left-right16">
@@ -143,7 +143,7 @@
                     <p>₹ {{row.price | number:'1.2-2'}}</p>
                     <p>Price</p>
                 </div>
-                <div class="tag-info ml8" (click)="deleteItemFromCartAlertMessage(i)">
+                <div class="tag-info ml8" (click)="deleteItemFromCartAlertMessage(i,row.qty)">
                     <a><i class="material-icons red-clr">delete_sweep</i></a>
                 </div>
             </div>
@@ -177,7 +177,10 @@
                 <p>₹ {{row.subtotal_discounted | number:'1.2-2'}}</p>
             </div>
         </div>
-
+        <div *ngIf="sub_total" class="time_show amount-listing">
+            <p>Total Quantity</p>
+            <p>{{totalQty}}</p>
+        </div>
         <div *ngIf="sub_total" class="time_show amount-listing">
             <p>Sub Total</p>
             <p>₹ {{sub_total | number:'1.2-2'}} /-</p>
