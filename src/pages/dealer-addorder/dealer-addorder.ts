@@ -224,7 +224,7 @@ export class DealerAddorderPage {
                 console.log(this.autocompleteItems);
                 setTimeout(() => {
                     this.loading.dismiss()
-                    this.prod_codeSelectable.open();
+                    // this.prod_codeSelectable.open();
                 }, 1000);
             }, err => {
                 this.loading.dismiss()
@@ -253,7 +253,7 @@ export class DealerAddorderPage {
                     console.log(this.autocompleteItems);
                     setTimeout(() => {
                         this.loading.dismiss()
-                        this.prod_codeSelectable.open();
+                        // this.prod_codeSelectable.open();
                     }, 1000);
                 }, err => {
                     this.loading.dismiss()
