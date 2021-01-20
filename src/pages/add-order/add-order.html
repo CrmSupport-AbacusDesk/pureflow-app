@@ -78,7 +78,7 @@
 
             <ion-item class="cs-selectable mb0" *ngIf="data.category && data.sub_category">
                 <ion-label><span>Item Name</span></ion-label>
-                <select-searchable #productCode item-content [(ngModel)]="data.cat_no" [items]="autocompleteItems" itemValueField="cat_no" itemTextField="product_name" name="cat_no" value="cat_no" [canSearch]="true" [hasVirtualScroll]="true" (onChange)="get_product_data(data.cat_no)">
+                <select-searchable #productCode item-content [(ngModel)]="data.cat_no" [items]="autocompleteItems" itemValueField="cat_no" itemTextField="product_name" name="cat_no" value="cat_no" [canSearch]="true" [hasVirtualScroll]="true" (onChange)="get_product_data(data.cat_no)"  (onSearch)="master_search($event)">
                 </select-searchable>
             </ion-item>
         </ion-list>

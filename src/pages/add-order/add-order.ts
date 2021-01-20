@@ -290,6 +290,8 @@ export class AddOrderPage {
         this.form.user_id = this.data.type_name.id
         this.form.user_type = this.user_data.type
         console.log(this.form);
+        console.log(this.data);
+        
 
 
         this.dbService.onPostRequestDataFromApi({"form":this.form}, 'dealerData/get_product_dataExecutive', this.dbService.rootUrlSfa).subscribe((result)=>{
@@ -358,13 +360,46 @@ export class AddOrderPage {
             console.log(this.autocompleteItems);
             setTimeout(() => {
                 this.dbService.onDismissLoadingHandler()
-                this.prod_codeSelectable.open();
+                // this.prod_codeSelectable.open();
             }, 1000);
         },err=>
         {
             this.dbService.onDismissLoadingHandler()
         });
     }
+
+  master_search(event){
+      console.log(event.text);
+      if(event.text=='')
+      {
+
+      }
+      else{
+        
+        this.dbService.onPostRequestDataFromApi({masterSearch:event.text},"product/product_code", this.dbService.rootUrlSfa).subscribe((result)=>{
+            console.log(result);
+            this.autocompleteItems=result;
+            this.temp_product_array = this.autocompleteItems;
+
+            console.log(this.autocompleteItems);
+            setTimeout(() => {
+                this.dbService.onDismissLoadingHandler()
+                // this.prod_codeSelectable.open();
+            }, 1000);
+        },err=>
+        {
+            this.dbService.onDismissLoadingHandler()
+        });
+      }
+      
+
+  }
+
+
+
+
+
+
     distributor_network_list:any = [];
 
     get_network_list(network_type)
