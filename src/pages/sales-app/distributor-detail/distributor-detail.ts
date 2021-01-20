@@ -288,7 +288,7 @@ export class DistributorDetailPage {
                     console.log(this.distributor_detail.id);
 
                     this.dbService.onPostRequestDataFromApi({"id":this.distributor_detail.id,'type':type,value:value},"dealerData/chngeStatusDr", this.dbService.rootUrlSfa)
-                    .then(resp=>{
+                    .subscribe(resp=>{
                         console.log(resp);
                         this.dbService.presentToast('Dealer '+str+'d successfully !!')
                         this.lead_detail()
