@@ -55,7 +55,7 @@ export class DealerHomePage {
     }
 
     ionViewWillEnter() {
-
+        this.notification();
         this.getDashBoardData()
         this.loginBanner()
         this.get_count()

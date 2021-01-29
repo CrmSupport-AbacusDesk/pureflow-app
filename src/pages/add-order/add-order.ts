@@ -45,6 +45,7 @@ export class AddOrderPage {
     alldata:any;
     show_price:any = false;
     totalQty:any=0;
+    cart_qty:any=0
 
 
     constructor(public navCtrl: NavController,
@@ -241,6 +242,8 @@ export class AddOrderPage {
 
         this.product.subtotal_discounted = this.product.discountedAmount * this.product.qty;
         this.product.subtotal_discounted  = this.product.subtotal_discounted.toFixed(2)
+        this.cart_qty= (this.product.cartoon_packing*this.product.qty  )
+        console.log(this.cart_qty);
 
 
     }

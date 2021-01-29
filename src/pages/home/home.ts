@@ -73,6 +73,7 @@ export class HomePage {
 
 
         this.loginBanner();
+        this.notification();
         this.get_countWithLiveServer()
         events.subscribe('getCountProducts',(data)=>
         {
@@ -122,7 +123,7 @@ export class HomePage {
             this.getofferBannerList();
 
             console.log('Hello its calling');
-            // this.notification();
+             this.notification();
             this.onProcessSQLDataHandler();
 
         }

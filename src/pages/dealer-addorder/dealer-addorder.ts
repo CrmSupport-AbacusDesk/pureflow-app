@@ -33,7 +33,7 @@ export class DealerAddorderPage {
     special_discount: any = 0;
     type: any = '';
     totalQty: any = 0;
-
+    cart_qty:any=0;
     order_item: any = [];
     constructor(public navCtrl: NavController,
         public events: Events,
@@ -296,6 +296,7 @@ console.log(val);
                 }
                 console.log(this.product)
             })
+            
 
 
 
@@ -331,7 +332,9 @@ console.log(val);
 
         this.product.subtotal_discounted = this.product.discountedAmount * this.product.qty;
         this.product.subtotal_discounted = this.product.subtotal_discounted.toFixed(2)
-
+        this.cart_qty= (this.product.cartoon_packing*this.product.qty  )
+        console.log(this.cart_qty);
+        
 
     }
 
