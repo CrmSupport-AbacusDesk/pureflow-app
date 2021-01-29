@@ -543,7 +543,7 @@ export class HomePage {
 
             const options: PushOptions = {
                 android: {
-                    senderID:'308411060308'
+                    senderID:'588971704584'
                 },
                 ios: {
 

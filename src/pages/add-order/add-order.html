@@ -135,6 +135,10 @@
                 <ion-label floating><span>Small Packing</span></ion-label>
                 <ion-input type="text" name="amount" [(ngModel)]="product.std_packing" readonly></ion-input>
             </ion-item>
+            <ion-item class="ml5">
+                <ion-label floating><span>Cartoon Packing</span></ion-label>
+                <ion-input type="text" name="amount" [(ngModel)]="product.cartoon_packing" readonly></ion-input>
+            </ion-item>
         </ion-list>
     </div>
 
@@ -198,6 +202,10 @@
                 <div class="lower">
                     <p>Small Packing</p>
                     <p>{{row.std_packing}}</p>
+                </div>
+                <div class="lower">
+                    <p>Cartoon Packing</p>
+                    <p>{{row.cartoon_packing}}</p>
                 </div>
             </div>
             <div class="time_show amount-listing pb5 border-none">

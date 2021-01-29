@@ -276,6 +276,8 @@ export class AddOrderPage {
 
     get_product_data(val)
     {
+        console.log(val);
+        
         console.log(this.data.type_name.id);
 
         this.dbService.onShowLoadingHandler();
@@ -287,12 +289,12 @@ export class AddOrderPage {
         this.form.product_id = val.id;
         this.form.user_state = this.user_data.state;
         this.form.user_district = this.user_data.district;
-        this.form.user_id = this.data.type_name.id
-        this.form.user_type = this.user_data.type
+        this.form.user_id = this.data.type_name.id;
+        this.form.user_type = this.user_data.type;
+        this.form.category= val.category;
+        this.form.selected_dr_id=  this.selected_drid
         console.log(this.form);
         console.log(this.data);
-        
-
 
         this.dbService.onPostRequestDataFromApi({"form":this.form}, 'dealerData/get_product_dataExecutive', this.dbService.rootUrlSfa).subscribe((result)=>{
 
@@ -503,6 +505,7 @@ export class AddOrderPage {
     net_total:any=0;
     spcl_dis_amt:any=0
     grand_total:any=0;
+    selected_drid:number=0;
     cal_grand_total()
     {
         console.log(this.type);
@@ -577,7 +580,17 @@ export class AddOrderPage {
     }
     openCategory()
     {
+
+        this.data.cat_no="";
+        this.product.discount='';
+        
         console.log(this.data.networkType);
+        console.log(this.data.type_name);
+
+        this.selected_drid= this.data.type_name.id;
+        console.log(this.selected_drid);
+        
+
 
         if(this.data.networkType!=3)
         {
@@ -614,6 +627,8 @@ export class AddOrderPage {
         })
     }
 
+
+    
     openCategory2()
     {
         this.categorySelectable.open();
