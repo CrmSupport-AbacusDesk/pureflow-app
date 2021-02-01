@@ -98,7 +98,7 @@
 
                 <ion-item [ngClass]="{'cs-error':f.submitted && city?.invalid}">
                     <ion-label floating><span>City </span></ion-label>
-                    <ion-input placeholder="Enter City" type="text" name="city" #city="ngModel" [(ngModel)]="form.city"></ion-input>
+                    <ion-input placeholder="Enter City" type="text" name="city" #city="ngModel" [(ngModel)]="form.city" required></ion-input>
                 </ion-item>
                 <p *ngIf="f.submitted && city?.invalid" class="error-line">City Is Invalid</p>
 

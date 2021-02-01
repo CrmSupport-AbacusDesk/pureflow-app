@@ -279,15 +279,36 @@
                         <div class="box complete">
                             <div class="data-table padding0">
                                 <table>
+
+
+                                    <tr>
+                                        <th>Cartoon Quantity</th>
+                                        <td>
+                                            <!-- (userDetail.delivery_from=='Gravity' ? '1 == 1' : orderDate == currentDate) &&  -->
+                                            <div class="edit-data" ngClass="{{order.edit_true1 ? '' : 'active' }}">
+                                                <input type="number" string-to-number (input)="userDetail.delivery_from == 'Gravity' ?  calculateAmountExecutive(i,false,'cartoon_qty') : calculateAmountExecutive(i,false,'cartoon_qty')" [readonly]="active[i]?.cartoon_qty != '1'" name="cartoon_qty" [(ngModel)]="order.cartoon_qty" readonly>
+                                                <ng-container *ngIf="order.edit_true1 && (userDetail.order_status=='Reject' || userDetail.order_status=='Rejected' ||userDetail.order_status=='Pending' || userDetail.order_status=='Draft')">
+
+                                                    <a class="edit-value edits" *ngIf="userDetail.order_status!='Reject' ||  userDetail.dr_id==dbService.userStorageData.id" (click)="edit_order_executive(i,order.id,order.category,userDetail.dr_id,userDetail.type,order.cat_no,'cartoon_qty')">
+                                                        <i class="material-icons create">create</i>
+                                                    </a>
+                                                </ng-container>
+
+                                                <a class="edit-value saves" *ngIf="!order.edit_true1">
+                                                    <i class="material-icons create" (click)="update_order(i,order.order_id,order.id,false)">save</i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <th>Order Quantity</th>
                                         <td>
                                             <!-- (userDetail.delivery_from=='Gravity' ? '1 == 1' : orderDate == currentDate) &&  -->
                                             <div class="edit-data" ngClass="{{order.edit_true ? '' : 'active' }}">
-                                                <input type="number" string-to-number (input)="userDetail.delivery_from == 'Gravity' ?  calculateAmountExecutive(order.qty,i,false) : calculateAmountExecutive(order.qty,i,false)" [readonly]="active[i]?.qty != '1'" name="qty" [(ngModel)]="order.qty" readonly>
+                                                <input type="number" string-to-number (input)="userDetail.delivery_from == 'Gravity' ?  calculateAmountExecutive(i,false,'') : calculateAmountExecutive(i,false,'')" [readonly]="active[i]?.qty != '1'" name="qty" [(ngModel)]="order.qty" readonly>
                                                 <ng-container *ngIf="order.edit_true && (userDetail.order_status=='Reject' || userDetail.order_status=='Rejected' ||userDetail.order_status=='Pending' || userDetail.order_status=='Draft')">
 
-                                                    <a class="edit-value edits" *ngIf="userDetail.order_status!='Reject' ||  userDetail.dr_id==dbService.userStorageData.id" (click)="edit_order_executive(i,order.id,order.category,userDetail.dr_id,userDetail.type,order.cat_no)">
+                                                    <a class="edit-value edits" *ngIf="userDetail.order_status!='Reject' ||  userDetail.dr_id==dbService.userStorageData.id" (click)="edit_order_executive(i,order.id,order.category,userDetail.dr_id,userDetail.type,order.cat_no,'')">
                                                         <i class="material-icons create">create</i>
                                                     </a>
                                                 </ng-container>
@@ -348,7 +369,7 @@
                                 <div class="figure wp100">
                                     <p>Total Amount</p>
                                     <p>&#8377; {{order.amount | number:'1.2-2'}}</p>
-                                </div>
+                                </div>\
                             </div>
                         </div>
                     </div>
