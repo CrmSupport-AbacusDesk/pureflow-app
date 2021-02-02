@@ -168,6 +168,7 @@ export class OrderDetailPage {
                 item.afterDiscount = parseFloat(item.price)-parseFloat(item.discount_amount)
                 item.amountAfterRoundOff =Math.round(item.amount)
                 item.edit_true = true;
+                item.edit_true1 = true;
                 if(item.dispatch_qty!="0")
                 {
                     this.show_image = true;
@@ -203,17 +204,28 @@ export class OrderDetailPage {
     value:any = {};
     // edit_true:boolean = true;
 
-    edit_order(index,order_item_id,category,dr_id,type,cat_no)
+    edit_order(index,order_item_id,category,dr_id,type,cat_no,type_cartoon)
     {
+        console.log(type_cartoon);
         console.log(index);
         console.log(order_item_id);
         console.log(cat_no);
         console.log(dr_id);
         console.log(type);
-        this.active[index] = Object.assign({'qty':"1"});
-        console.log(this.active);
-        this.orderDetail[index].edit_true = false;
+        if(type_cartoon=='cartoon_qty')
+        {
+            this.active[index] = Object.assign({'cartoon_qty':"1"});
+            console.log(this.active);
+            this.orderDetail[index].edit_true1 = false;
 
+        }
+        else{
+
+            this.active[index] = Object.assign({'qty':"1"});
+                console.log(this.active);
+            this.orderDetail[index].edit_true = false;
+            
+        }
         this.dbService.onPostRequestDataFromApi({'category':category, 'dr_id':dr_id, 'type':type, 'cat_no':cat_no},'Order/order_item_discount', this.dbService.rootUrlSfa)
         .subscribe((result)=>{
             console.log(result);
@@ -273,9 +285,22 @@ export class OrderDetailPage {
     subTotal:any;
     amount:any;
 
-    calculateAmount(qty,index,del,data:any)
+    calculateAmount(qty,index,del,type,data:any,)
     {
         console.log(this.orderDetail);
+        console.log(type);
+        if(type=='cartoon_qty')
+        {
+
+            console.log(this.orderDetail[index]['cartoon_qty']);
+            console.log("cartoon_qty");
+            
+            console.log(this.orderDetail[index].cartoon_packing);
+             this.orderDetail[index].qty= (this.orderDetail[index].cartoon_qty*this.orderDetail[index].cartoon_packing)
+            console.log(this.orderDetail.qty);
+        
+        }
+        
 
         var itemData =  this.orderDetail[index]
         console.log(itemData);
@@ -539,6 +564,8 @@ export class OrderDetailPage {
         })
         this.active = {};
         this.orderDetail[index].edit_true = true;
+        this.orderDetail[index].edit_true1 = true;
+
     }
 
 
@@ -563,7 +590,7 @@ export class OrderDetailPage {
                     handler: () => {
                         this.orderDetail[index].qty=0
                         var data = { index:index , order_id:order_id , order_item_id:order_item_id }
-                        this.calculateAmount(0,index,true,data)
+                        this.calculateAmount(0,index,true,'',data)
                         // this.delete_order_item(index,order_id,order_item_id);
                     }
                 }
