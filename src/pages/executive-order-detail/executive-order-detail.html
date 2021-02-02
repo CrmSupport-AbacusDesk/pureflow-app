@@ -324,6 +324,13 @@
                                         <th>Pending Qty</th>
                                         <td>{{order.pending_qty}}</td>
                                     </tr>
+
+                                    <tr>
+                                        <th>cartoon Packing</th>
+                                        <td>{{order.cartoon_packing}}</td>
+                                    </tr>
+                                    
+
                                     <tr *ngIf="userDetail.order_status=='Dispatch'">
                                         <th>Dispatched Qty</th>
                                         <td>{{order.dispatch_qty ? order.dispatch_qty: '0'}}</td>

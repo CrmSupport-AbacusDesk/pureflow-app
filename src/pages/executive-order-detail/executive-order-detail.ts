@@ -350,7 +350,7 @@ export class ExecutiveOrderDetailPage {
             this.update_order(data.index,data.order_id,data.order_item_id,true)
         }
     }
-    calculateAmountExecutive(index,del,data:any,type)
+    calculateAmountExecutive(index,del,type,data:any)
     {
            console.log(this.orderDetail);
            console.log(type);
