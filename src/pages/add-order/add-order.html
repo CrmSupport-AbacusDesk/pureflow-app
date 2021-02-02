@@ -93,8 +93,13 @@
 
 
             <ion-item class="ml8 input-bg">
+                <ion-label floating><span>Cartoon_QTY</span></ion-label>
+                <ion-input type="tel" name="cartoon_qty" [(ngModel)]="product.cartoon_qty" (ngModelChange)="calculate_amt()"  (keypress)="MobileNumber1($event)"></ion-input>
+            </ion-item> 
+
+            <ion-item class="ml8 input-bg">
                 <ion-label floating><span>QTY</span></ion-label>
-                <ion-input type="tel" name="qty" [(ngModel)]="product.qty" (ngModelChange)="calculate_amt()" (keypress)="MobileNumber1($event)"></ion-input>
+                <ion-input type="tel" name="qty" [(ngModel)]="product.qty" (ngModelChange)="calculate_amt()" (keypress)="MobileNumber1($event)" ></ion-input>
             </ion-item>
         </ion-list>
     </div>
@@ -135,6 +140,10 @@
                 <ion-label floating><span>Small Packing</span></ion-label>
                 <ion-input type="text" name="amount" [(ngModel)]="product.std_packing" readonly></ion-input>
             </ion-item>
+            <ion-item class="ml5">
+                <ion-label floating><span>Cartoon Packing</span></ion-label>
+                <ion-input type="text" name="amount" [(ngModel)]="product.cartoon_packing" readonly></ion-input>
+            </ion-item>
         </ion-list>
     </div>
 
@@ -151,7 +160,7 @@
             * To Add New Item in Order, Select Item Name Again.
         </div>
 
-        <div class="cs-heading1 pl0" *ngIf="cart_array.length">
+        <div class="cs-heading1 pl0" *ngIf="cart_array.length"> 
             <p>PRODUCT INFORMATION</p>
         </div>
 
@@ -198,6 +207,10 @@
                 <div class="lower">
                     <p>Small Packing</p>
                     <p>{{row.std_packing}}</p>
+                </div>
+                <div class="lower">
+                    <p>Cartoon Packing</p>
+                    <p>{{row.cartoon_packing}}</p>
                 </div>
             </div>
             <div class="time_show amount-listing pb5 border-none">

@@ -33,7 +33,7 @@ export class DealerAddorderPage {
     special_discount: any = 0;
     type: any = '';
     totalQty: any = 0;
-
+    cart_qty:any=0;
     order_item: any = [];
     constructor(public navCtrl: NavController,
         public events: Events,
@@ -296,6 +296,7 @@ console.log(val);
                 }
                 console.log(this.product)
             })
+            
 
 
 
@@ -303,13 +304,15 @@ console.log(val);
 
     calculate_amt() {
         console.log(typeof (this.product.qty));
-        if (this.product.qty.includes('.')) {
-            this.product.subtotal_discounted = ''
-            this.product.qty = ''
-            this.dbService.presentToast('Fraction values not allowed !!');
-            console.log(this.product.qty + 'Int Quantity');
-            return;
-        }
+        this.product.qty= (this.product.cartoon_packing*this.product.cartoon_qty  )
+        console.log(this.product.qty);
+        // if (this.product.qty.includes('.')) {
+        //     this.product.subtotal_discounted = ''
+        //     this.product.qty = ''
+        //     this.dbService.presentToast('Fraction values not allowed !!');
+        //     console.log(this.product.qty + 'Int Quantity');
+        //     return;
+        // }
 
         console.log(this.product);
         this.product.discount_amount = 0;
@@ -331,7 +334,8 @@ console.log(val);
 
         this.product.subtotal_discounted = this.product.discountedAmount * this.product.qty;
         this.product.subtotal_discounted = this.product.subtotal_discounted.toFixed(2)
-
+       
+        
 
     }
 
@@ -433,12 +437,11 @@ console.log(val);
         // this.user_data.order_status = type;
         this.user_data.SpecialDiscountLable = this.SpecialDiscountLable
         console.log(this.user_data);
-
         var orderData = { sub_total: this.sub_total, 'dis_amt': this.dis_amt, 'grand_total': this.grand_total, 'net_total': this.net_total, 'special_discount': this.special_discount, special_discount_amount: this.spcl_dis_amt }
         console.log(orderData);
 
 
-        this.dbService.onPostRequestDataFromApi({ "cart_data": this.cart_array, "user_data": this.user_data, 'orderData': orderData }, "dealerData/save_order", this.dbService.rootUrlSfa)
+        this.dbService.onPostRequestDataFromApi({ "cart_data": this.cart_array, "user_data": this.user_data, 'orderData': orderData}, "dealerData/save_order", this.dbService.rootUrlSfa)
             .subscribe(resp => {
                 console.log(resp);
                 if (resp['msg'] == "success") {

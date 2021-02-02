@@ -164,6 +164,9 @@ export class ExecutiveOrderDetailPage {
                 item.afterDiscount = parseFloat(item.price)-parseFloat(item.discount_amount)
                 item.amountAfterRoundOff =Math.round(item.amount)
                 item.edit_true = true;
+                item.edit_true1 = true; 
+
+
                 if(item.dispatch_qty!="0")
                 {
                     this.show_image = true;
@@ -209,7 +212,8 @@ export class ExecutiveOrderDetailPage {
         this.active[index] = Object.assign({'qty':"1"});
         console.log(this.active);
         this.orderDetail[index].edit_true = false;
-
+        this.orderDetail[index].edit_true1 = false;
+        
         this.dbService.onPostRequestDataFromApi({'category':category, 'dr_id':dr_id, 'type':type, 'cat_no':cat_no},'Order/order_item_discount', this.dbService.rootUrlSfa)
         .subscribe((result)=>{
             console.log(result);
@@ -229,17 +233,28 @@ export class ExecutiveOrderDetailPage {
         });
     }
 
-    edit_order_executive(index,order_item_id,category,dr_id,type,cat_no)
-    {
+    edit_order_executive(index,order_item_id,category,dr_id,type,cat_no,type_cartoon)
+    {  
+        console.log(type_cartoon);
         console.log(index);
         console.log(order_item_id);
         console.log(cat_no);
         console.log(dr_id);
         console.log(type);
-        this.active[index] = Object.assign({'qty':"1"});
-        console.log(this.active);
-        this.orderDetail[index].edit_true = false;
+        if(type_cartoon=='cartoon_qty')
+        {
+            this.active[index] = Object.assign({'cartoon_qty':"1"});
+            console.log(this.active);
+            this.orderDetail[index].edit_true1 = false;
 
+        }
+        else{
+
+            this.active[index] = Object.assign({'qty':"1"});
+                console.log(this.active);
+            this.orderDetail[index].edit_true = false;
+            
+        }
         this.dbService.onPostRequestDataFromApi({'category':category, 'dr_id':dr_id, 'type':type, 'cat_no':cat_no},'Order/order_item_discount', this.dbService.rootUrlSfa)
         .subscribe((result)=>{
             console.log(result);
@@ -335,9 +350,21 @@ export class ExecutiveOrderDetailPage {
             this.update_order(data.index,data.order_id,data.order_item_id,true)
         }
     }
-    calculateAmountExecutive(qty,index,del,data:any)
+    calculateAmountExecutive(index,del,data:any,type)
     {
-        console.log(this.orderDetail);
+           console.log(this.orderDetail);
+           console.log(type);
+           if(type=='cartoon_qty')
+           {
+
+               console.log(this.orderDetail[index]['cartoon_qty']);
+               console.log("cartoon_qty");
+               
+               console.log(this.orderDetail[index].cartoon_packing);
+                this.orderDetail[index].qty= (this.orderDetail[index].cartoon_qty*this.orderDetail[index].cartoon_packing)
+               console.log(this.orderDetail.qty);
+           
+           }
 
         var itemData =  this.orderDetail[index]
         console.log(itemData);
@@ -535,6 +562,8 @@ export class ExecutiveOrderDetailPage {
         })
         this.active = {};
         this.orderDetail[index].edit_true = true;
+        this.orderDetail[index].edit_true1 = true;
+
     }
 
 
