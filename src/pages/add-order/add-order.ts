@@ -208,11 +208,15 @@ export class AddOrderPage {
         }
         
         
-        calculate_amt()
-        {
+        calculate_amt(type){
+
+console.log(type);
+
             console.log(typeof(this.product.qty));
+            if(type == 'cartoon_qty'){
             this.product.qty= (this.product.cartoon_packing*this.product.cartoon_qty  )
             console.log(this.product.qty);
+            }
             console.log(this.product);
             this.product.discount_amount = 0;
             this.product.subTotal = 0;
@@ -250,6 +254,8 @@ export class AddOrderPage {
             this.product.subtotal_discount = this.product.discount_amount * this.product.qty;
             
             this.product.subtotal_discounted = this.product.discountedAmount * this.product.qty;
+            console.log(this.product.subtotal_discounted);
+            
             this.product.subtotal_discounted  = this.product.subtotal_discounted.toFixed(2)
             
             
