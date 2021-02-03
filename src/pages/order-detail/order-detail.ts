@@ -329,7 +329,7 @@ export class OrderDetailPage {
         {
             this.order_data.sub_total += parseFloat(this.orderDetail[i]['sub_total']);
             this.order_data.order_total += parseFloat(this.orderDetail[i]['amount']);
-            this.order_data.discount += parseFloat(this.orderDetail[index].sub_total)-parseFloat(this.orderDetail[index].amount);
+            this.order_data.discount += parseFloat(this.orderDetail[i].sub_total)-parseFloat(this.orderDetail[i].amount);
             this.order_data.gst += parseFloat(this.orderDetail[i]['gst_amount']);
 
 
