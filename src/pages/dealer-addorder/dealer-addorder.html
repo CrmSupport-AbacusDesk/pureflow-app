@@ -23,13 +23,21 @@
                 </ionic-selectable>
             </ion-item>
 
-            <ion-item class="cs-selectable">
+            <ion-item class="cs-selectable" *ngIf="triggerCategory">
                 <ion-label><span>Category </span></ion-label>
                 <select-searchable #category item-content [(ngModel)]="data.category" [items]="categoryList"
                     itemValueField="category" itemTextField="category" name="category" value="category"
-                    [canSearch]="true" [hasVirtualScroll]="true" (onChange)="getSubCategory(data.category)">
+                    [canSearch]="true" [hasVirtualScroll]="true" (onChange)="getSubCategory(data.category)" (onSearch)="testFUnction($event,'category')">
                 </select-searchable>
             </ion-item>
+
+            <!-- <ion-item class="cs-selectable" *ngIf="!triggerCategory">
+                <ion-label><span>Category </span></ion-label>
+                <select-searchable #category item-content [(ngModel)]="data.category" [items]="categoryList"
+                    itemValueField="category" itemTextField="product_name" name="category" value="category"
+                    [canSearch]="true" [hasVirtualScroll]="true" (onChange)="getSubCategory(data.category)" (onSearch)="testFUnction($event,'category')">
+                </select-searchable>
+            </ion-item> -->
 
             <ion-item class="cs-selectable" *ngIf="data.category">
                 <ion-label><span>Sub-Category</span></ion-label>
@@ -43,7 +51,7 @@
                 <ion-label><span>Item Name</span></ion-label>
                 <select-searchable #productCode item-content [(ngModel)]="data.cat_no" [items]="autocompleteItems"
                     itemValueField="id" itemTextField="product_name" name="cat_no" value="cat_no" [canSearch]="true"
-                    [hasVirtualScroll]="true" (onChange)="get_product_data(data.cat_no)" (onSearch)="testFUnction($event)">
+                    [hasVirtualScroll]="true" (onChange)="get_product_data(data.cat_no)" (onSearch)="testFUnction($event,'product')">
                 </select-searchable>
             </ion-item>
         </ion-list>
