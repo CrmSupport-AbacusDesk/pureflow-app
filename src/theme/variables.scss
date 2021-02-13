@@ -11522,6 +11522,10 @@ input {
     background: #fff;
 }
 
+.noOverflow{
+    overflow: visible !important;
+}
+
 .playstore-tabs {
     position: sticky;
     top: 0px;

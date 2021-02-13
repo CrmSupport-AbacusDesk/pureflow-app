@@ -12,7 +12,7 @@
             <ion-item class="cs-selectable" *ngIf="user_data.type == 3 && distributorSelected==true">
                 <ion-label><span>Select Distributor</span></ion-label>
                 <ionic-selectable item-content disabled [(ngModel)]="data.distributor_id" [items]="distributor_list"
-                    itemValueField="id" itemTextField="company_name" name="company_name" value="id" [canSearch]="true">
+                    itemValueField="id"  itemTextField="company_name" name="company_name" value="id" [canSearch]="true">
                 </ionic-selectable>
             </ion-item>
 
@@ -26,8 +26,8 @@
             <ion-item class="cs-selectable" *ngIf="triggerCategory">
                 <ion-label><span>Category </span></ion-label>
                 <select-searchable #category item-content [(ngModel)]="data.category" [items]="categoryList"
-                    itemValueField="category" itemTextField="category" name="category" value="category"
-                    [canSearch]="true" [hasVirtualScroll]="true" (onChange)="getSubCategory(data.category)" (onSearch)="testFUnction($event,'category')">
+                    itemValueField="category" [itemTextField]="searchTrigger ? 'category' : 'product_name'" name="category" value="category"
+                    [canSearch]="true" [hasVirtualScroll]="true" (onChange)="this.booleanFlag = this.searchTrigger ; this.searchTrigger=true; getSubCategory(data.category);(searchTrigger=true)" (onSearch)="masterSearchFUnction($event,'category')">
                 </select-searchable>
             </ion-item>
 
@@ -47,11 +47,12 @@
                 </select-searchable>
             </ion-item>
 
-            <ion-item class="cs-selectable mb0" *ngIf="data.category && data.sub_category">
+            <ion-item class="cs-selectable mb0" *ngIf="data.category">
                 <ion-label><span>Item Name</span></ion-label>
                 <select-searchable #productCode item-content [(ngModel)]="data.cat_no" [items]="autocompleteItems"
                     itemValueField="id" itemTextField="product_name" name="cat_no" value="cat_no" [canSearch]="true"
-                    [hasVirtualScroll]="true" (onChange)="get_product_data(data.cat_no)" (onSearch)="testFUnction($event,'product')">
+                    [hasVirtualScroll]="true" (onChange)="get_product_data(data.cat_no)">
+                    <!-- [hasVirtualScroll]="true" (onChange)="get_product_data(data.cat_no)" (onSearch)="masterSearchFUnction($event,'product')"> -->
                 </select-searchable>
             </ion-item>
         </ion-list>
@@ -66,7 +67,7 @@
 
 
             <ion-item class="ml8 input-bg">
-                <ion-label floating><span>Cartoon_QTY</span></ion-label>
+                <ion-label floating><span>Carton QTY</span></ion-label>
                 <ion-input type="tel" name="cartoon_qty" [(ngModel)]="product.cartoon_qty" (ngModelChange)="calculate_amt('cartoon_qty')"
                     (keypress)="MobileNumber1($event)"></ion-input>
             </ion-item>
@@ -125,18 +126,18 @@
     <div class="edit" *ngIf="show_price">
         <ion-list class="dflex1">
             <ion-item class="mr2 mb0">
-                <ion-label floating><span>Master Packing</span></ion-label>
+                <ion-label class="noOverflow" floating><span>Master Packing</span></ion-label>
                 <ion-input type="text" name="price" [(ngModel)]="product.master_packing" readonly></ion-input>
             </ion-item>
 
             <ion-item class="ml5">
-                <ion-label floating><span>Small Packing</span></ion-label>
+                <ion-label floating><span>Box Packing</span></ion-label>
                 <ion-input type="text" name="amount" [(ngModel)]="product.std_packing" readonly></ion-input>
             </ion-item>
 
 
             <ion-item class="ml5">
-                <ion-label floating><span>Cartoon Packing</span></ion-label>
+                <ion-label class="noOverflow" floating><span>Carton Packing</span></ion-label>
                 <ion-input type="text" name="amount" [(ngModel)]="product.cartoon_packing" readonly></ion-input>
             </ion-item>
        
@@ -200,11 +201,11 @@
                     <p>{{row.master_packing}}</p>
                 </div>
                 <div class="lower">
-                    <p>Small Packing</p>
+                    <p>Box Packing</p>
                     <p>{{row.std_packing}}</p>
                 </div>
                 <div class="lower">
-                    <p>Cartoon Packing</p>
+                    <p>Carton Packing</p>
                     <p>{{row.cartoon_packing}}</p>
                 </div>
             </div>

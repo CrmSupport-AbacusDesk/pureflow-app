@@ -93,7 +93,7 @@
 
 
             <ion-item class="ml8 input-bg">
-                <ion-label floating><span>Cartoon_QTY</span></ion-label>
+                <ion-label floating><span>Carton QTY</span></ion-label>
                 <ion-input type="tel" name="cartoon_qty" [(ngModel)]="product.cartoon_qty" (ngModelChange)="calculate_amt('cartoon_qty')"  (keypress)="MobileNumber1($event)"></ion-input>
             </ion-item> 
 
@@ -132,16 +132,16 @@
     <div class="edit" *ngIf="show_price">
         <ion-list class="dflex1">
             <ion-item class="mr2 mb0">
-                <ion-label floating><span>Master Packing</span></ion-label>
+                <ion-label class="noOverflow" floating><span>Master Packing</span></ion-label>
                 <ion-input type="text" name="price" [(ngModel)]="product.master_packing" readonly></ion-input>
             </ion-item>
 
             <ion-item class="ml5">
-                <ion-label floating><span>Small Packing</span></ion-label>
+                <ion-label floating><span>Box Packing</span></ion-label>
                 <ion-input type="text" name="amount" [(ngModel)]="product.std_packing" readonly></ion-input>
             </ion-item>
             <ion-item class="ml5">
-                <ion-label floating><span>Cartoon Packing</span></ion-label>
+                <ion-label class="noOverflow" floating><span>Carton Packing</span></ion-label>
                 <ion-input type="text" name="amount" [(ngModel)]="product.cartoon_packing" readonly></ion-input>
             </ion-item>
         </ion-list>
@@ -205,11 +205,11 @@
                     <p>{{row.master_packing}}</p>
                 </div>
                 <div class="lower">
-                    <p>Small Packing</p>
+                    <p>Box Packing</p>
                     <p>{{row.std_packing}}</p>
                 </div>
                 <div class="lower">
-                    <p>Cartoon Packing</p>
+                    <p>Carton Packing</p>
                     <p>{{row.cartoon_packing}}</p>
                 </div>
             </div>
