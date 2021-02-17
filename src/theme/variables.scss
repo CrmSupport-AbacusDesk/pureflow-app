@@ -3076,9 +3076,9 @@ ion-slides {
     ul {
         display: flex;
         li {
-            width: 33.3%;
+            width: 47%;
             background: #fff;
-            height: 94px;
+            height: 85px;
             margin-right: 16px;
             border-radius: 10px;
             box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.2);
@@ -3110,6 +3110,7 @@ ion-slides {
                     bottom: 35px;
                     letter-spacing: 2px;
                 }
+
             }
             &:last-child {
                 margin-right: 0px !important;

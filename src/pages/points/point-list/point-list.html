@@ -90,18 +90,47 @@
             <li>
                 <div class="pints">
                     <h3>₹{{karigar_point.service_wallet_balance_points}}</h3>
-                    <p>Service <br>Wallet</p>
+                    <p>Service Wallet</p>
                     <span>POINTS</span>
                 </div>
             </li>
             <li>
                 <div class="pints">
                     <h3>₹{{karigar_point.balance_point}}</h3>
-                    <p>Loyalty <br>Balance</p>
+                    <p>Loyalty Balance</p>
+                    <span>POINTS</span>
+                </div>
+            </li>
+            <!-- <li>
+                <div class="pints">
+                    <h3>₹{{conInt(karigar_point.balance_point) + conInt(karigar_point.service_wallet_balance_points) + conInt(karigar_point.referal_point_balance) + conInt(karigar_point.reg_points)}}</h3>
+                    <p>Total</p>
+                    <span>POINTS</span>
+                </div>
+            </li> -->
+        </ul>
+        <br>
+
+        <ul>
+            <li>
+                <div class="pints">
+                    <h3>₹{{karigar_point.reg_points}}</h3>
+                    <p>Registration Points</p>
                     <span>POINTS</span>
                 </div>
             </li>
             <li>
+                <div class="pints">
+                    <h3>₹{{karigar_point.referal_point_balance}}</h3>
+                    <p>Refferal Points</p>
+                    <span>POINTS</span>
+                </div>
+            </li>
+        </ul>
+        <br>
+
+        <ul>
+            <li class="wp72 ml45">
                 <div class="pints">
                     <h3>₹{{conInt(karigar_point.balance_point) + conInt(karigar_point.service_wallet_balance_points) + conInt(karigar_point.referal_point_balance) + conInt(karigar_point.reg_points)}}</h3>
                     <p>Total</p>
