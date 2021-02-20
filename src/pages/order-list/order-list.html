@@ -50,11 +50,11 @@
             <li [ngClass]="{'active' : filter.order_status=='Approved'}" (click)="filter.date='';filter.master='';start=0;filter.order_status='Approved';get_orders()">
                 <p>Accepted<span>{{count.approved}}</span></p>
             </li>
-            <li [ngClass]="{'active' : filter.order_status=='PDispatch'}" (click)="filter.date='';filter.master='';start=0;filter.order_status='PDispatch';order_list = [];get_orders1()">
-                <p>Partially Dispatched<span>--PDC--</span></p>
+            <li [ngClass]="{'active' : filter.order_status=='PDispatch'}" (click)="filter.date='';filter.master='';start=0;filter.order_status='PDispatch';order_list = [];get_orders()">
+                <p>Partially Dispatched<span>{{count.pdispatch}}</span></p>
             </li>
-            <li [ngClass]="{'active' : filter.order_status=='Dispatch'}" (click)="filter.date='';filter.master='';start=0;filter.order_status='Dispatch';order_list = [];get_orders1()">
-                <p>Completely Dispatched<span>--CDC--</span></p>
+            <li [ngClass]="{'active' : filter.order_status=='Dispatch'}" (click)="filter.date='';filter.master='';start=0;filter.order_status='Dispatch';order_list = [];get_orders()">
+                <p>Completely Dispatched<span>{{count.dispatch}}</span></p>
             </li>
 
             <li [ngClass]="{'active' : filter.order_status=='Reject'}" (click)="filter.date='';filter.master='';start=0;filter.order_status='Reject';get_orders()">

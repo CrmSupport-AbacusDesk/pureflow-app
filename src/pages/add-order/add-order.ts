@@ -47,6 +47,12 @@ export class AddOrderPage {
     totalQty:any=0;
     cart_qty:any=0
     loading: any;
+    searchTrigger : boolean = true;
+    masterFlag :any = 'nothing';
+    tmpStrLen:any = 0;
+    searchText:any;
+    booleanFlag : any;
+
     
     
     constructor(public navCtrl: NavController,
@@ -192,7 +198,7 @@ export class AddOrderPage {
         getCategory()
         {
             // this.service.show_loading()
-            this.dbService.onPostRequestDataFromApi('','Distributor/getCategory', this.dbService.rootUrlSfa)
+            this.dbService.onPostRequestDataFromApi('','Distributor/getCategory3', this.dbService.rootUrlSfa)
             .subscribe((result)=>
             {
                 console.log(result)
@@ -298,7 +304,7 @@ console.log(type);
             
             console.log(this.data.type_name.id);
             
-            this.dbService.onShowLoadingHandler();
+            // this.dbService.onShowLoadingHandler();
             
             console.log(this.user_data);
             
@@ -319,7 +325,7 @@ console.log(type);
             this.dbService.onPostRequestDataFromApi({"form":this.form}, 'dealerData/get_product_dataExecutive', this.dbService.rootUrlSfa).subscribe((result)=>{
                 
                 console.log(result);
-                this.dbService.onDismissLoadingHandler();
+                // this.dbService.onDismissLoadingHandler();
                 if(result['prod_price'])
                 {
                     this.show_price = true;
@@ -346,6 +352,16 @@ console.log(type);
         
         getSubCategory(cat)
         {
+            this.subCatList = {};
+            console.log(cat)
+            console.log(this.booleanFlag);
+            console.log(this.data.cat_no);
+
+            if((cat['product_name'].search(' | ') != -1) && this.masterFlag != 'product' ){
+                console.log("in if condition");
+                let avr = cat['product_name'].indexOf(' | ');
+                cat['product_name'] = cat['product_name'].substring(0,avr);
+            }
             console.log(cat)
             this.data.sub_category={};
             this.form.category = cat.category;
@@ -354,14 +370,27 @@ console.log(type);
                 
                 console.log(result)
                 this.subCatList = result['data'];
-                if(this.subCatList.length==1)
+                if(this.booleanFlag == false && this.masterFlag != 'product'){
+                    console.log("in if condition");
+                    this.searchTrigger=true;
+                    this.data.sub_category= this.subCatList.filter(row=>row.sub_category == cat.subcategory);
+                    this.data.sub_category=this.data.sub_category[0];                        
+                    this.getProductCode(this.data.sub_category)
+                    this.data.cat_no=cat;
+                    this.get_product_data(this.data.cat_no);
+                    // this.loading.dismiss();
+                } 
+                
+
+
+                else if(this.subCatList.length==1)
                 {
                     this.data.sub_category = this.subCatList[0]
                     this.getProductCode(this.data.sub_category)
                 }
                 else
                 {
-                    this.subcatSelectable.open();
+                    // this.subcatSelectable.open();
                 }
             },err=>{
                 
@@ -391,66 +420,107 @@ console.log(type);
         }
         
         master_search(event,type){
-            console.log(event.text);
+
             console.log(type);
+            console.log(event);
+            console.log(this.searchTrigger);
+            console.log(event.text);
+
+            console.log(this.data.category);
             
                 
                 if (event.text == '') {
                     
                 }
                 
-                else {
-                    this.dbService.onPostRequestDataFromApi({ masterSearch: event.text }, "product/product_code", this.dbService.rootUrlSfa)
-                    .subscribe((result) => {
-                        console.log(result);
-                        this.autocompleteItems = result;
-                        this.temp_product_array = this.autocompleteItems;
+                // else {
+                //     this.dbService.onPostRequestDataFromApi({ masterSearch: event.text }, "product/product_code", this.dbService.rootUrlSfa)
+                //     .subscribe((result) => {
+                //         console.log(result);
+                //         this.autocompleteItems = result;
+                //         this.temp_product_array = this.autocompleteItems;
                         
-                        console.log(this.autocompleteItems);
-                        setTimeout(() => {
-                            this.loading.dismiss()
-                            // this.prod_codeSelectable.open();
-                        }, 1000);
-                    }, err => {
-                        this.loading.dismiss()
-                    });
-                }
+                //         console.log(this.autocompleteItems);
+                //         setTimeout(() => {
+                //             this.loading.dismiss()
+                //             // this.prod_codeSelectable.open();
+                //         }, 1000);
+                //     }, err => {
+                //         this.loading.dismiss()
+                //     });
+                // }
             
-            if(type=='category')
-            {
-
-
-
-                if (event.text == '') {
+                else if(type=='category')
+                {
+                    this.masterFlag='nothing';
                     
+                    let txtLength = (event.text).length;
+                    console.log(txtLength);
+                    
+                    console.log("in else");   
+                    if (event.text == '') {
+                        this.searchTrigger=true;
+                        this.getCategory();
+                        
+                    }
+                    
+                    else if((this.tmpStrLen != 0) && (this.tmpStrLen > txtLength)){
+                        this.searchTrigger=true;
+                        this.getCategory();
+                        this.tmpStrLen = txtLength;
+                        this.searchText='';
+                        this.data.category['category']='';
+                        this.data.category['cat_no']='';
+                        this.data.category['id']='';
+                        this.data.category['product_name']='';
+                        this.data.category['subcategory']='';
+                    }
+                    
+                    else {
+                        
+                        if(this.searchText == event.text){
+                            this.tmpStrLen = (this.searchText).length
+                            console.log(this.tmpStrLen);                        
+                            this.searchTrigger=true;
+                            this.getCategory();
+                        }
+                        else{ 
+                            if( this.data.category){
+                                
+                                this.data.category['category']='';
+                                this.data.category['cat_no']='';
+                                this.data.category['id']='';
+                                this.data.category['product_name']='';
+                                this.data.category['subcategory']='';
+                            }
+                            console.log(this.data.category);
+                            
+                            this.searchTrigger=false;
+                            this.searchText = event.text;
+                            this.dbService.onPostRequestDataFromApi({ masterSearch: event.text }, "product/product_code", this.dbService.rootUrlSfa)
+                            .subscribe((result) => {
+                                console.log(result);
+                                this.categoryList=result;
+                                console.log(this.categoryList);
+                                for(let i=0;i<this.categoryList.length;i++){
+                                    this.categoryList[i].product_name = this.categoryList[i].product_name +' | '+ this.categoryList[i].subcategory
+                                }
+                                console.log(this.categoryList);
+                                /* this.temp_product_array = this.categoryList;
+                                console.log(this.autocompleteItems);
+                                this.data.category=this.categoryList.category;
+                                this.data.sub_category=this.categoryList.subcategory;
+                                this.data.cat_no=this.autocompleteItems.product_name; */
+                                setTimeout(() => {
+                                    // this.loading.dismiss()
+                                    // this.prod_codeSelectable.open();
+                                }, 1000);
+                            }, err => {
+                                // this.loading.dismiss()
+                            });                    
+                        }   
+                    } 
                 }
-                
-                else {
-                    this.dbService.onPostRequestDataFromApi({ masterSearch: event.text }, "product/product_code", this.dbService.rootUrlSfa)
-                    .subscribe((result) => {
-                        console.log(result);
-                        this.categoryList = result;
-                        this.temp_product_array = this.categoryList;
-                        console.log(this.autocompleteItems);
-                        this.data.category=this.categoryList.category;
-                        this.data.sub_category=this.categoryList.subcategory;
-                        this.data.cat_no=this.categoryList.product_name;
-                        setTimeout(() => {
-                            this.loading.dismiss()
-                            // this.prod_codeSelectable.open();
-                        }, 1000);
-                    }, err => {
-                        this.loading.dismiss()
-                    });
-                }
-            
-
-
-                
-            }
-
-            
-            
         }
         
         

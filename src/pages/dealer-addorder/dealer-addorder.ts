@@ -36,6 +36,14 @@ export class DealerAddorderPage {
     cart_qty:any=0;
     order_item: any = [];
     triggerCategory:boolean = true;
+    
+    searchTrigger : boolean = true;
+    masterFlag :any = 'nothing';
+    tmpStrLen:any = 0;
+    searchText:any;
+
+    booleanFlag : any;
+    
     constructor(public navCtrl: NavController,
         public events: Events,
         public loadingCtrl: LoadingController,
@@ -176,7 +184,19 @@ export class DealerAddorderPage {
         
         subCatList: any = [];
         getSubCategory(cat) {
+            // this.booleanFlag = this.searchTrigger;
+            // this.searchTrigger=true;
+            this.subCatList = {};
             console.log(cat)
+            console.log(this.booleanFlag);
+            console.log(this.data.cat_no);
+            
+            if((cat['product_name'].search(' | ') != -1) && this.masterFlag != 'product' ){
+                console.log("in if condition");
+                let avr = cat['product_name'].indexOf(' | ');
+                cat['product_name'] = cat['product_name'].substring(0,avr);
+            }
+            console.log(cat);
             this.data.sub_category = {};
             this.form.category = cat.category;
             this.product.category = cat.category;
@@ -184,12 +204,28 @@ export class DealerAddorderPage {
             .subscribe((result) => {
                 console.log(result)
                 this.subCatList = result['data'];
-                if (this.subCatList.length == 1) {
+                console.log(this.searchTrigger);
+                console.log(this.booleanFlag);
+                console.log(this.data.cat_no);
+                
+                if(this.booleanFlag == false && this.masterFlag != 'product'){
+                    console.log("in if condition");
+                    this.searchTrigger=true;
+                    this.data.sub_category= this.subCatList.filter(row=>row.sub_category == cat.subcategory);
+                    this.data.sub_category=this.data.sub_category[0];                        
+                    this.getProductCode(this.data.sub_category)
+                    this.data.cat_no=cat;
+                    this.get_product_data(this.data.cat_no);
+                    this.loading.dismiss();
+                }  
+                else if  (this.subCatList.length == 1){
+                    console.log("in else-> if");
                     this.data.sub_category = this.subCatList[0]
                     this.getProductCode(this.data.sub_category)
                 }
                 else {
-                    this.subcatSelectable.open();
+                    // this.subcatSelectable.open();
+                    console.log("in else->");   
                 }
             }, err => {
                 
@@ -197,17 +233,18 @@ export class DealerAddorderPage {
         }
         
         getCategory() {
-            this.dbService.onShowLoadingHandler()
-            this.dbService.onPostRequestDataFromApi('', 'Distributor/getCategory', this.dbService.rootUrlSfa)
+            // this.searchTrigger = false;
+            // this.dbService.onShowLoadingHandler()
+            this.dbService.onPostRequestDataFromApi('', 'Distributor/getCategory3', this.dbService.rootUrlSfa)
             .subscribe((result) => {
                 console.log(result)
                 this.categoryList = result['data'];
                 if (!this.order_data || !this.order_data.order_id) {
-                    this.categorySelectable.open();
+                    // this.categorySelectable.open();
                 }
-                this.dbService.onDismissLoadingHandler();
+                // this.dbService.onDismissLoadingHandler();
             }, err => {
-                this.dbService.onDismissLoadingHandler();
+                // this.dbService.onDismissLoadingHandler();
                 this.dbService.errToasr();
             });
         }
@@ -238,12 +275,16 @@ export class DealerAddorderPage {
         show_price: any = false;
         
         
-        testFUnction(event,type) {
-            
+        masterSearchFUnction(event,type) {
+            console.log(event);
+            console.log(this.searchTrigger);
             console.log(event.text);
             console.log(type);
+            console.log(this.data.category);
+            
             if(type=='product')
             {
+                // not use right now
                 
                 if (event.text == '') {
                     
@@ -264,44 +305,106 @@ export class DealerAddorderPage {
                     }, err => {
                         this.loading.dismiss()
                     });
+                    event.text == ''
+                    this.masterFlag='product';
                 }
             }
-            if(type=='category')
+            
+            else if(type=='category')
             {
+                this.masterFlag='nothing';
                 
-                // this.triggerCategory=false; 
+                let txtLength = (event.text).length;
+                console.log(txtLength);
                 
+                console.log("in else");   
                 if (event.text == '') {
+                    this.searchTrigger=true;
+                    this.getCategory();
                     
                 }
                 
-                else {
-                    this.dbService.onPostRequestDataFromApi({ masterSearch: event.text }, "product/product_code", this.dbService.rootUrlSfa)
-                    .subscribe((result) => {
-                        console.log(result);
-                        this.categoryList=result;
-                        console.log(this.categoryList);
-                        this.temp_product_array = this.categoryList;
-                        console.log(this.autocompleteItems);
-                        this.data.category=this.categoryList.category;
-                        this.data.sub_category=this.categoryList.subcategory;
-                        this.data.cat_no=this.autocompleteItems.product_name;
-                        setTimeout(() => {
-                            this.loading.dismiss()
-                            // this.prod_codeSelectable.open();
-                        }, 1000);
-                    }, err => {
-                        this.loading.dismiss()
-                    });
+                else if((this.tmpStrLen != 0) && (this.tmpStrLen > txtLength)){
+                    this.searchTrigger=true;
+                    this.getCategory();
+                    this.tmpStrLen = txtLength;
+                    this.searchText='';
+                    this.data.category['category']='';
+                    this.data.category['cat_no']='';
+                    this.data.category['id']='';
+                    this.data.category['product_name']='';
+                    this.data.category['subcategory']='';
                 }
                 
-                
-                
-                
+                else {
+                    
+                    if(this.searchText == event.text){
+                        this.tmpStrLen = (this.searchText).length
+                        console.log(this.tmpStrLen);                        
+                        this.searchTrigger=true;
+                        this.getCategory();
+                    }
+                    else{ 
+                        if( this.data.category){
+                            
+                            this.data.category['category']='';
+                            this.data.category['cat_no']='';
+                            this.data.category['id']='';
+                            this.data.category['product_name']='';
+                            this.data.category['subcategory']='';
+                        }
+                        console.log(this.data.category);
+                        
+                        this.searchTrigger=false;
+                        this.searchText = event.text;
+                        this.dbService.onPostRequestDataFromApi({ masterSearch: event.text }, "product/product_code", this.dbService.rootUrlSfa)
+                        .subscribe((result) => {
+                            console.log(result);
+                            this.categoryList=result;
+                            console.log(this.categoryList);
+                            for(let i=0;i<this.categoryList.length;i++){
+                                this.categoryList[i].product_name = this.categoryList[i].product_name +' | '+ this.categoryList[i].subcategory
+                            }
+                            console.log(this.categoryList);
+                            /* this.temp_product_array = this.categoryList;
+                            console.log(this.autocompleteItems);
+                            this.data.category=this.categoryList.category;
+                            this.data.sub_category=this.categoryList.subcategory;
+                            this.data.cat_no=this.autocompleteItems.product_name; */
+                            setTimeout(() => {
+                                this.loading.dismiss()
+                                // this.prod_codeSelectable.open();
+                            }, 1000);
+                        }, err => {
+                            this.loading.dismiss()
+                        });                    
+                    }   
+                } 
             }
         }
         get_product_data(val) {
-            this.lodingPersent();
+            
+            console.log(this.data);
+            console.log(val);
+            
+            if(this.masterFlag == 'product'){
+                this.data.category = val;
+                this.getSubCategory(val);
+                console.log(this.subCatList);
+                
+                setTimeout(() => {
+                    console.log(this.subCatList);
+                    this.data.sub_category= this.subCatList.filter(row=>row.sub_category == val.subcategory);
+                    this.data.sub_category=this.data.sub_category[0];       
+                    
+                }, 1000);
+                
+            }
+            
+            
+            
+            
+            // this.lodingPersent();
             console.log(val);
             
             this.form.cat_no = val.cat_no;
@@ -312,7 +415,7 @@ export class DealerAddorderPage {
             this.form.user_district = this.user_data.district;
             this.form.user_id = this.user_data.id
             this.form.user_type = this.user_data.type
-            // this.form.sub_category=val.subcategory;
+            this.form.sub_category=val.subcategory;
             
             this.dbService.onPostRequestDataFromApi({ "form": this.form }, "dealerData/get_product_data", this.dbService.rootUrlSfa)
             .subscribe((result) => {
@@ -335,9 +438,10 @@ export class DealerAddorderPage {
                 if (this.color_list && this.color_list.length == 1) {
                     this.product.color = this.color_list[0]['color_name'];
                 }
-                console.log(this.product)
+                // console.log(this.product)
             })
             
+            this.loading.dismiss();
             
             
         }
@@ -486,29 +590,29 @@ export class DealerAddorderPage {
             console.log( this.cart_array);
             
             
-            // this.dbService.onPostRequestDataFromApi({ "cart_data": this.cart_array, "user_data": this.user_data, 'orderData': orderData}, "dealerData/save_order", this.dbService.rootUrlSfa)
-            // .subscribe(resp => {
-            //     console.log(resp);
-            //     if (resp['msg'] == "success") {
-            //         var toastString = ''
-            //         if (type == 'save') {
-            //             this.dbService.tabSelectedOrder = 'Draft';
-            //             toastString = 'Order Saved To Draft Successfully !'
-            //         }
-            //         else {
-            //             this.dbService.tabSelectedOrder = 'Pending';
-            //             toastString = 'Order Placed Successfully !'
-                        
-            //         }
-            //         let toast = this.toastCtrl.create({
-            //             message: toastString,
-            //             duration: 3000
-            //         });
-            //         toast.present();
-            //         this.navCtrl.push(DealerOrderPage, { "type": "Primary" });
-            //         // this.navCtrl.popTo(DealerOrderPage)
-            //     }
-            // })
+            this.dbService.onPostRequestDataFromApi({ "cart_data": this.cart_array, "user_data": this.user_data, 'orderData': orderData}, "dealerData/save_order", this.dbService.rootUrlSfa)
+            .subscribe(resp => {
+                console.log(resp);
+                if (resp['msg'] == "success") {
+                    var toastString = ''
+                    if (type == 'save') {
+                        this.dbService.tabSelectedOrder = 'Draft';
+                        toastString = 'Order Saved To Draft Successfully !'
+                    }
+                    else {
+                        this.dbService.tabSelectedOrder = 'Pending';
+                        toastString = 'Order Placed Successfully !'
+            
+                    }
+                    let toast = this.toastCtrl.create({
+                        message: toastString,
+                        duration: 3000
+                    });
+                    toast.present();
+                    this.navCtrl.push(DealerOrderPage, { "type": "Primary" });
+                    // this.navCtrl.popTo(DealerOrderPage)
+                }
+            })
         }
         
         ionViewDidEnter() {

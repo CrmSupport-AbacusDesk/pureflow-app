@@ -24,7 +24,23 @@
     
     <div class="pd-left-right16">
         <div class="list-box mt16" *ngFor="let data of dr_list" >
-           
+            <div class="upper">
+                <div class="left-date">
+                    <div class="date-section">
+                        <p>{{data.date_created | date: 'MMM d, y'}}</p>
+                        <p>Date Created</p>
+                    </div>
+                    <div class="date-section" *ngIf="data.created_by_name != '' && data.created_by_name != null" >
+                        <p>{{data.created_by_name | titlecase}}</p>
+                        <p>Created By</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <br>
+
+
             <div class="mid mt0">
                 <div class="content-info" >
                     <div class="left-info" >
