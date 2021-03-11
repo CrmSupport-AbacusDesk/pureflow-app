@@ -17,7 +17,7 @@ export class ViewProfilePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ViewProfilePage');
     this.profile_pic=this.navParams.get("Image");
-    // console.log(this.profile_pic);
+     console.log(this.profile_pic);
 
   }
   closeModal(){

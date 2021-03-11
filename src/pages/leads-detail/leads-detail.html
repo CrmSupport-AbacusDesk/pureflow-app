@@ -92,7 +92,10 @@
                     <p>End Location : <span>{{val.address | titlecase}}</span></p>
                 </div> 
             </div>
-        </div>  
+        </div>
+        <button ion-button class="cs-btn" (click)="convertdealer()">
+            Convert To dealer
+         </button>  
     </div>
     
 </ion-content>
@@ -258,7 +261,8 @@
             <button ion-item [ngClass]="{'active': distributor_detaill.orderType == 'Primary'}" (click)="distributor_detaill.orderType='Primary'"><p>Primary</p></button>
 
             <button ion-item [ngClass]="{'active': distributor_detaill.orderType == 'Secondary'}" (click)="distributor_detaill.orderType='Secondary'" ><p>Secondary</p> </button>
+            
         </div>
+        
     </ion-footer> 
-    
 </ng-container>
