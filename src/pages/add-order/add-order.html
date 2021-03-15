@@ -66,7 +66,7 @@
 
             <ion-item class="cs-selectable">
                 <ion-label><span>Category </span></ion-label>
-                <select-searchable #category item-content [(ngModel)]="data.category" [items]="categoryList" itemValueField="category" itemTextField="category" name="category" value="category" [canSearch]="true" [hasVirtualScroll]="true" (onChange)="getSubCategory(data.category)">
+                <select-searchable #category item-content [(ngModel)]="data.category" [items]="categoryList" itemValueField="category" [itemTextField]="searchTrigger ? 'category' : 'product_name'" name="category" value="category" [canSearch]="true" [hasVirtualScroll]="true" (onChange)="this.booleanFlag = this.searchTrigger ; this.searchTrigger=true; getSubCategory(data.category);(searchTrigger=true)" (onSearch)="master_search($event,'category')">
                 </select-searchable>
             </ion-item>
 

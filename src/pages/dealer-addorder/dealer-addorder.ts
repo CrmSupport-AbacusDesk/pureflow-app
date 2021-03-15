@@ -36,11 +36,13 @@ export class DealerAddorderPage {
     cart_qty:any=0;
     order_item: any = [];
     triggerCategory:boolean = true;
+    
     searchTrigger : boolean = true;
-    searchText:any;
-    tmpStrLen:any = 0;
-    booleanFlag : any;
     masterFlag :any = 'nothing';
+    tmpStrLen:any = 0;
+    searchText:any;
+
+    booleanFlag : any;
     
     constructor(public navCtrl: NavController,
         public events: Events,
@@ -361,7 +363,7 @@ export class DealerAddorderPage {
                             this.categoryList=result;
                             console.log(this.categoryList);
                             for(let i=0;i<this.categoryList.length;i++){
-                                this.categoryList[i].product_name = this.categoryList[i].product_name +' | '+ this.categoryList[i].cat_no
+                                this.categoryList[i].product_name = this.categoryList[i].product_name +' | '+ this.categoryList[i].subcategory
                             }
                             console.log(this.categoryList);
                             /* this.temp_product_array = this.categoryList;
@@ -588,29 +590,29 @@ export class DealerAddorderPage {
             console.log( this.cart_array);
             
             
-            // this.dbService.onPostRequestDataFromApi({ "cart_data": this.cart_array, "user_data": this.user_data, 'orderData': orderData}, "dealerData/save_order", this.dbService.rootUrlSfa)
-            // .subscribe(resp => {
-            //     console.log(resp);
-            //     if (resp['msg'] == "success") {
-            //         var toastString = ''
-            //         if (type == 'save') {
-            //             this.dbService.tabSelectedOrder = 'Draft';
-            //             toastString = 'Order Saved To Draft Successfully !'
-            //         }
-            //         else {
-            //             this.dbService.tabSelectedOrder = 'Pending';
-            //             toastString = 'Order Placed Successfully !'
+            this.dbService.onPostRequestDataFromApi({ "cart_data": this.cart_array, "user_data": this.user_data, 'orderData': orderData}, "dealerData/save_order", this.dbService.rootUrlSfa)
+            .subscribe(resp => {
+                console.log(resp);
+                if (resp['msg'] == "success") {
+                    var toastString = ''
+                    if (type == 'save') {
+                        this.dbService.tabSelectedOrder = 'Draft';
+                        toastString = 'Order Saved To Draft Successfully !'
+                    }
+                    else {
+                        this.dbService.tabSelectedOrder = 'Pending';
+                        toastString = 'Order Placed Successfully !'
             
-            //         }
-            //         let toast = this.toastCtrl.create({
-            //             message: toastString,
-            //             duration: 3000
-            //         });
-            //         toast.present();
-            //         this.navCtrl.push(DealerOrderPage, { "type": "Primary" });
-            //         // this.navCtrl.popTo(DealerOrderPage)
-            //     }
-            // })
+                    }
+                    let toast = this.toastCtrl.create({
+                        message: toastString,
+                        duration: 3000
+                    });
+                    toast.present();
+                    this.navCtrl.push(DealerOrderPage, { "type": "Primary" });
+                    // this.navCtrl.popTo(DealerOrderPage)
+                }
+            })
         }
         
         ionViewDidEnter() {
