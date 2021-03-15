@@ -57,7 +57,7 @@ export class GiftDetailPage {
 				this.rating_star=parseInt(r['gift'].rating);
 				console.log(this.gift_detail);
 				this.offer_balance= parseInt(r['gift'].offer_balance );
-				this.balance_point= parseInt(r['karigar'].balance_point ) + parseInt(r['karigar'].reg_points) + parseInt(r['karigar'].service_wallet_balance_points) + parseInt(r['karigar'].referal_point_balance);
+				this.balance_point= parseInt(r['karigar'].balance_point ) + parseInt(r['karigar'].service_wallet_balance_points) + parseInt(r['karigar'].referal_point_balance);
 				console.log(this.balance_point
 					);
 				
