@@ -149,4 +149,35 @@ export class LeadsDetailPage {
     goOnOrderDetail(id){
         this.navCtrl.push(ExecutiveOrderDetailPage,{id:id , login:'Employee'})
     }
+    convertdealer()
+    {
+        console.log("convertdealer");
+        let alert=this.alertCtrl.create({
+            title:'Are You Sure?',
+            subTitle: 'You want To Convert This Lead To Dealer',
+            cssClass:'action-close',
+            
+            buttons: [{
+                text: 'Cancel',
+                role: 'cancel',
+               
+            },
+            {
+                text:'Confirm',
+                cssClass: 'close-action-sheet',
+                handler:()=>
+                {
+                    
+                    this.navCtrl.pop();
+                }
+            }]
+        });
+        alert.present();
+        console.log(this.dr_id);   
+        this.dbService.onPostRequestDataFromApi({'id':this.dr_id},'Distributor/convert_lead', this.dbService.rootUrlSfa).subscribe((result)=>{
+            console.log(result);
+
+        })
+
+    }
 }
