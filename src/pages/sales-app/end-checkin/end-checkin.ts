@@ -66,6 +66,8 @@ export class EndCheckinPage {
     {
       
       console.log(this.checkin_data);
+      console.log(this.checkin_data.dr_id);
+      console.log(this.checkin);
       
       
       if(!description)
@@ -86,8 +88,9 @@ export class EndCheckinPage {
             
             var lat = resp.coords.latitude
             var lng = resp.coords.longitude
+
             
-            this.dbService.onPostRequestDataFromApi({'lat':lat, 'lng':lng, 'checkin_id': checkin_id, 'checkin': description,imgarr:this.image_data,'dr_data':this.checkinForm.value},'Checkin/visit_end', this.dbService.rootUrlSfa).subscribe((result) => {
+            this.dbService.onPostRequestDataFromApi({'lat':lat, 'lng':lng, 'checkin_id': checkin_id, 'checkin': description,imgarr:this.image_data,'dr_data':this.checkin,'dr_id':this.checkin_data.dr_id},'Checkin/visit_end', this.dbService.rootUrlSfa).subscribe((result) => {
               
               this.for_order = result['for_order'];
               this.brand_assign = result['brand_assign'];

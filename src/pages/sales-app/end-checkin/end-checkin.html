@@ -68,7 +68,7 @@
     </div>
     <!-- All Check IN End -->
     
-    <form class="pt0" *ngIf="checkin_data.checkin_with_new_dealer!='true'"  name="f" #f="ngForm"  (ngSubmit)="f.valid && end_visit(checkin_data.checkin_id,checkin.description)"  padding>
+    <form class="pt0" *ngIf="checkin_data.checkin_with_new_dealer!='true' "  name="f" #f="ngForm"  (ngSubmit)="f.valid && end_visit(checkin_data.checkin_id,checkin.description)"  padding>
         <!-- <form class="pt0" *ngIf="checkin_data.checkin_with_new_dealer!='true'"  name="f" #f="ngForm"  (ngSubmit)="f.valid && test_end_visit(checkin_data.checkin_id,checkin.description)"  padding> -->
             
             
@@ -76,53 +76,53 @@
                 <p>Start Time</p>
                 <p>{{checkin_data.visit_start | date: 'h:mm a'}}</p>
             </div>
-            
-            <div class="edit ml0 mr0">
-                <ion-list>
-                    <ion-item class="cs-textarea1 " [ngClass]="{'cs-error': (f.submitted && available_brands?.invalid)}">
-                        <ion-label floating><span>Available Brands<strong>*</strong></span></ion-label>
-                        <ion-textarea name="available_brands" #available_brands="ngModel" [(ngModel)]="checkin.available_brands"  placeholder="Available brand with the dealers" required></ion-textarea>
-                    </ion-item>
-                    <!-- -->
-                    <p class="error-line relative"  *ngIf="f.submitted && available_brands?.invalid" >available_brands is Required!</p>
-                </ion-list>
+            <div *ngIf="checkin_data.other_name == ''">
+                <div class="edit ml0 mr0">
+                    <ion-list>
+                        <ion-item class="cs-textarea1 " [ngClass]="{'cs-error': (f.submitted && available_brands?.invalid)}">
+                            <ion-label floating><span>Available Brands<strong>*</strong></span></ion-label>
+                            <ion-textarea name="available_brands" #available_brands="ngModel" [(ngModel)]="checkin.available_brands"  placeholder="Available brand with the dealers" required></ion-textarea>
+                        </ion-item>
+                        <!-- -->
+                        <p class="error-line relative"  *ngIf="f.submitted && available_brands?.invalid" >available_brands is Required!</p>
+                    </ion-list>
+                </div>
+                
+                <div class="edit ml0 mr0">
+                    <ion-list>
+                        <ion-item class="cs-normal-select mt16" [ngClass]="{'cs-error': (f.submitted && showOwnerType?.invalid)}">
+                            <ion-label>Select type</ion-label>
+                            <ion-select name="showOwnerType" #showOwnerType="ngModel" [(ngModel)]="checkin.showOwnerType" required>
+                                <ion-option value="Whole Seller">Whole Seller</ion-option>
+                                <ion-option value="Retailer">Retailer</ion-option>
+                            </ion-select>
+                        </ion-item>
+                        <p class="error-line"  *ngIf="f.submitted && showOwnerType?.invalid" >Owner Type is Required!</p>
+                    </ion-list>
+                </div>
+                
+                
+                <div class="edit ml0 mr0">
+                    <ion-list>
+                        <ion-item class=" " [ngClass]="{'cs-error': (f.submitted && shopEmpCount?.invalid)}">
+                            <ion-label floating><span>Employees in the shop.<strong>*</strong></span></ion-label>
+                            <ion-input type="tel" (keypress)="MobileNumber($event)"  name="shopEmpCount" placeholder="How many employees in this shop" #shopEmpCount="ngModel" [(ngModel)]="checkin.shopEmpCount" required></ion-input>
+                        </ion-item>
+                        <p *ngIf="f.submitted && shopEmpCount?.invalid && !checkin.shopEmpCount" class="error-line">Employees Count Is Required</p>
+                    </ion-list>
+                </div>
+                
+                
+                <div class="edit ml0 mr0">
+                    <ion-list>
+                        <ion-item class="cs-textarea1 " [ngClass]="{'cs-error': (f.submitted && feedback?.invalid)}">
+                            <ion-label floating><span>Feedback<strong>*</strong></span></ion-label>
+                            <ion-textarea name="feedback" #feedback="ngModel" [(ngModel)]="checkin.feedback"  placeholder="Feedback" required></ion-textarea>
+                        </ion-item>
+                        <p class="error-line relative"  *ngIf="f.submitted && feedback?.invalid" >Feedback is Required!</p>
+                    </ion-list>
+                </div>
             </div>
-            
-            <div class="edit ml0 mr0">
-                <ion-list>
-                    <ion-item class="cs-normal-select mt16" [ngClass]="{'cs-error': (f.submitted && showOwnerType?.invalid)}">
-                        <ion-label>Select type</ion-label>
-                        <ion-select name="showOwnerType" #showOwnerType="ngModel" [(ngModel)]="checkin.showOwnerType" required>
-                            <ion-option value="Whole Seller">Whole Seller</ion-option>
-                            <ion-option value="Retailer">Retailer</ion-option>
-                        </ion-select>
-                    </ion-item>
-                    <p class="error-line"  *ngIf="f.submitted && showOwnerType?.invalid" >Owner Type is Required!</p>
-                </ion-list>
-            </div>
-            
-            
-            <div class="edit ml0 mr0">
-                <ion-list>
-                    <ion-item class=" " [ngClass]="{'cs-error': (f.submitted && shopEmpCount?.invalid)}">
-                        <ion-label floating><span>Employees in the shop.<strong>*</strong></span></ion-label>
-                        <ion-input type="tel" (keypress)="MobileNumber($event)"  name="shopEmpCount" placeholder="How many employees in this shop" #shopEmpCount="ngModel" [(ngModel)]="checkin.shopEmpCount" required></ion-input>
-                    </ion-item>
-                    <p *ngIf="f.submitted && shopEmpCount?.invalid && !checkin.shopEmpCount" class="error-line">Employees Count Is Required</p>
-                </ion-list>
-            </div>
-            
-            
-            <div class="edit ml0 mr0">
-                <ion-list>
-                    <ion-item class="cs-textarea1 " [ngClass]="{'cs-error': (f.submitted && feedback?.invalid)}">
-                        <ion-label floating><span>Feedback of Dealer <strong>*</strong></span></ion-label>
-                        <ion-textarea name="feedback" #feedback="ngModel" [(ngModel)]="checkin.feedback"  placeholder="Feedback of Dealer" required></ion-textarea>
-                    </ion-item>
-                    <p class="error-line relative"  *ngIf="f.submitted && feedback?.invalid" >Feedback of dealer is Required!</p>
-                </ion-list>
-            </div>
-            
             
             
             <div class="edit ml0 mr0">
@@ -167,8 +167,8 @@
         </form>
         
         
-        <!-- <form class="pt0"  *ngIf="checkin_data.checkin_with_new_dealer=='true'" name="f" #f="ngForm" (ngSubmit)="f.valid && end_visitwithNewDealer(checkin_data.checkin_id,checkin.description)"> -->
-            <form class="pt0"  *ngIf="checkin_data.checkin_with_new_dealer=='true'" name="f" #f="ngForm" (ngSubmit)="f.valid && test_end_visit(checkin_data.checkin_id,checkin.description)">
+        <form class="pt0"  *ngIf="checkin_data.checkin_with_new_dealer=='true'" name="f" #f="ngForm" (ngSubmit)="f.valid && end_visitwithNewDealer(checkin_data.checkin_id,checkin.description)">
+            <!-- <form class="pt0"  *ngIf="checkin_data.checkin_with_new_dealer=='true'" name="f" #f="ngForm" (ngSubmit)="f.valid && test_end_visit(checkin_data.checkin_id,checkin.description)"> -->
                 
                 
                 <div padding class="pb0 pt0">
@@ -183,72 +183,73 @@
                     
                     <!-- ---------------------------- -->
                     
-                    <!-- <div>
-                        <div class="edit ml0 mr0">
-                            <ion-list>
-                                <ion-item class="cs-textarea1 " [ngClass]="{'cs-error': (f.submitted && available_brands?.invalid)}">
-                                    <ion-label floating><span>Available Brands<strong>*</strong></span></ion-label>
-                                    <ion-textarea name="available_brands" #available_brands="ngModel" [(ngModel)]="checkin.available_brands"  placeholder="Available brand with the dealers" required></ion-textarea>
-                                </ion-item>
-                                <p class="error-line relative"  *ngIf="f.submitted && available_brands?.invalid" >available_brands is Required!</p>
-                            </ion-list>
+                    <div>
+                        <div *ngIf="checkin_data.other_name == ''">
+                            <div class="edit ml0 mr0">
+                                <ion-list>
+                                    <ion-item class="cs-textarea1 " [ngClass]="{'cs-error': (f.submitted && available_brands?.invalid)}">
+                                        <ion-label floating><span>Available Brands<strong>*</strong></span></ion-label>
+                                        <ion-textarea name="available_brands" #available_brands="ngModel" [(ngModel)]="checkin.available_brands"  placeholder="Available brand with the dealers" required></ion-textarea>
+                                    </ion-item>
+                                    <p class="error-line relative"  *ngIf="f.submitted && available_brands?.invalid" >Available Brands is Required!</p>
+                                </ion-list>
+                            </div>
+                            
+                            <div class="edit ml0 mr0">
+                                <ion-list>
+                                    <ion-item class="cs-normal-select mt16" [ngClass]="{'cs-error': (f.submitted && showOwnerType?.invalid)}">
+                                        <ion-label>Select type</ion-label>
+                                        <ion-select name="showOwnerType" #showOwnerType="ngModel" [(ngModel)]="checkin.showOwnerType" required>
+                                            <ion-option value="Whole Seller">Whole Seller</ion-option>
+                                            <ion-option value="Retailer">Retailer</ion-option>
+                                        </ion-select>
+                                    </ion-item>
+                                    <p class="error-line"  *ngIf="f.submitted && showOwnerType?.invalid" >Owner Type is Required!</p>
+                                </ion-list>
+                            </div>
+                            
+                            
+                            <div class="edit ml0 mr0">
+                                <ion-list>
+                                    <ion-item class=" " [ngClass]="{'cs-error': (f.submitted && shopEmpCount?.invalid)}">
+                                        <ion-label floating><span>Employees in the shop.<strong>*</strong></span></ion-label>
+                                        <ion-input type="tel" (keypress)="MobileNumber($event)"  name="shopEmpCount" placeholder="How many employees in this shop" #shopEmpCount="ngModel" [(ngModel)]="checkin.shopEmpCount" required></ion-input>
+                                    </ion-item>
+                                    <p *ngIf="f.submitted && shopEmpCount?.invalid && !checkin.shopEmpCount" class="error-line">Employees Count Is Required</p>
+                                </ion-list>
+                            </div>
+                            
+                            
+                            <div class="edit ml0 mr0">
+                                <ion-list>
+                                    <ion-item class="cs-textarea1 " [ngClass]="{'cs-error': (f.submitted && feedback?.invalid)}">
+                                        <ion-label floating><span>Feedback<strong>*</strong></span></ion-label>
+                                        <ion-textarea name="feedback" #feedback="ngModel" [(ngModel)]="checkin.feedback"  placeholder="Feedback" required></ion-textarea>
+                                    </ion-item>
+                                    <p class="error-line relative"  *ngIf="f.submitted && feedback?.invalid" >Feedback is Required!</p>
+                                </ion-list>
+                            </div>
+                            
+                            
+                            
+                            <div class="edit ml0 mr0">
+                                <ion-list>
+                                    <ion-item class="cs-textarea1 " [ngClass]="{'cs-error': (f.submitted && description?.invalid)}">
+                                        <ion-label floating><span>Description <strong>*</strong></span></ion-label>
+                                        <ion-textarea name="description" #description="ngModel" [(ngModel)]="checkin.description"  placeholder="Enter Description" required></ion-textarea>
+                                    </ion-item>
+                                    
+                                    <p class="error-line relative"  *ngIf="f.submitted && description?.invalid" >Description is Required!</p>
+                                </ion-list>
+                            </div>
+                            
                         </div>
-                        
-                        <div class="edit ml0 mr0">
-                            <ion-list>
-                                <ion-item class="cs-normal-select mt16" [ngClass]="{'cs-error': (f.submitted && showOwnerType?.invalid)}">
-                                    <ion-label>Select type</ion-label>
-                                    <ion-select name="showOwnerType" #showOwnerType="ngModel" [(ngModel)]="checkin.showOwnerType" required>
-                                        <ion-option value="Whole Seller">Whole Seller</ion-option>
-                                        <ion-option value="Retailer">Retailer</ion-option>
-                                    </ion-select>
-                                </ion-item>
-                                <p class="error-line"  *ngIf="f.submitted && showOwnerType?.invalid" >Owner Type is Required!</p>
-                            </ion-list>
-                        </div>
-                        
-                        
-                        <div class="edit ml0 mr0">
-                            <ion-list>
-                                <ion-item class=" " [ngClass]="{'cs-error': (f.submitted && shopEmpCount?.invalid)}">
-                                    <ion-label floating><span>Employees in the shop.<strong>*</strong></span></ion-label>
-                                    <ion-input type="tel" (keypress)="MobileNumber($event)"  name="shopEmpCount" placeholder="How many employees in this shop" #shopEmpCount="ngModel" [(ngModel)]="checkin.shopEmpCount" required></ion-input>
-                                </ion-item>
-                                <p *ngIf="f.submitted && shopEmpCount?.invalid && !checkin.shopEmpCount" class="error-line">Employees Count Is Required</p>
-                            </ion-list>
-                        </div>
-                        
-                        
-                        <div class="edit ml0 mr0">
-                            <ion-list>
-                                <ion-item class="cs-textarea1 " [ngClass]="{'cs-error': (f.submitted && feedback?.invalid)}">
-                                    <ion-label floating><span>Feedback of Dealer <strong>*</strong></span></ion-label>
-                                    <ion-textarea name="feedback" #feedback="ngModel" [(ngModel)]="checkin.feedback"  placeholder="Feedback of Dealer" required></ion-textarea>
-                                </ion-item>
-                                <p class="error-line relative"  *ngIf="f.submitted && feedback?.invalid" >Feedback of dealer is Required!</p>
-                            </ion-list>
-                        </div>
-                        
-                        
-                        
-                        <div class="edit ml0 mr0">
-                            <ion-list>
-                                <ion-item class="cs-textarea1 " [ngClass]="{'cs-error': (f.submitted && description?.invalid)}">
-                                    <ion-label floating><span>Description <strong>*</strong></span></ion-label>
-                                    <ion-textarea name="description" #description="ngModel" [(ngModel)]="checkin.description"  placeholder="Enter Description" required></ion-textarea>
-                                </ion-item>
-                               
-                                <p class="error-line relative"  *ngIf="f.submitted && description?.invalid" >Description is Required!</p>
-                            </ion-list>
-                        </div>
-                        
-                        
-                    </div> -->
+                    </div>
                     
                     <!-- ---------------------------- -->
                     
                     
-                    <div class="edit ml0 mr0">
+                    <!-- <div class="edit ml0 mr0">
                         <ion-list>
                             <ion-item class="cs-textarea1 " [ngClass]="{'cs-error':f.submitted && description?.invalid}">
                                 <ion-label floating><span>Description *</span> </ion-label>
@@ -257,7 +258,7 @@
                             <p  *ngIf="f.submitted && description?.invalid && checkin.description" class="error-line relative">Description Is Invalid!</p>
                             <p  *ngIf="f.submitted && description?.invalid && !checkin.description" class="error-line relative">Description Is Required!</p>
                         </ion-list>
-                    </div>
+                    </div> -->
                     
                     
                     
