@@ -159,7 +159,7 @@ export class DealerHomePage {
 
     ShareApp()
     {
-        this.socialSharing.share('Hey There ! here is an awesome app from Gravity Bath Pvt Ltd  ..Give it a try https://play.google.com/store/apps/details?id=com.gravitybath.app ')
+        this.socialSharing.share('Hey There ! here is an awesome app from PureFlow Solutions Pvt Ltd  ..Give it a try https://play.google.com/store/apps/details?id=com.gravitybath.app ')
         .then(() => {
             console.log("success");
         }).catch((e) => {

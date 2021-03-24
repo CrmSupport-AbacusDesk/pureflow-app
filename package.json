@@ -89,7 +89,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.2.4",
-    "cordova-android": "^6.4.0",
+    "cordova-android": "9.0.0",
     "cordova-plugin-android-permissions": "^1.1.2",
     "cordova-plugin-document-viewer": "^0.9.13",
     "cordova-plugin-ionic-webview": "^1.2.1",
@@ -138,9 +138,7 @@
       "phonegap-plugin-push": {
         "FCM_VERSION": "11.6.2"
       },
-
       "cordova-plugin-android-permissions": {}
-
     },
     "platforms": [
       "ios",

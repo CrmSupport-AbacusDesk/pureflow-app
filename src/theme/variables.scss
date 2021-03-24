@@ -528,7 +528,10 @@ ul {
 .main-login {
     width: 100%;
     height: 100%;
-    background: url(../assets/imgs/login-banner.jpg) no-repeat;
+
+    background: #87CEEB;
+
+    // background: url(../assets/imgs/login-banner.jpg) no-repeat;
     background-size: cover;
     background-position: bottom;
     .logo {
@@ -1160,7 +1163,7 @@ ul {
             box-shadow: none;
             i {
                 font-size: 30px;
-                color: #fff;
+                color:     #87CEEB;
             }
             img {
                 height: 22px !important;
