@@ -72,42 +72,9 @@ export class ProductSubdetailPage {
 
         }
 
+  
+
         getProductDetail(id)
-        {
-            this.offlineService.onGetProductDetailHandler(id)
-            .subscribe((productData) =>
-            {
-                console.log(productData);
-                this.loading.dismiss();
-                this.prod_detail = productData;
-                this.prod_image = productData['image'];
-
-                for (let index = 0; index < this.prod_image.length; index++) {
-
-                    this.offlineService.onReturnImagePathHandler('productImage', this.prod_image[index].image, this.prod_image[index].id).subscribe((imageResultData) => {
-
-                        console.log(imageResultData);
-
-                        const productIndex = this.prod_image.findIndex(row => row.id == imageResultData.recordId);
-
-                        console.log(this.prod_image);
-                        console.log('ProductIndex ' + productIndex);
-
-                        this.prod_image[productIndex].imageCompletePath = imageResultData['imagePath'];
-
-                        this.changeImage();
-                    });
-                }
-
-
-
-                console.log(this.prod_detail.image_profile);
-            });
-        }
-
-
-
-        getProductDetailWithLiveServer(id)
         {
             this.dbService.onPostRequestDataFromApi({'product_id' :id},'app_master/productDetail', this.dbService.rootUrl).subscribe( r =>
                 {
@@ -115,6 +82,17 @@ export class ProductSubdetailPage {
                     this.loading.dismiss();
                     this.prod_detail=r['product'];
                     this.prod_image=r['product']['image'];
+                    console.log(this.prod_image);
+                    if(this.prod_image && this.prod_image.length > 1) {
+
+                        this.prod_image=r['product']['image']=this.prod_image=r['product']['image'];
+    
+                    } else {
+    
+                        this.prod_image=r['product']['image']=this.prod_image=r['product']['image'][0];
+                    }
+                    console.log(this.prod_image);
+
                     this.changeImage();
                     this.api=this.dbService.upload_url+"app/uploads/";
                     console.log(this.prod_detail.image_profile);
@@ -133,6 +111,7 @@ export class ProductSubdetailPage {
 
                     if(this.prod_image.length > 1) {
 
+                        // http://phpstack-83335-1831788.cloudwaysapps.com/dd_api/app/uploads
                         this.imgData='http://app.gravitybath.com/dd_api/app/Http/Controllers/Admin/Master/appOfflineUploads/productImage/'+this.prod_image[1].image;
 
 

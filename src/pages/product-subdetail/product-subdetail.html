@@ -18,11 +18,11 @@
         <div class="product-pic">
             <img class="single-image" src="assets/imgs/no-thumbnail.jpg" *ngIf="!prod_image.length">
             <ng-container *ngIf="prod_image.length && prod_image.length==1">
-                <img *ngFor="let image of prod_image" class="single-image" src="{{image.imageCompletePath}}" >
+                <img *ngFor="let image of prod_image" class="single-image" src="{{image.image}}" >
             </ng-container>
             <ion-slides pager *ngIf="prod_image.length  && prod_image.length!=1">
                 <ion-slide  *ngFor="let image of prod_image">
-                    <img src="{{image.imageCompletePath}}">
+                    <img src="{{image.image}}">
                 </ion-slide>
             </ion-slides>
 
@@ -96,3 +96,9 @@
     </ng-container>
 
 </ion-footer>
+
+
+
+
+
+

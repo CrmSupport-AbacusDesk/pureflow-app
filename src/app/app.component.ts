@@ -85,7 +85,7 @@ export class MyApp {
 
                   statusBar.overlaysWebView(false);
                   splashScreen.hide();
-                  statusBar.backgroundColorByHexString('#8b1842');
+                  statusBar.backgroundColorByHexString('#204766');
 
                   this.onCheckAppCurrentVersionHandler();
 

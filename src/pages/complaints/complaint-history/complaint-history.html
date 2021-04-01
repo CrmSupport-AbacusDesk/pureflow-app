@@ -8,24 +8,24 @@
   <ion-navbar>
     <ion-title>Request History</ion-title>
   </ion-navbar>
-
-  <div *ngIf="complaint_count!='0'">
-      <div class="filter-select">
-        <ion-list>
-          <ion-item>
-            <ion-select  name="status" [(ngModel)]="filter.status"  (ngModelChange)="getComplaintHistory()" >
-              <ion-option value="">All</ion-option>
-              <ion-option value="Pending">Pending</ion-option>
-              <ion-option value="Closed">Closed</ion-option>
-              <ion-option value="Cancel">Cancel</ion-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
-        <div class="found">
-          <h3>{{complaint_list.length}}/{{complaint_count}}</h3>
-        </div>
+  
+  <ion-toolbar class="primary-bg"  *ngIf="complaint_count!='0'">
+    <div class="filter-select">
+      <ion-list>
+        <ion-item>
+          <ion-select  name="status" [(ngModel)]="filter.status"  (ngModelChange)="getComplaintHistory()" >
+            <ion-option value="">All</ion-option>
+            <ion-option value="Pending">Pending</ion-option>
+            <ion-option value="Closed">Closed</ion-option>
+            <ion-option value="Cancel">Cancel</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <div class="found">
+        <h3>{{complaint_list.length}}/{{complaint_count}}</h3>
       </div>
-  </div>
+    </div>
+  </ion-toolbar>
 </ion-header>
 
 

@@ -32,7 +32,7 @@ export class ContactPage {
     let destination = 28.66249 + ',' + 77.43777;
 
 
-      let label = encodeURI('Gravity Bath 28/3/2, Site IV, Industrial Area, Sahibabad, Ghaziabad, U.P.-201001, India');
+      let label = encodeURI('Plot No-4, Dhwani Industrial Park-4, Ardoi Survey No-583, Hadamtala Police Station Road, Near Toll Plaza, Gondal National Highway, Kotda Sangani, Rajkot, Gujarat, India - 360005');
 
       window.open('geo:0,0?q=' + destination + '(' + label + ')', '_system');
   }

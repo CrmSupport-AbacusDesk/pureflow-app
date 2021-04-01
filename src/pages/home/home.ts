@@ -413,14 +413,14 @@ export class HomePage {
         // }
         goOnProductPage()
         {
-            if(this.dbService.connection=='offline')
-            {
-                let toast = this.toastCtrl.create({
-                    message: 'You Are Offline .. You May Miss The Updates!',
-                    duration: 3000
-                });
-                toast.present();
-            }
+            // if(this.dbService.connection=='offline')
+            // {
+            //     let toast = this.toastCtrl.create({
+            //         message: 'You Are Offline .. You May Miss The Updates!',
+            //         duration: 3000
+            //     });
+            //     toast.present();
+            // }
 
             this.navCtrl.push(CategoryPage,{'mode':'home'});
         }

@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DbserviceProvider } from '../../providers/dbservice/dbservice';
 import { ProductSubdetailPage } from '../product-subdetail/product-subdetail';
-import { OfflineDbProvider } from '../../providers/offline-db/offline-db';
-import { SQLite } from '@ionic-native/sqlite';
 
 /**
  * Generated class for the NewarrivalsPage page.
@@ -27,39 +25,41 @@ export class NewarrivalsPage {
   total_count:any='';
   flag:any='';
   no_rec:any=false;
-  skelton:any={}
+  skelton:any={};
+  imageUrl:any;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public dbService:DbserviceProvider,
-              public offlineService: OfflineDbProvider,
-              private sqlite: SQLite) {
-
-        this.skelton = new Array(10);
+  constructor(public navCtrl: NavController, public navParams: NavParams ,public service:DbserviceProvider) {
+    this.skelton = new Array(10);
+    console.log(navParams);
+    console.log(navCtrl);
+    
+    
+    this.getProductList(this.cat_id,'');
+    console.log(service);
+    this.imageUrl = this.service.image_url;
+    // this.imageUrl = service['constant'].image_url+'product/';
   }
-
   ionViewDidLoad() {
-
-      this.getProductList(this.cat_id,'');
+    this.getProductList(this.cat_id,'');
+    
   }
-
   goOnProductSubDetailPage(id){
-      this.navCtrl.push(ProductSubdetailPage,{'id':id})
+    this.navCtrl.push(ProductSubdetailPage,{'id':id})
   }
-
-  doRefresh(refresher)
+  
+  doRefresh(refresher) 
   {
     console.log('Begin async operation', refresher);
     this.flag = '';
-    this.getProductList(this.cat_id,'');
+    this.getProductList(this.cat_id,''); 
     refresher.complete();
   }
   loadData(infiniteScroll)
   {
     console.log('loading');
-
+    
     this.filter.limit=this.prod_list.length;
-    this.dbService.onPostRequestDataFromApi({'filter' : this.filter,'type':'New Arivals'},'app_master/newArrivals', this.dbService.rootUrl).subscribe( r =>
+    this.service.post_rqst({'filter' : this.filter,'type':'New Arivals'},'app_master/newArrivals').subscribe( r =>
       {
         console.log(r);
         if(r['products']=='')
@@ -76,71 +76,30 @@ export class NewarrivalsPage {
         }
       });
     }
-
-    getProductList(id, search)  {
-
-          console.log(search);
-          this.filter.search = search;
-          this.filter.limit = 0;
-          this.filter.id = id;
-
-          console.log(this.filter);
-
-          const searchData = JSON.parse(JSON.stringify(this.filter));
-
-          if(searchData.search) {
-              searchData.search = '%'+ searchData.search +'%';
-          }
-
-          this.offlineService.onGetProductListHandler(searchData, 1).subscribe(productData => {
-
-                  console.log(productData);
-                  this.prod_list = productData['products'];
-
-                  for (let index = 0; index < this.prod_list.length; index++) {
-
-                        this.offlineService.onReturnImagePathHandler('productImage', this.prod_list[index].image, this.prod_list[index].id).subscribe((imageResultData) => {
-
-                              console.log(imageResultData);
-
-                              const productIndex = this.prod_list.findIndex(row => row.id == imageResultData.recordId);
-
-                              console.log(this.prod_list);
-                              console.log('ProductIndex ' + productIndex);
-
-                              this.prod_list[productIndex].imageCompletePath = imageResultData['imagePath'];
-                        });
-                  }
-
-                  if(this.prod_list.length == 0) {
-
-                      this.no_rec = true;
-
-                  } else {
-
-                      this.no_rec = false;
-                  }
-
-                  this.prod_count = productData['product_count']
-                  this.total_count = productData['product_count_all']
-                  console.log(this.prod_cat);
-          });
-    }
-
-
-  getProductListWithLiveServer(id,search)
+ 
+  getProductList(id,search)
   {
     console.log(search);
     this.filter.search=search;
     this.filter.limit = 0;
     this.filter.id=id;
     // this.presentLoading();
-    this.dbService.onPostRequestDataFromApi({'filter':this.filter},'app_master/newArrivals', this.dbService.rootUrl)
+    this.service.post_rqst({'filter':this.filter},'app_master/newArrivals')
     .subscribe( (r) =>
     {
       console.log(r);
       // this.loading.dismiss();
       this.prod_list=r['products'];
+
+    for (let index = 0; index < this.prod_list.length; index++) {
+      if(this.prod_list[index].image.search("base64")=='-1'){
+        this.prod_list[index].image = this.prod_list[index].image;
+    }else{
+      this.prod_list[index].image1 = this.prod_list[index].image;
+    }
+    }
+
+
       if(this.prod_list.length == 0)
       {
         this.no_rec = true;
@@ -153,6 +112,7 @@ export class NewarrivalsPage {
       this.prod_count=r['product_count']
       this.total_count=r['product_count_all']
       console.log(this.prod_cat);
+      console.log(this.prod_list);
     },(error: any) => {
       // this.loading.dismiss();
     })
