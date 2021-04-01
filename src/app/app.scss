@@ -45,7 +45,7 @@ ion-menu
             {
                 float: left;
                 margin: -1px 15px 0px 15px;
-                color: $theme5;
+                color: $primary;
                 font-size: 18px;
             }
             a
@@ -62,7 +62,7 @@ ion-menu
         {
             button
             {
-                background: $theme5 !important;
+                background: $primary !important;
                 height: 90px;
                 
                 .thumb
@@ -79,7 +79,7 @@ ion-menu
                     p
                     {
                         text-transform: uppercase;
-                        color: $theme5;
+                        color: $primary;
                         font-size: 22px;
                         @extend.semibold;
                     }

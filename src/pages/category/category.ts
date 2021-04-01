@@ -2,11 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Loading, LoadingController, App } from 'ionic-angular';
 import { ProductsPage } from '../products/products';
 import { DbserviceProvider } from '../../providers/dbservice/dbservice';
+import { errorHandler } from '@angular/platform-browser/src/browser';
 import { ProductDetailPage } from '../product-detail/product-detail';
 import { NewarrivalsPage } from '../newarrivals/newarrivals';
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
-import { OfflineDbProvider } from '../../providers/offline-db/offline-db';
-
 
 @IonicPage()
 @Component({
@@ -22,28 +20,20 @@ export class CategoryPage {
   category_count:any='';
   no_rec:any=false;
   skelton:any={}
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public dbService:DbserviceProvider,
-              public loadingCtrl:LoadingController,
-              private app:App,
-              public offlineService: OfflineDbProvider,
-              private sqlite: SQLite) {
-
-        this.skelton = new Array(10);
+  constructor(public navCtrl: NavController, public navParams: NavParams,public service:DbserviceProvider,public loadingCtrl:LoadingController,private app:App) {
+    this.skelton = new Array(10);
   }
-
+  
   ionViewDidLoad() {
-      console.log('ionViewDidLoad ProductsPage');
-      this.presentLoading();
+    console.log('ionViewDidLoad ProductsPage');
+    this.presentLoading();
   }
-
   ionViewWillEnter()
   {
-      this.getProductCategoryList();
+    this.getProductCategoryList();
   }
-
-  doRefresh(refresher)
+  
+  doRefresh(refresher) 
   {
     console.log('Begin async operation', refresher);
     this.getProductCategoryList();
@@ -55,46 +45,11 @@ export class CategoryPage {
     console.log('newArrivals')
     this.navCtrl.push(NewarrivalsPage);
   }
-
-
-  goOnCategoryListPage(name, image) {
-
-        this.presentLoading2();
-        this.filter.name = name;
-        this.offlineService.onProductSelectedImage = image;
-
-        this.offlineService.onReturnLocalDBHandler().subscribe((db) => {
-
-                this.offlineService.onGetCategoryRowsHandler(db, name).subscribe(categoryData => {
-
-                        this.loading.dismiss();
-
-                        const categoryLength = categoryData.rows.length;
-
-                        if(categoryLength == 1) {
-
-                              console.log('list length is one');
-
-                              const item = categoryData.rows.item(0);
-                              console.log(item);
-                              const categoryId = item.id;
-                              this.navCtrl.push(ProductDetailPage,{'id':categoryId, src: 'mainCategory'});
-
-                        } else {
-
-                              console.log('list length is two');
-                              this.navCtrl.push(ProductsPage,{'name':name})
-                        }
-                });
-        });
-  }
-
-
-  goOnCategoryListPageWithLiveServer(name){
+  goOnCategoryListPage(name){
     this.presentLoading2();
     this.filter.limit = 0;
     this.filter.name = name;
-    this.dbService.onPostRequestDataFromApi({'filter' : this.filter},'app_master/checkCategoryLength', this.dbService.rootUrl)
+    this.service.post_rqst({'filter' : this.filter},'app_master/checkCategoryLength')
     .subscribe((r)=>
     {
       console.log(r);
@@ -103,7 +58,7 @@ export class CategoryPage {
       {
         console.log('list length is one');
         this.navCtrl.push(ProductDetailPage,{'id':r['categories'][0].id})
-
+    
       }
       else{
         console.log('list length is two');
@@ -113,68 +68,54 @@ export class CategoryPage {
     },(error: any) => {
       this.loading.dismiss();
     })
+
   }
-
-
-  getProductCategoryList(name = '') {
-
-          this.filter.name = name;
-          if(name) {
-             this.filter.name = '%' +name + '%';
-          }
-          this.no_rec=false
-          this.offlineService.onGetMainCategoryListHandler(this.filter).subscribe(data => {
-
-                console.log(data);
-                this.prod_cat_list = [];
-
-                for (let i = 0; i < data.rows.length; i++) {
-
-                      let item = data.rows.item(i);
-                      this.prod_cat_list.push(item);
-                      console.log(item);
-                      console.log(item.id);
-                      this.offlineService.onReturnImagePathHandler('mainCategoryImage', item.image, item.id).subscribe((imageResultData) => {
-
-                            console.log(imageResultData);
-
-                            const categoryIndex = this.prod_cat_list.findIndex(row => row.id == imageResultData.recordId);
-
-                            console.log(this.prod_cat_list);
-                            console.log('categoryIndex ' + categoryIndex);
-
-                            this.prod_cat_list[categoryIndex].imageCompletePath = imageResultData['imagePath'];
-
-                      });
-                }
-
-                console.log(this.prod_cat_list);
-                if(!this.prod_cat_list.length)
-                {
-                     this.no_rec=true
-                }
-          });
+  getProductCategoryList()
+  {
+    console.log('catagorylist');
+    this.filter.limit = 0;
+    this.service.post_rqst({'filter' : this.filter},'app_master/parentCategory_List')
+    .subscribe((r) =>
+    {
+      // this.loading.dismiss();
+      console.log(r);
+      this.prod_cat_list=r['categories'];
+      if(this.prod_cat_list.length == 0)
+      {
+        this.no_rec = true;
+      }
+      else
+      {
+        this.no_rec = false;
+      }
+      for (let index = 0; index < this.prod_cat_list.length; index++) {
+       console.log(this.prod_cat_list[index])
+        this.getCategoryImages(this.prod_cat_list[index]['main_category'],index)
+      }
+    },(error: any) => {
+      // this.loading.dismiss();
+    }
+    );
+    
   }
-
   getCategoryImages(categoryId,index)
   {
-      console.log(categoryId)
-      //  this.prod_cat_list[index]['image'] = 'http://app.gravitybath.com/dd_api/app/uploads/newarrival.jpg';
-      this.dbService.onPostRequestDataFromApi({'categoryid':categoryId},'app_master/getcategoryImage', this.dbService.rootUrl).subscribe((res)=>
-      {
-        console.log(res)
-        console.log(res['categories'][0]['image'])
-        this.prod_cat_list[index]['image'] = res['categories'][0]['image']
-      })
+    console.log(categoryId)
+  //  this.prod_cat_list[index]['image'] = 'http://gravity.abacusdesk.com/dd_api/app/uploads/newarrival.jpg';
+  this.service.post_rqst({'categoryid':categoryId},'app_master/getcategoryImage').subscribe((res)=>
+  {
+    console.log(res)
+    // console.log(res['categories'][0]['image'])
+    this.prod_cat_list[index]['image'] = res['categories'][0]['image']
+  })
   }
-
-
+  
   loadData(infiniteScroll)
   {
     console.log('loading');
-
+    
     this.filter.limit=this.prod_cat_list.length;
-    this.dbService.onPostRequestDataFromApi({'filter' : this.filter},'app_master/parentCategoryList', this.dbService.rootUrl).subscribe( r =>
+    this.service.post_rqst({'filter' : this.filter},'app_master/parentCategoryList').subscribe( r =>
       {
         console.log(r);
         if(r['categories']=='')
@@ -195,51 +136,43 @@ export class CategoryPage {
         }
       });
     }
-    presentLoading()
+    presentLoading() 
     {
       // this.loading = this.loadingCtrl.create({
       //   content: "Please wait...",
-      //   dismissOnPageChange: true
+      //   dismissOnPageChange: false
       // });
       // this.loading.present();
     }
-    presentLoading2()
+    presentLoading2() 
     {
       this.loading = this.loadingCtrl.create({
         content: "",
-        dismissOnPageChange: true
+        dismissOnPageChange: false
       });
       this.loading.present();
     }
     ionViewDidLeave()
     {
       let nav = this.app.getActiveNav();
-      if(nav && nav.getActive())
+      if(nav && nav.getActive()) 
       {
         let activeView = nav.getActive().name;
         let previuosView = '';
         if(nav.getPrevious() && nav.getPrevious().name)
         {
           previuosView = nav.getPrevious().name;
-        }
-        console.log(previuosView);
-        console.log(activeView);
+        }  
+        console.log(previuosView); 
+        console.log(activeView);  
         console.log('its leaving');
-        if((activeView == 'HomePage' || activeView == 'GiftListPage' || activeView == 'TransactionPage' || activeView == 'ProfilePage' ||activeView =='MainHomePage') && (previuosView != 'HomePage' && previuosView != 'GiftListPage'  && previuosView != 'TransactionPage' && previuosView != 'ProfilePage' && previuosView != 'MainHomePage'))
+        if((activeView == 'HomePage' || activeView == 'GiftListPage' || activeView == 'TransactionPage' || activeView == 'ProfilePage' ||activeView =='MainHomePage') && (previuosView != 'HomePage' && previuosView != 'GiftListPage'  && previuosView != 'TransactionPage' && previuosView != 'ProfilePage' && previuosView != 'MainHomePage')) 
         {
-
+          
           console.log(previuosView);
           this.navCtrl.popToRoot();
         }
       }
     }
-    //master search start
-    goToProductsWithSearch(globalSearchData)
-    {
-      setTimeout(() => {
-
-        this.navCtrl.push(ProductDetailPage, {'id':'', categoryName:'', globalSearchData: globalSearchData, src: 'mainCategory'})
-      }, 500);
-    }
-
   }
+  
