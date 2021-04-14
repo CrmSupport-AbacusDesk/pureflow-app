@@ -41,7 +41,7 @@ export class DealerDealerListPage
 
     viewProfiePic(src)
     {
-      this.modalCtrl.create(ViewProfilePage, {"Image": "http://app.gravitybath.com/uploads/"+src}).present();
+      this.modalCtrl.create(ViewProfilePage, {"Image": "http://phpstack-83335-1831788.cloudwaysapps.com/uploads/"+src}).present();
     }
     dr_list:any=[];
     get_assign_dr()

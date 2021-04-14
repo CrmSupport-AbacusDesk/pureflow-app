@@ -66,7 +66,7 @@
 			</div>
 			
 			<div *ngIf="data.type == 'Plumber'">
-				<h3>Document Information</h3>
+				<h3 class="mt10">Document Information</h3>
 			</div>
 			
 			<div class="ragistration-fields" *ngIf="data.type == 'Plumber'">
@@ -110,8 +110,8 @@
 				</div>
 			</div>
 			
-			<h3 *ngIf="data.type == 'Customer'">Address information</h3>
-			<h3 *ngIf="data.type == 'Plumber'">working address</h3>
+			<h3 *ngIf="data.type == 'Customer'" class="mt10">Address information</h3>
+			<h3 *ngIf="data.type == 'Plumber'" class="mt10">working address</h3>
 			
 			
 			<div class="cs-form">
@@ -155,11 +155,9 @@
 				</ion-item>
 				
 			</div>
-			<h3 class="change-hadding" *ngIf="data.type == 'Plumber'">Permanent Address</h3>
+			<h3 *ngIf="data.type == 'Plumber'">Permanent Address</h3>
 			<div class="cs-form" *ngIf="data.type == 'Plumber'" >
 				<ion-list>
-					
-					
 					<ion-item class="cs-input" [ngClass]="{'error':(f.permanent_address && permanent_address?.invalid) || (f.submitted && !permanent_address.valid)}">
 						<ion-label floating>Street</ion-label>
 						<ion-input type="text"  type="text"  name="permanent_address"  #permanent_address="ngModel" [(ngModel)]="data.permanent_address" (ngModelChange)="data.permanent_address" required></ion-input>

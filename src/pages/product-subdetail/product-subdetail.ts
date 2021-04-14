@@ -56,7 +56,7 @@ export class ProductSubdetailPage {
             }
             console.log(this.user_data);
             this.presentLoading();
-            this.checkForExistInFavourite()
+            // this.checkForExistInFavourite()
 
         }
 
@@ -83,14 +83,14 @@ export class ProductSubdetailPage {
                     this.prod_detail=r['product'];
                     this.prod_image=r['product']['image'];
                     console.log(this.prod_image);
-                    if(this.prod_image && this.prod_image.length > 1) {
+                    // if(this.prod_image && this.prod_image.length > 1) {
 
-                        this.prod_image=r['product']['image']=this.prod_image=r['product']['image'];
+                    //     this.prod_image=r['product']['image']=this.prod_image=r['product']['image'];
     
-                    } else {
+                    // } else {
     
-                        this.prod_image=r['product']['image']=this.prod_image=r['product']['image'][0];
-                    }
+                    //     this.prod_image=r['product']['image']=this.prod_image=r['product']['image'][0];
+                    // }
                     console.log(this.prod_image);
 
                     this.changeImage();
@@ -112,12 +112,12 @@ export class ProductSubdetailPage {
                     if(this.prod_image.length > 1) {
 
                         // http://phpstack-83335-1831788.cloudwaysapps.com/dd_api/app/uploads
-                        this.imgData='http://app.gravitybath.com/dd_api/app/Http/Controllers/Admin/Master/appOfflineUploads/productImage/'+this.prod_image[1].image;
+                        this.imgData='http://phpstack-83335-1831788.cloudwaysapps.com/dd_api/app/Http/Controllers/Admin/Master/appOfflineUploads/productImage/'+this.prod_image[1].image;
 
 
                     } else {
 
-                        this.imgData='http://app.gravitybath.com/dd_api/app/Http/Controllers/Admin/Master/appOfflineUploads/productImage/'+this.prod_image[0].image;;
+                        this.imgData='http://phpstack-83335-1831788.cloudwaysapps.com/dd_api/app/Http/Controllers/Admin/Master/appOfflineUploads/productImage/'+this.prod_image[0].image;;
 
                     }
 

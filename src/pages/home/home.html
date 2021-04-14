@@ -1,3 +1,6 @@
+
+
+<!-- Consumer Home Start-->
 <ion-header  *ngIf="dbService.userStorageData.type == 'Customer'">
     <ion-toolbar class="secondary-bg">
         <img src="assets/imgs/logo.png" class="h40 ml16">
@@ -29,7 +32,7 @@
         -->
         <ion-slides pager autoplay=3000>
             <ion-slide *ngFor="let list of banner; let i=index">
-                <img src="http://app.gravitybath.com/dd_api/app/uploads/{{list.banner}}">
+                <img src="http://phpstack-83335-1831788.cloudwaysapps.com/dd_api/app/uploads/{{list.banner}}">
                 
             </ion-slide>
         </ion-slides>
@@ -120,14 +123,14 @@
                 <p> Nearest Plumbers </p>
             </div>
         </button>
-        <button (click)="goToFav()">
+        <!-- <button (click)="goToFav()">
             <div class="lf-btn">
                 <i class="material-icons">star</i>
             </div>
             <div class="rt-btn">
                 <p> Favourite Products </p>
             </div>
-        </button>
+        </button> -->
         
         <!-- <button *ngIf="complaint_exist" (click)="goOnOpenComplaintAdd()">
             <div class="lf-btn">
@@ -139,6 +142,12 @@
         </button> -->
     </div>
 </ion-content>
+
+<!-- Consumer Home End -->
+
+
+
+<!-- Plumber Home Start -->
 
 <ion-header *ngIf="dbService.userStorageData.type == 'Plumber'">
     <ion-toolbar class="secondary-bg">
@@ -238,61 +247,63 @@
         </div>
     </div>
     
-<!--     
-    <p *ngIf="offlineService.shouldStartSetUpProcess===true" style="text-align:center">Catalogue Offline Setup:</p>
-    <progress-bar [progress]="offlineService.imagesDownloadProgress" [color]="'#488aff'" *ngIf="offlineService.shouldStartSetUpProcess===true">
-    </progress-bar> -->
-    
-    <div class="pd-left-right16 mb16" (click)="goToVideosPage('Product Installation')">
-        <div class="go-btn artificial">
-            <div class="g-left">
-                <img src="assets/imgs/online-learning.svg">
-            </div>
-            <div class="g-right">
-                <div class="g-content">
-                    <p>Installation Videos</p>
+    <!--     
+        <p *ngIf="offlineService.shouldStartSetUpProcess===true" style="text-align:center">Catalogue Offline Setup:</p>
+        <progress-bar [progress]="offlineService.imagesDownloadProgress" [color]="'#488aff'" *ngIf="offlineService.shouldStartSetUpProcess===true">
+        </progress-bar> -->
+        
+        <div class="pd-left-right16 mb16" (click)="goToVideosPage('Product Installation')">
+            <div class="go-btn artificial">
+                <div class="g-left">
+                    <img src="assets/imgs/online-learning.svg">
                 </div>
-                <div class="g-count">
-                    <i class="material-icons">arrow_right_alt</i>
+                <div class="g-right">
+                    <div class="g-content">
+                        <p>Installation Videos</p>
+                    </div>
+                    <div class="g-count">
+                        <i class="material-icons">arrow_right_alt</i>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        
+        <div class="btns">
+            <button (click)="goToNewArrivals()">
+                <div class="lf-btn">
+                    <i class="material-icons">group_add</i>
+                </div>
+                <div class="rt-btn">
+                    <p>New Arrivals</p>
+                </div>
+            </button>
+            <!-- <button (click)="goToNearestDealers('Dealer')">
+                <div class="lf-btn">
+                    <i class="material-icons">engineering</i>
+                </div>
+                <div class="rt-btn">
+                    <p>Nearest Dealers</p>
+                </div>
+            </button> -->
+            <a href="tel:9582198301">
+                <div class="lf-btn">
+                    <i class="material-icons">support_agent</i>
+                </div>
+                <div class="rt-btn">
+                    <p>Customer Care</p>
+                </div>
+            </a>
+            <!-- <button  (click)="goToFav()">
+                <div class="lf-btn">
+                    <i class="material-icons">star</i>
+                </div>
+                <div class="rt-btn">
+                    <p> Favourite Products </p>
+                </div>
+            </button> -->
+        </div>
+        
+        <div class="h50">&nbsp;</div>
+    </ion-content>
+    <!-- Plumber Home End -->
     
-    <div class="btns">
-        <button (click)="goToNewArrivals()">
-            <div class="lf-btn">
-                <i class="material-icons">group_add</i>
-            </div>
-            <div class="rt-btn">
-                <p>New Arrivals</p>
-            </div>
-        </button>
-        <!-- <button (click)="goToNearestDealers('Dealer')">
-            <div class="lf-btn">
-                <i class="material-icons">engineering</i>
-            </div>
-            <div class="rt-btn">
-                <p>Nearest Dealers</p>
-            </div>
-        </button> -->
-        <a href="tel:9582198301">
-            <div class="lf-btn">
-                <i class="material-icons">support_agent</i>
-            </div>
-            <div class="rt-btn">
-                <p>Customer Care</p>
-            </div>
-        </a>
-        <button  (click)="goToFav()">
-            <div class="lf-btn">
-                <i class="material-icons">star</i>
-            </div>
-            <div class="rt-btn">
-                <p> Favourite Products </p>
-            </div>
-        </button>
-    </div>
-    
-    <div class="h50">&nbsp;</div>
-</ion-content>
