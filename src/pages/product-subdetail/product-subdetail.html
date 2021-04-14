@@ -15,31 +15,28 @@
             <h4>{{prod_detail.product_name}}</h4>
             <h3><span>₹​</span> {{prod_detail.price}}</h3>
         </div>
-        <div class="product-pic">
-            <img class="single-image" src="assets/imgs/no-thumbnail.jpg" *ngIf="!prod_image.length">
-            <ng-container *ngIf="prod_image.length && prod_image.length==1">
-                <img *ngFor="let image of prod_image" class="single-image" src="{{image.image}}" >
-            </ng-container>
-            <ion-slides pager *ngIf="prod_image.length  && prod_image.length!=1">
-                <ion-slide  *ngFor="let image of prod_image">
-                    <img src="{{image.image}}">
-                </ion-slide>
-            </ion-slides>
-
-            <ng-container *ngIf="prod_image.length!=0 && prod_image.length!=1">
+        <div class="product-pic"  *ngIf="!prod_image.length">
+            <img class="single-image" src="assets/imgs/no-thumbnail.jpg">
+            <!-- <ng-container *ngIf="prod_image.length!=0 && prod_image.length!=1">
                 <ul *ngFor="let image of prod_image; let i=index">
                     <li (click)="changeImage(i)">
                         <a><img src="{{image.imageCompletePath}}"></a>
                     </li>
                 </ul>
-            </ng-container>
+            </ng-container> -->
         </div>
-
+        
+        <ion-slides  pager="true">
+            <ion-slide *ngFor="let image of prod_image">
+                <img src="{{image.image}}">
+            </ion-slide>
+        </ion-slides>
+        
         <div class="product-descr">
             <h3>Description</h3>
             <p *ngIf="prod_detail.desc">{{prod_detail.desc}}</p>
         </div>
-
+        
         <div class="table-capsule">
             <div class="box1">
                 <h4>Product Name</h4>
@@ -57,7 +54,7 @@
                 <h4>PCS/SET</h4>
                 <p>{{prod_detail.pcs?prod_detail.pcs:'NA'}}</p>
             </div>
-
+            
             <div class="box1">
                 <h4>Box Packing</h4>
                 <p>{{prod_detail.std_packing?prod_detail.std_packing :'NA'}}</p>
@@ -71,7 +68,7 @@
                 <p>{{prod_detail.video_link?prod_detail.video_link:'NA'}}</p>
             </div> -->
         </div>
-
+        
         <!-- <div class="enquiry-btn" *ngIf="dbService.userStorageData?.type == 'Customer' && userType=='CMS'">
             <button ion-button color="danger" class="green-color" icon-start (click)="goToEnquiryPage()">
                 <p> ENQUIRY NOW</p>
@@ -80,7 +77,7 @@
     </div>
 </ion-content>
 
-<ion-footer style="padding: 14px 16px;" >
+<!-- <ion-footer style="padding: 14px 16px;" >
     <ng-container>
         <div class="add-favroute" [ngClass]="{'remove': existInFavourite}"  >
             <div class="iner-fav">
@@ -92,10 +89,10 @@
                 </button>
             </div>
         </div>
-
+        
     </ng-container>
-
-</ion-footer>
+    
+</ion-footer> -->
 
 
 

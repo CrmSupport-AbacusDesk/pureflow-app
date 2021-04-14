@@ -10,7 +10,7 @@
         <div class="main-field">
             <h3>Basic information</h3>
             
-            <div class="cs-form">
+            <div class="cs-form mb10">
                 <ion-list>
                     <ion-item class="cs-input" [ngClass]="{'error':f.submitted && first_name?.invalid}">
                         <ion-label floating>Name <span>*</span></ion-label>
@@ -28,13 +28,13 @@
                             <ion-datetime displayFormat="DD/MM/YYYY" max={{today_date}} type="text"  name="dob" #dob="ngModel" [(ngModel)]="data.dob" >
                             </ion-datetime>
                         </ion-item>
-                        <ion-item class="cs-input" [ngClass]="{'error':f.submitted && dist?.invalid}">
+                        <!-- <ion-item class="cs-input" [ngClass]="{'error':f.submitted && dist?.invalid}">
                             <ion-label floating>Distributor / Direct Dealer</ion-label>
                             <ion-select name="dist" [(ngModel)]="data.dist" #dist="ngModel" required>
                                 <ion-option *ngFor="let row of dr_list" value="{{row.id}}">{{row.company_name}}</ion-option>
                             </ion-select>
                             <ion-input type="text" name="dist" #dist="ngModel" [(ngModel)]="data.dist"></ion-input>
-                        </ion-item>
+                        </ion-item> -->
                         
                         <ion-item class="cs-input" >
                             <ion-label floating>Dealer Name</ion-label>
@@ -55,7 +55,7 @@
                 </ion-list>
             </div>
             
-            <h3 class="heading-line">Address information</h3>
+            <h3 class="mt10">Address information</h3>
             
             <div class="cs-form">
                 <ion-list>

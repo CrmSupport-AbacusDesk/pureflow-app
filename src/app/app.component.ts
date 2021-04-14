@@ -182,16 +182,14 @@ export class MyApp {
                                           }, 2500);
 
                                     } else {
-
-                                        console.log('hello1');
                                         this.platform.exitApp();
-
                                     }
 
-                               } else {
+                               } 
+                          //      else {
 
-                                     this.dbService.onShowMessageAlertHandler('Offline SetUp InProcess, Please Wait...');
-                               }
+                          //       this.dbService.onShowMessageAlertHandler('Offline SetUp InProcess, Please Wait...');
+                          // }
 
                         } else if (activeView == 'DealerAddorderPage') {
 

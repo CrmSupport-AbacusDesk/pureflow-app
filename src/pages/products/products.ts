@@ -22,8 +22,6 @@ export class ProductsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public service:DbserviceProvider,public loadingCtrl:LoadingController,private app:App ) {
     this.imageUrl = this.service.image_url;
-
-    console.log(this.imageUrl);
     this.skelton = new Array(10);
 
   }
@@ -54,7 +52,6 @@ export class ProductsPage {
     this.service.post_rqst({'filter' : this.filter},'app_master/categoryList')
     .subscribe((r)=>
     {
-
       // this.loading.dismiss();
       this.prod_cat_list=r['categories'];
       if(this.prod_cat_list.length == 0)
@@ -65,24 +62,30 @@ export class ProductsPage {
       {
         this.no_rec = false;
       }
-      for (let index = 0; index < this.prod_cat_list.length; index++) {
+      // for (let index = 0; index < this.prod_cat_list.length; index++) {
+        
+      //   this.getImages(this.prod_cat_list[index]['id'],index)
 
-        this.getImages(this.prod_cat_list[index]['id'],index)
-
-      }
+        
+      // }
+      // if(this.prod_cat_list.length == 1)
+      // {
+      //   console.log('list length is one');
+      //   console.log(this.prod_cat_list[0].id);
+      //   this.goOnProductDetailPage(this.prod_cat_list[0].id)
+      // }
     },(error: any) => {
+      // this.loading.dismiss();
     })
   }
-  getImages(category_id,index)
-  {
-    this.service.post_rqst({'category_id' : category_id},'app_master/getSubCatImages').subscribe((res)=>
-    {
-     
-      this.prod_cat_list[index]['image']=res['image'];
-      console.log(this.prod_cat_list[index]['image']);
+  // getImages(category_id,index)
+  // {
+  //   this.service.post_rqst({'category_id' : category_id},'app_master/getSubCatImages').subscribe((res)=>
+  //   {
       
-    })
-  }
+  //     this.prod_cat_list[index]['image']=res['image'];
+  //   })
+  // }
   loadData(infiniteScroll)
   {
     console.log('loading');
@@ -103,7 +106,7 @@ export class ProductsPage {
             console.log(this.prod_cat_list.length +' '+ r['categories'].length)
             for (let index =(this.prod_cat_list.length - r['categories'].length); index < this.prod_cat_list.length; index++) {
               console.log(index)
-              this.getImages(this.prod_cat_list[index]['id'],index)
+              // this.getImages(this.prod_cat_list[index]['id'],index)
       
               
             }

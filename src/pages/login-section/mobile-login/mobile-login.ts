@@ -36,7 +36,9 @@ export class MobileLoginPage {
 
         this.dbService.onShowLoadingHandler();
 
-        if(this.data.mobile_no == '9896356568') {
+        
+
+        if(this.data.mobile_no == '9896356568' || this.data.mobile_no == '7070183423' ||  this.data.mobile_no == '9560533107') {
 
             this.data.otp = '123456';
 

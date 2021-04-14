@@ -14,6 +14,8 @@ import { TabsPage } from '../../tabs/tabs';
 })
 export class PointListPage {
   coupon_list:any=[];
+  offerData:any = [];
+  offerId:any ={};
   karigar_point:any={};
   karigar_detail:any={};
   loading:Loading;
@@ -76,8 +78,17 @@ export class PointListPage {
         this.loading.dismiss();
         console.log( this.loading);
 
+        this.offerData=r['offer'];
+        console.log('====================================');
+        console.log(this.offerData);
+        console.log('====================================');
+        for (let index = 0; index < this.offerData.length; index++) {
+          this.offerId = this.offerData[index].id;
+        }
+    
         this.coupon_list=r['coupon'];
         this.karigar_point=r['karigar'];
+
       });
     }
     conInt(val)
@@ -173,7 +184,7 @@ export class PointListPage {
         if(this.filter.active_tab == "offer_list")
         {
             // this.getTransactionDetail();
-             this.navCtrl.push(OffersPage,{'id':'3'});
+             this.navCtrl.push(OffersPage,{'id':this.offerId});
 
         }
     }

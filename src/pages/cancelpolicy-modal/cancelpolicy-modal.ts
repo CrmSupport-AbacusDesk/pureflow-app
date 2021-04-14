@@ -66,7 +66,7 @@ export class CancelpolicyModalPage {
     getOtpDetail()
     {
         console.log('otp');
-        this.dbService.onPostRequestDataFromApi({'karigar_id':this.dbService.userStorageData.id,'gift_id':this.gift_id},'app_karigar/sendOtp', this.dbService.rootUrl)
+        this.dbService.onPostRequestDataFromApi({'karigar_id':this.dbService.userStorageData.id, 'mobile_no':this.dbService.userStorageData.mobile_no, 'gift_id':this.gift_id},'app_karigar/sendOtp', this.dbService.rootUrl)
         .subscribe((r)=>
         {
             console.log(r);

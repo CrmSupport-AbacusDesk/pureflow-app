@@ -457,7 +457,7 @@ image:any='';
 
 
 
-      fileTransfer.upload(this.videoId,"http://app.gravitybath.com/dd_api/app/uploadVideos.php", options1)
+      fileTransfer.upload(this.videoId,"http://phpstack-83335-1831788.cloudwaysapps.com/dd_api/app/uploadVideos.php", options1)
       .then((data :any) => {
 
         var d = JSON.parse(data.response)

@@ -122,16 +122,12 @@ export class ProfilePage {
         this.karigar_detail=r['karigar'];
         console.log(this.karigar_detail.profile);
         // this.karigar_detail.profile =  this.sanitizer.bypassSecurityTrustResourceUrl( this.dbService.upload_url+'app/uploads/'+this.karigar_detail.profile  );
-        this.karigar_detail.document_image =  this.sanitizer.bypassSecurityTrustResourceUrl( this.dbService.upload_url+'app/uploads/'+this.karigar_detail.document_image  );
+        this.karigar_detail.document_image =  this.sanitizer.bypassSecurityTrustResourceUrl(this.karigar_detail.document_image  );
         console.log( this.karigar_detail.document_image);
-
-
         // this.karigar_detail.service_wallet_balance_points = parseInt(this.karigar_detail.service_wallet_balance_points)
-        this.karigar_detail.totalpoints = parseInt(this.karigar_detail.balance_point)+ parseInt(this.karigar_detail.service_wallet_balance_points)
+        this.karigar_detail.totalpoints = parseInt(this.karigar_detail.balance_point)+ parseInt(this.karigar_detail.service_wallet_balance_points);
         this.last_point = r['last_point'];
         this.today_point = r['today_point'];
-
-
       });
     }
 

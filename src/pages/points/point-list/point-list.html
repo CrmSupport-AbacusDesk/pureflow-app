@@ -51,7 +51,7 @@
             </li>
         </ul>
     </div>
-    <div *ngIf="filter.active_tab == 'points' &&  coupon_list.length" class="data-not">
+    <div *ngIf="filter.active_tab == 'points' &&  !coupon_list.length" class="data-not">
         <img src="assets/imgs/data-not-found.png">
     </div>
     <div *ngIf="filter.active_tab == 'points' && coupon_list.length" class="main-div">
