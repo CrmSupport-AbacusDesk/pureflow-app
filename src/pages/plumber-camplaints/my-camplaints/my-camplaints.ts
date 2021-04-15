@@ -82,7 +82,7 @@ export class MyCamplaintsPage {
     console.log('loading');
 
     this.filter.limit=this.complaint_list.length;
-    this.dbService.onPostRequestDataFromApi({'plumber_id':this.dbService.userStorageData.id,'filter' : this.filter},'app_karigar/getPlumberComplaintList', this.dbService.rootUrl).subscribe( r =>
+    this.dbService.onPostRequestDataFromApi({'plumber_id':this.dbService.userStorageData.id,'filter' : this.filter, type:this.data.type},'app_karigar/getPlumberComplaintList', this.dbService.rootUrl).subscribe( r =>
       {
         console.log(r);
         if(r['plumberComplaintList']=='')

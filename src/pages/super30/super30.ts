@@ -62,7 +62,7 @@ export class Super30Page {
         console.log(response);
         this.loading.dismiss();
         this.plumber_list = response['karigars'];
-        
+        console.log(this.plumber_list);
         var index = response['karigarData'].findIndex(row=>row.id==this.dbService.userStorageData.id);
         console.log(index);
         if(index!=-1)
