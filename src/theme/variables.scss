@@ -5027,23 +5027,7 @@ a {
     }
 }
 
-#tab-t0-5,
-#tab-t0-6,
-#tab-t0-7,
-#tab-t0-8,
-#tab-t0-9,
-#tab-t0-10,
-#tab-t0-11,
-#tab-t1-4,
-#tab-t1-5,
-#tab-t1-6,
-#tab-t1-7,
-#tab-t1-8,
-#tab-t1-9,
-#tab-t1-10,
-#tab-t1-11 {
-    display: none;
-}
+
 
 .cs-hedaer2 {
     width: 100%;
@@ -6979,6 +6963,10 @@ ion-tabs {
             color: #2c5e7f;
         }
     }
+}
+
+#tab-t0-5, #tab-t0-6, #tab-t0-7, #tab-t0-8, #tab-t0-9, #tab-t0-10, #tab-t0-11, #tab-t1-4, #tab-t1-5, #tab-t1-6, #tab-t1-7, #tab-t1-8, #tab-t1-9, #tab-t1-10, #tab-t1-11{
+    display: block !important;
 }
 
 .csslecttype {
