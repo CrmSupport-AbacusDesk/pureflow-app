@@ -80,12 +80,12 @@ export class ComplaintHistoryPage {
       });
     }
 
-    loadData(infiniteScroll)
+    loadData(infiniteScroll, type)
     {
       console.log('loading');
 
       this.filter.limit=this.complaint_list.length;
-      this.dbService.onPostRequestDataFromApi({'customer_id':this.dbService.userStorageData.id ,'filter' : this.filter},'app_karigar/getComplaintList', this.dbService.rootUrl).subscribe( r =>
+      this.dbService.onPostRequestDataFromApi({'customer_id':this.dbService.userStorageData.id ,'filter' : this.filter,type:{type:type}},'app_karigar/getComplaintList', this.dbService.rootUrl).subscribe( r =>
         {
           console.log(r);
           if(r['complaintList']=='')
