@@ -23,6 +23,7 @@ export class ProductDetailPage {
   no_rec:any=false;
   skelton:any={}
   imageUrl:any;
+  prd_img_url="http://phpstack-83335-1831788.cloudwaysapps.com//dd_api/app/Http/Controllers/Admin/Master/appOfflineUploads/productImage/"
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public service:DbserviceProvider,public loadingCtrl:LoadingController, private app:App) {
     // this.presentLoading();
@@ -63,6 +64,11 @@ export class ProductDetailPage {
       console.log(r);
       // this.loading.dismiss();
       this.prod_list=r['products'];
+      console.log("==========================");
+      
+      console.log(this.prod_list)
+      console.log("==========================");
+
 if(this.prod_list.length==r.product_count_all){
   this.flag=1;
 }

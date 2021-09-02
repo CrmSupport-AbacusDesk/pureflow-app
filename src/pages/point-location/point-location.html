@@ -19,27 +19,28 @@
   <div (click)=" loadMap()" class="map-location"><i class="material-icons">my_location</i></div>
 </ion-content>
 
-
-<div class="point-loc" *ngIf="dbService.userStorageData?.type == 'Customer'">
-  <div class="point-add" *ngIf="old_location!=''">
-    <p>Last Location</p>
-    <textarea [(ngModel)]="old_location"readonly></textarea>
+<ion-footer padding>
+  <div class="point-loc" *ngIf="dbService.userStorageData?.type == 'Customer'">
+    <div class="point-add" *ngIf="old_location!=''">
+      <p>Last Location</p>
+      <textarea [(ngModel)]="old_location"readonly></textarea>
+    </div>
+  
+  
+    <div class="enquiry-btn loction-btn" >
+      <button  (click)=" loadMap()" ion-button color="danger" class="green-color h35" (click)="add_loc()">
+        <p>Add location</p>
+      </button>
+    </div>
   </div>
-
-  <!-- <div class="input-submit padding-16" >
-    <a type="button">ADD LOCATION</a>
-  </div> -->
-
-  <div class="enquiry-btn loction-btn" >
-    <button  (click)=" loadMap()" ion-button color="danger" class="green-color" (click)="add_loc()">
-      <p>Add location</p>
-    </button>
+  <div class="point-loc" *ngIf="isDealer == true">
+    <div class="enquiry-btn loction-btn">
+      <button ion-button color="danger" class="green-color h35" (click)=" loadMap()">
+        <p>Add location</p>
+      </button>
+    </div>
   </div>
-</div>
-<div class="point-loc" *ngIf="isDealer == true">
-  <div class="enquiry-btn loction-btn" >
-    <button  (click)=" loadMap()" ion-button color="danger" class="green-color" (click)="addDealerLocation()">
-      <p>Add location</p>
-    </button>
-  </div>
-</div>
+</ion-footer>
+
+
+

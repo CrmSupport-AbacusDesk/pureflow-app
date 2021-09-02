@@ -223,7 +223,8 @@
             <div class="heading">
                 <h4>Our Products</h4>
             </div>
-            <span>{{product_count ? product_count : 0}}</span>
+            <span *ngIf="this.product_count == null">0</span>
+            <span *ngIf="this.product_count != null">{{this.product_count}}</span>
         </div>
         <div class="main-box" (click)="goOnMyCamplaintsPage('Service')">
             <div class="product-box">

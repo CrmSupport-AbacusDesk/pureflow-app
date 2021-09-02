@@ -32,6 +32,7 @@ export class Super30Page {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Super30Page');
+    this.presentLoading();
     this.getList();
 
   }
@@ -55,8 +56,6 @@ export class Super30Page {
   getList()
   {
     this.filter.limit = 0;
-
-    this.presentLoading();
     this.dbService.onPostRequestDataFromApi( {'filter':this.filter},'app_karigar/getSuperPlumberList', this.dbService.rootUrl).subscribe(response =>
       {
         console.log(response);

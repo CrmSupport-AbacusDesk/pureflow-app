@@ -1,13 +1,13 @@
 
 <ion-header >
     <ion-navbar>
-        <ion-title>Main Category</ion-title>
+        <ion-title>Category</ion-title>
     </ion-navbar>
     <ion-toolbar class="primary-bg">
         <div class="search add-search">
             <div class="filter">
                 <!-- getProductCategoryList(filter.category_name);getProductSubCategoryList() -->
-                <ion-searchbar type='text' name='category_name' [(ngModel)]="filter.category_name" (keyup.enter)="goToProductsWithSearch(filter.category_name)"></ion-searchbar>
+                <ion-searchbar type='text' name='category_name' [(ngModel)]="filter.category_name" (keyup.enter)="getProductCategoryList(filter.category_name)"></ion-searchbar>
             </div>
         </div>
     </ion-toolbar>
@@ -41,7 +41,7 @@
             </button> 
             <button  *ngIf="list.image" ion-item (click)="goOnCategoryListPage(list.main_category)">
                 <div class="image-manage">
-                    <img  src="{{list.image}}">
+                    <img  src="{{prd_img_url + list.actual_image_name}}">
                 </div>
                 <p>{{list.main_category}}</p>
             </button>  

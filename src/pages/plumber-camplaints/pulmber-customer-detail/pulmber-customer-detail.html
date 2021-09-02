@@ -26,7 +26,7 @@
       <a *ngIf="plumber_detail.cust_long!='' && plumber_detail.complaintStatus=='Pending'">
         <h3>Address</h3>
         <!-- <i  class="material-icons">near_me</i> -->
-        <button (click)="getDirection()">Get Route</button>
+        <!-- <button (click)="getDirection()">Get Route</button> -->
       </a>
       <p class="pb0">{{plumber_detail.address | titlecase}} {{plumber_detail.city | titlecase}}{{plumber_detail.district | titlecase}}{{plumber_detail.state | titlecase}}{{plumber_detail.pincode}}</p>
     </div>

@@ -28,16 +28,17 @@
         
         <ion-slides  pager="true">
             <ion-slide *ngFor="let image of prod_image">
-                <img src="{{image.image}}">
+                <img src="{{prd_img_url + image.actual_image_name}}">
             </ion-slide>
         </ion-slides>
         
-        <div class="product-descr">
-            <h3>Description</h3>
-            <p *ngIf="prod_detail.desc">{{prod_detail.desc}}</p>
-        </div>
         
-        <div class="table-capsule">
+        
+        <div class="table-capsule mt10">
+            <div class="box1">
+                <h4>Category</h4>
+                <p>{{prod_detail.main_category?prod_detail.main_category:'NA'}}</p>
+            </div>
             <div class="box1">
                 <h4>Product Name</h4>
                 <p>{{prod_detail.product_name?prod_detail.product_name:'NA'}}</p>
@@ -47,26 +48,31 @@
                 <p>{{prod_detail.material_code?prod_detail.material_code:'NA'}}</p>
             </div>
             <div class="box1">
-                <h4>HSN Code</h4>
-                <p>{{prod_detail.hsn?prod_detail.hsn:'NA'}}</p>
+                <h4>Price</h4>
+                <p>&#x20B9; {{prod_detail.price?prod_detail.price:'NA'}}</p>
             </div>
-            <div class="box1">
+            <!-- <div class="box1">
                 <h4>PCS/SET</h4>
                 <p>{{prod_detail.pcs?prod_detail.pcs:'NA'}}</p>
-            </div>
+            </div> -->
             
-            <div class="box1">
+            <!-- <div class="box1">
                 <h4>Box Packing</h4>
                 <p>{{prod_detail.std_packing?prod_detail.std_packing :'NA'}}</p>
             </div>
             <div class="box1">
                 <h4>Carton Packing</h4>
                 <p>{{prod_detail.cartoon_packing?prod_detail.cartoon_packing :'NA'}}</p>
-            </div>
+            </div> -->
             <!-- <div *ngIf="prod_detail.video_link" class="link" (click)="openLink(prod_detail.video_link)">
                 <h4>Video Link</h4>
                 <p>{{prod_detail.video_link?prod_detail.video_link:'NA'}}</p>
             </div> -->
+        </div>
+
+        <div class="product-descr" *ngIf="prod_detail.desc">
+            <h3>Description</h3>
+            <p >{{prod_detail.desc}}</p>
         </div>
         
         <!-- <div class="enquiry-btn" *ngIf="dbService.userStorageData?.type == 'Customer' && userType=='CMS'">
