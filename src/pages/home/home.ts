@@ -52,7 +52,7 @@ export class HomePage {
     complaint_count:any='';
     plumber_complaint:any='';
     plumber_installation:any='';
-
+    complaint_count_services:any;
 
     constructor(public toastCtrl: ToastController,
                 public socialSharing:SocialSharing ,
@@ -212,7 +212,7 @@ export class HomePage {
         console.log(this.prodCount);
     }
 
-
+   
     get_countWithLiveServer()
     {
         this.dbService.onPostRequestDataFromApi({'customer_id':this.dbService.userStorageData.id},'app_master/product_catalogue_count', this.dbService.rootUrl)
@@ -221,6 +221,7 @@ export class HomePage {
             console.log(result);
             // this.product_count = result['master_product'];
             this.complaint_count = result['complaint'];
+            this.complaint_count_services = result['complaint'];
             this.installation_count = result['installation'];
             this.complaint_exist = result['complaint_exist'];
             this.open_complaint = result['open_complaint'];
