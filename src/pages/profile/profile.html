@@ -58,7 +58,7 @@
 					</div>
 					<div class="ratings"  *ngIf="dbService.userStorageData.type == 'Plumber'">
 						<h3>Dealer Information</h3>
-						<p> {{karigar_detail.dealer_contact_person | titlecase}} ({{karigar_detail.dealer_mobile}})</p>
+						<p> {{karigar_detail.dealer_contact_person | titlecase}} {{karigar_detail.dealer_mobile}}</p>
 					</div>
 					<!-- <div class="ratings"  *ngIf="dbService.userStorageData.type == 'Plumber'">
 						<h3>Service Wallet Balance</h3>
@@ -169,27 +169,22 @@
 					</div>
 				</div>
 				
-				<div class="point-loc remove-pointlo">
-					<div class="point-add" *ngIf="karigar_detail.cust_geo_address">
-						<p>Geo Location</p>
-						<textarea [(ngModel)]="karigar_detail.cust_geo_address" readonly></textarea>
-					</div>
-					
-					<div class="enquiry-btn loction-btn mt16 mb16">
-						<button ion-button color="danger" class="green-color h35" (click)="pointLocation()">
-							<p>{{karigar_detail.cust_geo_address?'Update location':'Add location' }}</p>
-						</button>
-					</div>
-				</div>
-				
 			</div>
 			
 			
-			<!-- <div class="ponit-location" (click)='pointLocation()'>
-				<a><i class="material-icons">room</i></a>
-			</div> -->
-			
-			
-			
 		</ion-content>
-		
+		<ion-footer padding *ngIf="dbService.userStorageData.type == 'Customer'">
+			<div class="point-loc remove-pointlo">
+				<div class="point-add" *ngIf="karigar_detail.cust_geo_address">
+					<p>Geo Location</p>
+					<textarea [(ngModel)]="karigar_detail.cust_geo_address" readonly></textarea>
+				</div>
+				
+				<div class="enquiry-btn loction-btn">
+					<button ion-button color="danger" class="green-color h35" (click)="pointLocation()">
+						<p>{{karigar_detail.cust_geo_address?'Update location':'Add location' }}</p>
+					</button>
+				</div>
+			</div>
+			
+		</ion-footer>

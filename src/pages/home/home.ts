@@ -165,6 +165,13 @@ export class HomePage {
         {
             console.log(r);
             this.loading.dismiss();
+            this.product_count = r.product_count
+            console.log("============================");
+            
+           console.log( r.product_count);
+           console.log("============================");
+
+           
             this.karigar_detail=r['karigar'];
             this.last_point=r['last_point'];
             this.today_point=r['today_point'];

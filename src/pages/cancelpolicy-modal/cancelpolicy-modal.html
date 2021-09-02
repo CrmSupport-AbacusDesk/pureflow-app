@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content padding class="popup-modal">
-    <div class="dflex1">
+    <div class="center-modal">
         <div class="modal-content">
             <form #f="ngForm" (ngSubmit)="f.form.valid && submit()">
                 <h1>PureFlow Indian</h1>
@@ -31,7 +31,7 @@
                                         <ion-item class="cs-select">
                                             <ion-label>Select type</ion-label>
                                             <!-- <ion-select disabled placeholder="Select Type" name="type"> -->
-                                            <ion-select placeholder="Select Type" name="bank_detail_type" #bankDetails="ngModel" [(ngModel)]="data.bank_detail_type" required>
+                                            <ion-select placeholder="Select Type" name="bank_detail_type" #bank_detail_type="ngModel" [(ngModel)]="data.bank_detail_type" (ngModelChange)="resetInput(data.bank_detail_type)" required>
                                                 <ion-option value="Bank Transfer">Bank Transfer</ion-option>
                                                 <ion-option value="Paytm Transfer">Paytm Transfer</ion-option>
                                             </ion-select>
@@ -62,8 +62,8 @@
                 </div>
 
                 <div class="btn-align">
-                    <button (click)="dismiss()">No</button>
-                    <button [disabled]="!data.check ||!data.otp ||!otp_value || !data.bank_detail_type ">Yes</button>
+                    <a (click)="dismiss()">No</a>
+                    <button (click)="submit()" [disabled]="!data.check ||!data.otp ||!otp_value || !data.bank_detail_type ">Yes</button>
                 </div>
             </form>
         </div>

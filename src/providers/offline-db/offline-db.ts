@@ -215,33 +215,34 @@ export class OfflineDbProvider {
 
                                  this.onInitializeLocalDBUpdationHandler(db);
 
-                          } else {
+                          } 
+                        //   else {
 
-                                this.shouldStartSetUpProcess = true;
+                        //         this.shouldStartSetUpProcess = true;
 
-                                this.storage.set('offlineDBLastInfo', {});
+                        //         this.storage.set('offlineDBLastInfo', {});
 
-                                userLocalDBSetUpMsg = 'Account SetUp Required, It will take little time!';
+                        //         userLocalDBSetUpMsg = 'Account SetUp Required, It will take little time!';
 
-                                let alert = this.alertCtrl.create({
-                                    title: 'Confirmation',
-                                    message: userLocalDBSetUpMsg,
-                                    buttons: [
-                                    {
-                                      text: 'Ok',
-                                        handler: () => {
+                        //         let alert = this.alertCtrl.create({
+                        //             title: 'Confirmation',
+                        //             message: userLocalDBSetUpMsg,
+                        //             buttons: [
+                        //             {
+                        //               text: 'Ok',
+                        //                 handler: () => {
 
-                                            setTimeout(() => {
+                        //                     setTimeout(() => {
 
-                                                 this.importSQLFile();
+                        //                          this.importSQLFile();
 
-                                            }, 100);
-                                        }
-                                    }]
-                                });
+                        //                     }, 100);
+                        //                 }
+                        //             }]
+                        //         });
 
-                                alert.present();
-                          }
+                        //         alert.present();
+                        //   }
                     })
             }
 

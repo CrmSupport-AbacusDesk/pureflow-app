@@ -59,6 +59,7 @@ export class ProductSubdetailPage {
             // this.checkForExistInFavourite()
 
         }
+        prd_img_url="http://phpstack-83335-1831788.cloudwaysapps.com//dd_api/app/Http/Controllers/Admin/Master/appOfflineUploads/productImage/"
 
         ionViewDidLoad() {
             console.log('ionViewDidLoad ProductSubdetailPage');

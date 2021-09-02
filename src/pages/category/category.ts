@@ -20,6 +20,8 @@ export class CategoryPage {
   category_count:any='';
   no_rec:any=false;
   skelton:any={}
+  prd_img_url="http://phpstack-83335-1831788.cloudwaysapps.com//dd_api/app/Http/Controllers/Admin/Master/appOfflineUploads/imageCatalogue/"
+
   constructor(public navCtrl: NavController, public navParams: NavParams,public service:DbserviceProvider,public loadingCtrl:LoadingController,private app:App) {
     this.skelton = new Array(10);
   }
