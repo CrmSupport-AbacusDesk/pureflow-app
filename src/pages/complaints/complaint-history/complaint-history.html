@@ -9,7 +9,7 @@
     <ion-title>Request History</ion-title>
   </ion-navbar>
   
-  <ion-toolbar class="primary-bg"  *ngIf="complaint_count!='0'">
+  <ion-toolbar class="primary-bg"  *ngIf="complaint_list!='0'">
     <div class="filter-select">
       <ion-list>
         <ion-item>
@@ -93,7 +93,7 @@
   
   <!-- infinite scroll -->
   
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)"  *ngIf="flag!=1">
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event, data.type)"  *ngIf="flag!=1">
     <ion-infinite-scroll-content
     loadingSpinner="bubbles"
     loadingText="Loading more data...">

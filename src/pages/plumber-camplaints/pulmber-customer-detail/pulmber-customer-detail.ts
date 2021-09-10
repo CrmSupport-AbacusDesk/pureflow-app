@@ -75,11 +75,15 @@ export class PulmberCustomerDetailPage {
         // console.log(this.complaint_list);
 
         // this.showSuccess("Profile Photo Updated")
-
-        for (let i = 0; i < this.complaint_media.length; i++) {
-          this.complaint_media[i].file_name =  this.sanitizer.bypassSecurityTrustResourceUrl( this.dbService.upload_url+'app/uploads/'+this.complaint_media[i].file_name  );
-
-      }
+        if(this.complaint_media[0].type == "video"){
+          for (let i = 0; i < this.complaint_media.length; i++) {   
+            this.complaint_media[i].file_name =  this.sanitizer.bypassSecurityTrustResourceUrl( this.dbService.upload_url+'app/uploads/'+this.complaint_media[i].file_name  );
+           }
+        }else{
+          for (let i = 0; i < this.complaint_media.length; i++) {   
+            this.complaint_media[i].file_name =  this.sanitizer.bypassSecurityTrustResourceUrl( this.complaint_media[i].file_name);           }
+        }
+       
       });
 
   }

@@ -100,6 +100,8 @@ export class CategoryPage {
     );
     
   }
+
+  
   getCategoryImages(categoryId,index)
   {
     console.log(categoryId)
@@ -127,10 +129,7 @@ export class CategoryPage {
         else
         {
           setTimeout(()=>{
-            for (let index = this.prod_cat_list.length; index < r['categories'].length; index++) {
-              console.log(r['categories'][index])
-              this.getCategoryImages(r['categories'][index]['main_category'],index)
-            }
+           
             this.prod_cat_list=this.prod_cat_list.concat(r['categories']);
             console.log('Asyn operation has stop')
             infiniteScroll.complete();
@@ -138,6 +137,7 @@ export class CategoryPage {
         }
       });
     }
+
     presentLoading() 
     {
       // this.loading = this.loadingCtrl.create({

@@ -129,16 +129,16 @@
         </div>
       </div> 
       
-      <div class="ratings" *ngIf="rating_star > '0'">
+      <div class="ratings" *ngIf="star  > '0'">
         <p>Rating</p>
         
         <ul>
-          <li [ngClass]="{'active':rating_star>='1'}"><a><i class="material-icons" >star</i></a></li>
-          <li [ngClass]="{'active':rating_star>='2'}"><a><i class="material-icons" >star</i></a></li>
-          <li [ngClass]="{'active':rating_star>='3'}"><a><i class="material-icons" >star</i></a></li>
-          <li [ngClass]="{'active':rating_star>='4'}"><a><i class="material-icons"  >star</i></a></li>
-          <li [ngClass]="{'active':rating_star>='5'}"><a><i class="material-icons" >star</i></a></li>
-          <li><p>{{rating_star}} Star {{complaint_detail.total_votes}} Complaints</p></li>
+          <li [ngClass]="{'active':star >='1'}"><a><i class="material-icons" >star</i></a></li>
+          <li [ngClass]="{'active':star >='2'}"><a><i class="material-icons" >star</i></a></li>
+          <li [ngClass]="{'active':star >='3'}"><a><i class="material-icons" >star</i></a></li>
+          <li [ngClass]="{'active':star >='4'}"><a><i class="material-icons"  >star</i></a></li>
+          <li [ngClass]="{'active':star >='5'}"><a><i class="material-icons" >star</i></a></li>
+          <li><p>{{star }} Star {{complaint_detail.total_votes}} Complaints</p></li>
         </ul>
       </div>
     </div>

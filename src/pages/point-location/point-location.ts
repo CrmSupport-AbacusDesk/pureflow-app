@@ -2,9 +2,12 @@ import { Component, ViewChild, ElementRef  } from '@angular/core';
 import { IonicPage, NavController, NavParams,AlertController, ToastController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { DbserviceProvider } from '../../providers/dbservice/dbservice';
-import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
+// import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult,NativeGeocoderOptions } from '@ionic-native/native-geocoder';
 import { ProfilePage } from '../profile/profile';
 import { LocationAccuracy } from '@ionic-native/location-accuracy';
+import { DomSanitizer } from '@angular/platform-browser';
+
 /**
 * Generated class for the PointLocationPage page.
 *
@@ -34,6 +37,8 @@ export class PointLocationPage {
   new_long:any;
   cust_latLong:any;
   plum_latLong:any;
+  GoogleAddress:any;
+  url:any;
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
 
@@ -49,12 +54,20 @@ export class PointLocationPage {
               public geolocation: Geolocation,
               public dbService:DbserviceProvider,
               private nativeGeocoder: NativeGeocoder,
-              public alertCtrl:AlertController) {
-
+              public alertCtrl:AlertController,
+              private sanitize: DomSanitizer) {
+                if(this.new_lat  == undefined){
+                  this.GoogleAddress = "https://maps.google.com/maps?q="+this.new_lat+','+this.new_long+"&output=embed"        
+                  this.url = this.sanitize.bypassSecurityTrustResourceUrl(this.GoogleAddress);
+                }
+                this.loadMap();
+               
         //  alert('haksjaks');
         //  this.getGeolocation();
   }
   isDealer:any
+
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad PointLocationPage');
 
@@ -103,11 +116,17 @@ export class PointLocationPage {
 
         this.new_lat=resp.coords.latitude;
         this.new_long=resp.coords.longitude;
-
+         console.log("lat value ",this.new_lat)
+         console.log("lat value ",this.new_long)
         console.log(latLng);
+        console.log("dydfwhdfhgcfd",this.GoogleAddress)
+        if(this.new_lat != null){
+          this.GoogleAddress = "https://maps.google.com/maps?q="+this.new_lat+','+this.new_long+"&output=embed"        
+          this.url = this.sanitize.bypassSecurityTrustResourceUrl(this.GoogleAddress);
+        }
+      
 
         this.getGeoencoder(resp.coords.latitude, resp.coords.longitude);
-
         this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
         this.addMarker(this.map);
 
@@ -153,21 +172,49 @@ export class PointLocationPage {
     });
   }
 
-  getGeoencoder(latitude,longitude)
+  getGeoencoder(latitude:any,longitude:any)
   {
-    this.nativeGeocoder.reverseGeocode(latitude, longitude, this.geoencoderOptions)
-    .then((result: NativeGeocoderReverseResult[]) => {
-      this.geoAddress = this.generateAddress(result[0]);
-    })
-    .catch((error: any) => {
-      // alert('Error getting location'+ JSON.stringify(error));
-    });
+    // console.log("getGeoencoder functions call",this.new_long);
+    // console.log("this.geoencoderOptions",this.geoencoderOptions);
+    // this.generateAddress('');
+    
+    // this.nativeGeocoder.reverseGeocode(this.new_lat, this.new_long, this.geoencoderOptions)
+    // .then((result: NativeGeocoderReverseResult[]) => console.log("ya jaru ri ja a a a  a",JSON.stringify(result[0])))
+      
+    //   // this.geoAddress = this.generateAddress(result[0]);
+    //   // console.log("======================================>",result)
+    //   // console.log("getGeoencoder",this.geoAddress);
+    //   // console.log("======================================>",result[0])
+      
+  
+    // .catch((error: any) => {
+    //   // alert('Error getting location'+ JSON.stringify(error));
+    //   console.log("getGeoencoder inside catch ",error);
+      
+
+    // });
+
+    let options: NativeGeocoderOptions = {
+      useLocale: true,
+      maxResults: 5
+  };
+  
+  this.nativeGeocoder.reverseGeocode(52.5072095, 13.1452818, options)
+    .then((result: NativeGeocoderReverseResult[]) => console.log(JSON.stringify(result[0])))
+    .catch((error: any) => console.log(error));
+  
+  this.nativeGeocoder.forwardGeocode('Berlin', options)
+    .then((coordinates: NativeGeocoderForwardResult[]) => console.log('The coordinates are latitude=' + coordinates[0].latitude + ' and longitude=' + coordinates[0].longitude))
+    .catch((error: any) => console.log(error));
   }
 
   //Return Comma saperated address
-  generateAddress(addressObj){
+  generateAddress(addressObj:any){
+    console.log("genarte address call===>",addressObj);
+    console.log("genarte address call===>",this.address);
     let obj = [];
     let address = "";
+
     for (let key in addressObj) {
       obj.push(addressObj[key]);
     }
@@ -183,16 +230,19 @@ export class PointLocationPage {
 
   add_loc()
   {
+    this.loadMap();
     // this.geoAddress='NIT';
     console.log(this.geoAddress);
     console.log(this.new_lat);
     console.log(this.new_long);
     this.dbService.onPostRequestDataFromApi( {'customer_id': this.dbService.userStorageData.id,'cust_lat': this.new_lat,'cust_long':this.new_long ,'cust_geo_address':this.geoAddress},'app_karigar/addGeoLocation', this.dbService.rootUrl).subscribe(result =>
       {
+      
+
         console.log(result);
         if(result['status']=='failed')
         {
-          alert('Geo Location not found! Try Again');
+          // alert('Geo Location not found! Try Again');
           // this.showSuccess("Geo Location not found!")   ;
           return;
 
@@ -205,12 +255,9 @@ export class PointLocationPage {
 
         // this.navCtrl.setRoot(TabsPage,{index:'5'});
         this.navCtrl.setRoot(ProfilePage);
-
-
-
       });
 
-    }
+  }
     addDealerLocation()
     {
       // this.geoAddress='NIT';
@@ -254,5 +301,9 @@ export class PointLocationPage {
       });
     }
 
+    // trustSrc = function(src) {
+    //   console.log("convert into trust src");
+    //   return trustAsResourceUrl(src);
+    // }
 
   }

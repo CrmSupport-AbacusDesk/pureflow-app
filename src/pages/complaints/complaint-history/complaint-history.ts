@@ -23,6 +23,7 @@ export class ComplaintHistoryPage {
   flag:any='';
   complaint_count:any='';
   data:any={};
+  data1:any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public dbService:DbserviceProvider,
@@ -31,6 +32,7 @@ export class ComplaintHistoryPage {
   {
     console.log(this.navParams);
     this.data.type  =this.navParams.data.type;
+    this.data1 = this.navParams.data.type;
     console.log(this.data.type);
     this.presentLoading();
     this.getComplaintHistory(this.data.type)

@@ -27,12 +27,13 @@ export class NewarrivalsPage {
   no_rec:any=false;
   skelton:any={};
   imageUrl:any;
-
+  usertype:any;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams ,public service:DbserviceProvider) {
     this.skelton = new Array(10);
     console.log(navParams);
     console.log(navCtrl);
-    
+    this.usertype = this.service.userStorageData.type;
     
     this.getProductList(this.cat_id,'');
     console.log(service);
