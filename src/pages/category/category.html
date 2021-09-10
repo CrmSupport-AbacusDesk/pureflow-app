@@ -49,6 +49,14 @@
         
     </div>
 
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)"  *ngIf="flag!=1">
+        <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+
     <div class="main-div" *ngIf="!prod_cat_list.length && !no_rec">
         <ion-list *ngFor="let row of skelton" >
             <button class="skleton-box"></button> 

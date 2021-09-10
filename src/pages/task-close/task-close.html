@@ -24,7 +24,7 @@
           
           <ion-item  *ngIf="lable=='Closed'"  [ngClass]="{'error':f.submitted && otp?.invalid}">
             <ion-label floating>Enter OTP Sent to {{customerMobileNo}}</ion-label>
-            <ion-input type="tel" [(ngModel)]="status.otp" name="otp" #otp=ngModel maxlength="6" minlength="6" (keypress)="MobileNumber($event)" required></ion-input>
+            <ion-input style="margin-top:13px" type="tel" [(ngModel)]="status.otp" name="otp" #otp=ngModel maxlength="6" minlength="6" (keypress)="MobileNumber($event)" required></ion-input>
           </ion-item>
           
         </ion-list>        

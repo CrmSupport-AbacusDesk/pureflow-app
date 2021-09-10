@@ -3824,11 +3824,13 @@ ion-slides {
 }
 
 // Video End ///
+.main-header ion-navbar .header-icons button{display: inherit !important;}
 .header-icons {
     position: absolute;
     top: 10px;
     right: 0px;
     button {
+        
         &.cs-hdr-icons {
             background: transparent;
             border-radius: 0px;

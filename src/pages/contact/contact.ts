@@ -10,11 +10,13 @@ import { HomePage } from '../home/home';
   templateUrl: 'contact.html',
 })
 export class ContactPage {
-
+  usertype:any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private app:App,
               public dbService:DbserviceProvider) {
+
+                this.usertype = this.dbService.userStorageData.type;
 
     if(this.dbService.connection=='offline')
     {

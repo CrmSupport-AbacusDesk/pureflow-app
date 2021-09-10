@@ -667,6 +667,9 @@ export class HomePage {
         setTimeout(() => {
             refresher.complete();
         }, 1000);
+        this.get_countWithLiveServer()
+        this.getDate();
+
     }
 
     goToVideosPage(cat) {

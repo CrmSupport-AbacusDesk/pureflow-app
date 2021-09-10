@@ -27,20 +27,35 @@
         </ion-refresher-content>
     </ion-refresher>
     
-    <div class="banner" *ngIf="banner.length">
-        <!-- <img src="assets/imgs/banner.png">
-        -->
+    <!-- <div class="banner" *ngIf="banner.length">
         <ion-slides pager autoplay=3000>
             <ion-slide *ngFor="let list of banner; let i=index">
                 <img src="http://phpstack-83335-1831788.cloudwaysapps.com/dd_api/app/uploads/{{list.banner}}">
                 
             </ion-slide>
         </ion-slides>
+    </div> -->
+
+        <div class="banner" >
+        <ion-slides pager autoplay=3000>
+            <ion-slide>
+                <img src="assets/imgs/banner1.jpg">
+            </ion-slide>
+            <ion-slide>
+                <img src="assets/imgs/banner2.jpg">
+            </ion-slide>
+            <ion-slide>
+                <img src="assets/imgs/banner3.jpg">
+            </ion-slide>
+            <ion-slide>
+                <img src="assets/imgs/banner4.jpg">
+            </ion-slide>
+        </ion-slides>
     </div>
     
-    <div class="banner" *ngIf="!banner.length">
+    <!-- <div class="banner" *ngIf="!banner.length">
         <img src="assets/imgs/banner.jpg">
-    </div>
+    </div> -->
     
     <div class="product-option">
         <div class="main-box" (click)="goOnProductPage()">
@@ -97,7 +112,7 @@
                 <p> Add Installation Req.</p>
             </div>
         </button>
-        <a href="tel:9582198301" (click)="callCustomerCare()">
+        <a href="tel:9726013013" (click)="callCustomerCare()">
             <div class="lf-btn">
                 <i class="material-icons">support_agent</i>
             </div>
@@ -174,7 +189,25 @@
         </ion-refresher-content>
     </ion-refresher>
     
-    <div class="banner">
+    <div class="banner" >
+        <ion-slides pager autoplay="400" loop="true" speed="3000">
+            <ion-slide>
+                <img src="assets/imgs/banner1.jpg">
+            </ion-slide>
+            <ion-slide>
+                <img src="assets/imgs/banner2.jpg">
+            </ion-slide>
+            <ion-slide>
+                <img src="assets/imgs/banner3.jpg">
+            </ion-slide>
+            <ion-slide>
+                <img src="assets/imgs/banner4.jpg">
+            </ion-slide>
+        </ion-slides>
+    </div>
+
+
+    <!-- <div class="banner">
         <img *ngIf="!offer_list.length" src="assets/imgs/banner.jpg">
         
         <ion-slides  autoplay=300 *ngIf="offer_list && offer_list.length">
@@ -182,7 +215,7 @@
                 <img [src]="list.offer_banner">
             </ion-slide>
         </ion-slides>
-    </div>
+    </div> -->
     
     <div class="home-pint" style="padding: 5px 15px;">
         <div class="profile-point ">
@@ -243,7 +276,7 @@
                 <h4>Installation Request</h4>
             </div>
             <span>
-                {{plumber_installation}}
+                {{installation_count }}
             </span>
         </div>
     </div>
@@ -286,7 +319,7 @@
                     <p>Nearest Dealers</p>
                 </div>
             </button> -->
-            <a href="tel:9582198301">
+            <a href="tel:9726013013">
                 <div class="lf-btn">
                     <i class="material-icons">support_agent</i>
                 </div>
