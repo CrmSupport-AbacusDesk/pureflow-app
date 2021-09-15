@@ -597,7 +597,7 @@ export class MyApp {
                                 {
                                     text: 'Update Now',
                                     handler: () => {
-                                        window.open('market://details?id=com.gravitybath.app&hl=en','_system','location=yes');
+                                        window.open('market://details?id=com.pureflow.app&hl=en','_system','location=yes');
                                     }
 
                                 }
